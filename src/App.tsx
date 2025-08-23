@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import './App.css'
-import { Intro, Navbar, Project, Canvas } from './components';
+import { Intro, Navbar, Project, Canvas, Title } from './components';
 
 
 
@@ -11,9 +11,9 @@ function App() {
   return (
     <>
     <Intro></Intro>
+    <Navbar></Navbar>
       <Canvas>
-        <Navbar></Navbar>
-        
+        <Title></Title>
       </Canvas>
     </>
   )

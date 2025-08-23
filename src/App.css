@@ -1,46 +1,24 @@
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('./assets/fonts/ClashDisplay-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+* {
+  font-family: 'ClashDisplay';
+  font-weight: 500;
+}
+
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0 0;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
 }
 
 .card {
   padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 .backgroundCanvas {
@@ -55,10 +33,10 @@
 
 .container {
   position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background: #f3f4f6;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #FFF6F8;
 }
 
 .box {
@@ -69,4 +47,81 @@
   left: 1000000px;
   top: 1000000px;
   transform: translate(-50%, -50%);
+}
+
+.project-cards {
+  cursor: pointer;
+}
+
+.title {
+  position: absolute;
+  left: 1000000px;
+  top: 1000000px;
+  transform: translate(-50%, -50%);
+  color: black;
+  width: 20rem;
+}
+
+.title .split-parent{
+  overflow-y: hidden;
+}
+
+.navbar {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  right: 50%;
+  width: fit-content;
+  transform: translate(-50%, 0);
+  color: black;
+  background-color: white;
+  z-index: 9999;
+  border-radius: 100px;
+  padding: 10px 40px;
+  box-shadow: 0px 4px 15px 15px rgba(0,0,0,0.05);
+}
+
+.navbar .content {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  align-content: space-between;
+  gap: 100px;
+  align-items: center;
+}
+
+.navbar .tabs {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  cursor: pointer;
+}
+
+.navbar .tabs span{
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.navbar .tag {
+  transition: .3s ease;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+.navbar .tag:hover {
+  font-weight: 500;
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+.navbar img {
+  width: 1.5rem;
+  transition: .5s ease;
+}
+
+.navbar img:hover {
+  transform: rotate(180deg);
 }
