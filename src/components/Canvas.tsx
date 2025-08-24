@@ -50,7 +50,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
                 if (entry.isIntersecting) {
                     gsap.to(entry.target, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut" });
                 } else {
-                    gsap.to(entry.target, { opacity: 0.1, scale: 0.8, rotate: randomIntFromInterval(-30, 30), duration: 0.4, ease: "power2.inOut" });
+                    gsap.to(entry.target, { opacity: 0, scale: 0.8, rotate: randomIntFromInterval(-30, 30), duration: 0.4, ease: "power2.inOut" });
                 }
             });
         }, { threshold: 0.5 });
