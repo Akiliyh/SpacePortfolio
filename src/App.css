@@ -36,11 +36,11 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #FFF6F8;
+  background: var(--white-bg);
 }
 
 .box {
-  background-color: red;
+  background-color: var(--red);
   width: 50px;
   height: 50px;
   position: absolute;
@@ -78,7 +78,7 @@
   z-index: 9999;
   border-radius: 100px;
   padding: 10px 40px;
-  box-shadow: 0px 4px 15px 15px rgba(0,0,0,0.05);
+  box-shadow: 0px 4px 15px 15px rgba(2, 2, 99, 0.05);
 }
 
 .navbar .content {
@@ -124,4 +124,40 @@
 
 .navbar img:hover {
   transform: rotate(180deg);
+}
+
+/* INTROOOOOO */
+
+.intro {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--white);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro .intro-container {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.intro img {
+  width: 30px;
+  height: 30px;
+}
+
+.intro-title {
+  color: black;
+  height: fit-content;
+  font-size: 5rem;
+  overflow: hidden;
+  height: 6rem;
+}
+
+.intro-title .split-parent div {
+  overflow: hidden;
 }
