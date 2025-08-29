@@ -12,7 +12,6 @@
 }
 
 #root {
-  max-width: 1280px;
   margin: 0 0;
   text-align: center;
 }
@@ -62,7 +61,7 @@
   width: 20rem;
 }
 
-.title .split-parent{
+.title .split-parent {
   overflow-y: hidden;
 }
 
@@ -95,11 +94,37 @@
   align-items: center;
   gap: 30px;
   cursor: pointer;
+  overflow: hidden;
 }
 
-.navbar .tabs span{
+.navbar .tabs span {
   font-weight: 400;
   font-size: 1.25rem;
+}
+
+.navbar .tabs .sub-tab {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: .5s ease;
+}
+
+.navbar .tabs .sub-tab span {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar .tabs .sub-tab span div {
+  font-weight: 400;
+}
+
+.navbar .tabs .sub-tab span:last-child {
+  position: absolute;
+  top: -30px;
+}
+
+.navbar .tabs .sub-tab:hover {
+  transform: translateY(30px);
 }
 
 .navbar .tag {
@@ -160,4 +185,31 @@
 
 .intro-title .split-parent div {
   overflow: hidden;
+}
+
+/* CENTER BUTTON */
+
+.container .center-button {
+  position: fixed;
+  right: 20px;
+  z-index: 2000;
+  padding: 10px;
+  background: var(--blue);
+  border: 2px transparent solid;
+  cursor: pointer;
+  top: 40px;
+  transform: translate(-50%, 0);
+  color: var(--white);
+  background: var(--white);
+  border-radius: 100px;
+  box-shadow: 0px 4px 15px 15px rgba(2, 2, 99, 0.05);
+  width: 40px;
+  height: 40px;
+  transition: .3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.container .center-button:hover {
+  border: 2px var(--blue) solid;
 }
