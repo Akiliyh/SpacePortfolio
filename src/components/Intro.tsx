@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react"
+import { useRef } from "react"
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import { SplitText } from "gsap/SplitText";
@@ -23,18 +23,16 @@ const Intro = () => {
     const childSplit = new SplitText(titleRef.current, { type: "chars", reduceWhiteSpace:false});
 
     let initials = childSplit.chars.filter(el =>
-      ["G", "B", "R"].includes(el.textContent)
+      ["G", "B", "R"].includes(el.textContent || "")
     );
 
     const allOtherLetters = childSplit.chars.filter(
-      el => !["G", "B", "R"].includes(el.textContent)
+      el => !["G", "B", "R"].includes(el.textContent || "")
     );
 
     const capitalR = childSplit.chars.filter(
-      el => ["R"].includes(el.textContent)
+      el => ["R"].includes(el.textContent || "")
     );
-
-    console.log(allOtherLetters);
 
     const tl = gsap.timeline();
 
@@ -109,7 +107,7 @@ const Intro = () => {
     <div className="intro" ref={introRef}>
       <div ref={introContainerRef} className="intro-container">
         <div ref={titleRef} className="intro-title">
-          Guillaume BoucherR
+          Guillaume&nbsp;BoucherR
           {/* <div ref={spaceRef}/> */} 
            
         </div>

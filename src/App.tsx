@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import './App.css'
-import { Intro, Navbar, Project, Canvas, Title } from './components';
+import { Intro, Navbar, Canvas, Title } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 
