@@ -95,9 +95,9 @@ const Canvas = ({ children }: PropsWithChildren) => {
     useGSAP(() => {
 
         if (showFlag) {
-            gsap.to(buttonRef.current, { autoAlpha: 1, scale: 1, rotate: 0, duration: .5, ease: "power2.inOut" });
+            gsap.to(buttonRef.current, { autoAlpha: 1, y: 0, duration: 1.5, ease: "expo.out" });
         } else {
-            gsap.to(buttonRef.current, { autoAlpha: 0, scale: 1, rotate: 0, duration: .5, ease: "power2.inOut" });
+            gsap.to(buttonRef.current, { autoAlpha: 0, y: 20, duration: .5, ease: "expo.in" });
         }
 
 
@@ -128,9 +128,9 @@ const Canvas = ({ children }: PropsWithChildren) => {
                 ))}
                 {children}
             </div>
-            <button className="center-button" ref={buttonRef} onClick={() => {
+            <button className="center-button" title="Return back to origin" ref={buttonRef} onClick={() => {
                 gsap.to(backgroundRef.current, { x: 0, y: 0, duration: 2, ease: "power2.inOut" });
-                gsap.to(buttonRef.current, { autoAlpha: 0, duration: .5, ease: "power2.inOut" });
+                gsap.to(buttonRef.current, { autoAlpha: 0, y: 20, duration: .5, ease: "power2.inOut" });
             }}>
                 <svg width="0em" height="0em">
                     <linearGradient id="icon-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
