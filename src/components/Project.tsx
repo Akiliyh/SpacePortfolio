@@ -43,7 +43,7 @@ const Project = ({ project, index }: ProjectProps) => {
       gsap.to(titleSplitRef.current.chars, {
         yPercent: 20,
         duration: 0.6,
-        stagger: 0.02,
+        stagger: 0.01,
         ease: "expo.out"
       });
     }
@@ -52,11 +52,16 @@ const Project = ({ project, index }: ProjectProps) => {
       gsap.to(yearSplitRef.current.chars, {
         yPercent: 20,
         duration: 0.6,
-        delay: 0.2,
-        stagger: 0.02,
+        // delay: 0.2,
+        stagger: 0.01,
         ease: "expo.out"
       });
     }
+
+
+    gsap.set(projectRef.current, {
+        zIndex: 1
+      });
 
 
   })
@@ -76,7 +81,7 @@ const Project = ({ project, index }: ProjectProps) => {
       gsap.to(titleSplitRef.current.chars, {
         yPercent: 110,
         duration: 0.6,
-        stagger: 0.02,
+        stagger: 0.01,
         ease: "expo.out"
       });
     }
@@ -87,11 +92,14 @@ const Project = ({ project, index }: ProjectProps) => {
       gsap.to(yearSplitRef.current.chars, {
         yPercent: 150,
         duration: 0.6,
-        delay: 0.1,
-        stagger: 0.02,
+        stagger: 0.01,
         ease: "expo.out"
       });
     }
+
+    gsap.set(projectRef.current, {
+        zIndex: 0
+      });
   })
 
   useGSAP(() => {
