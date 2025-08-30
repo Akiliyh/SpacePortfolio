@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { IoFlag } from "react-icons/io5";
+import { Project } from "./index"
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
@@ -43,14 +44,6 @@ const Canvas = ({ children }: PropsWithChildren) => {
             });
         }
     }
-
-    const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
-        gsap.to(el, { scale: 1.2, duration: 0.3, ease: "power2.out" });
-    })
-
-    const handleHoverLeave = contextSafe((el: HTMLDivElement) => {
-        gsap.to(el, { scale: 1, duration: 0.3, ease: "power2.inOut" });
-    })
 
     useGSAP(() => {
         // // gsap code here...
@@ -112,19 +105,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
             <div ref={backgroundRef} className="backgroundCanvas">
                 {projectsRef.current.map((project, index) => (
-                    <div className="project-cards"
-                        onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
-                        onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}
-                        key={index}
-                        style={{
-                            position: "absolute",
-                            left: project.x,
-                            top: project.y,
-                            width: 100,
-                            height: 100,
-                            backgroundColor: "red",
-                        }}
-                    />
+                    <Project key={index} project={project} index={index}></Project>
                 ))}
                 {children}
             </div>
