@@ -50,6 +50,23 @@
 
 .project-cards {
   cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+  padding: 10px;
+}
+
+.project-cards div{
+  height: fit-content;
+  overflow: hidden;
+}
+
+.project-cards .project-title{
+  font-size: 2rem;
+}
+
+.project-cards .year{
+  padding-bottom: .5rem;
 }
 
 .title {
