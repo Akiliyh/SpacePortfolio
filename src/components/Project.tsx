@@ -51,6 +51,11 @@ const Project = ({ project, index, handleClick }: ProjectProps) => {
 
   const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
     const el = mouseEl.currentTarget;
+
+    if (mouseEl.buttons > 0) { // if div is dragged (mouse buttons clicked) we don't apply any hover effect
+      return;
+    }
+
     gsap.to(el, { scale: 1.5, duration: .6, ease: "power2.out" });
     gsap.to(hoverCircleRef.current, { scale: 1.5, autoAlpha: 1, duration: .6, ease: "power2.out" });
 
