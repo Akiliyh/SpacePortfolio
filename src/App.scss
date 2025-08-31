@@ -54,18 +54,41 @@
   justify-content: space-around;
   align-items: end;
   padding: 10px;
+
+  div {
+    height: fit-content;
+    overflow: hidden;
+  }
+
+  .hover-circle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--white);
+  pointer-events: none; /* so it doesn’t block mouse events */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+  mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 70%;
+    height: 70%;
+  }
+}
 }
 
-.project-cards div{
-  height: fit-content;
-  overflow: hidden;
-}
-
-.project-cards .project-title{
+.project-cards .project-title {
   font-size: 2rem;
 }
 
-.project-cards .year{
+.project-cards .year {
   padding-bottom: .5rem;
 }
 
@@ -174,18 +197,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.intro .intro-container {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
+  .intro-container {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
 
-.intro img {
-  width: 30px;
-  height: 30px;
-  padding-bottom: 10px;
+  img {
+    width: 30px;
+    height: 30px;
+    padding-bottom: 10px;
+  }
 }
 
 .intro-title {
@@ -194,10 +217,10 @@
   font-size: 5rem;
   overflow: hidden;
   height: 6rem;
-}
 
-.intro-title .split-parent div {
-  overflow: hidden;
+  .split-parent div {
+    overflow: hidden;
+  }
 }
 
 /* CENTER BUTTON */
@@ -221,8 +244,18 @@
   transition: .3s ease;
   opacity: 0;
   visibility: hidden;
+
+  &:hover {
+    border: 2px var(--blue) solid;
+  }
 }
 
-.container .center-button:hover {
-  border: 2px var(--blue) solid;
+.container .info {
+  position: fixed;
+  width: 70vw;
+  right: 0;
+  bottom: 0;
+  background-color: var(--white);
+  z-index: 9999;
+  height: 0;
 }
