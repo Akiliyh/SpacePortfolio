@@ -2,21 +2,26 @@ import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
+import { TfiArrowTopRight } from "react-icons/tfi";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 type ProjectProps = {
   project: { x: number; y: number };
   index: number;
+  handleClick: Function;
 };
 
-const Project = ({ project, index }: ProjectProps) => {
+const Project = ({ project, index, handleClick }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const moveX = useRef<(value: number) => void>(null);
-  const moveY = useRef<(value: number) => void>(null);
+  const hoverCircleRef = useRef<HTMLDivElement>(null);
+  const moveCardX = useRef<(value: number) => void>(null);
+  const moveCardY = useRef<(value: number) => void>(null);
+  const moveCircleX = useRef<(value: number) => void>(null);
+  const moveCircleY = useRef<(value: number) => void>(null);
 
   const titleSplitRef = useRef<SplitText>(null);
   const yearSplitRef = useRef<SplitText>(null);
@@ -26,18 +31,28 @@ const Project = ({ project, index }: ProjectProps) => {
   const handleMouseMove = contextSafe((e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const rect = el.getBoundingClientRect();
-    const offsetX = e.clientX - (rect.left + rect.width / 2);
-    const offsetY = e.clientY - (rect.top + rect.height / 2);
+    const offsetCardX = e.clientX - (rect.left + rect.width / 2);
+    const offsetCardY = e.clientY - (rect.top + rect.height / 2);
 
-    if (moveX.current && moveY.current) {
-      moveX.current(gsap.utils.clamp(-30, 30, offsetX));
-      moveY.current(gsap.utils.clamp(-30, 30, offsetY));
+
+    if (moveCircleX.current && moveCircleY.current) {
+      // counter the scale 1.5 effect
+      moveCircleX.current(offsetCardX / 1.5);
+      moveCircleY.current(offsetCardY / 1.5);
     }
+
+    if (moveCardX.current && moveCardY.current) {
+      moveCardX.current(gsap.utils.clamp(-30, 30, offsetCardX));
+      moveCardY.current(gsap.utils.clamp(-30, 30, offsetCardY));
+    }
+
+    
   });
 
   const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
     const el = mouseEl.currentTarget;
     gsap.to(el, { scale: 1.5, duration: .6, ease: "power2.out" });
+    gsap.to(hoverCircleRef.current, { scale: 1.5, autoAlpha: 1, duration: .6, ease: "power2.out" });
 
     if (titleSplitRef.current) {
       gsap.to(titleSplitRef.current.chars, {
@@ -69,10 +84,11 @@ const Project = ({ project, index }: ProjectProps) => {
   const handleHoverLeave = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
     const el = mouseEl.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
+    gsap.to(hoverCircleRef.current, { scale: 0, autoAlpha:0, duration: .6, ease: "power2.out" });
     // goes back to center
-    if (moveX.current && moveY.current) {
-      moveX.current(0);
-      moveY.current(0);
+    if (moveCardX.current && moveCardY.current) {
+      moveCardX.current(0);
+      moveCardY.current(0);
     }
 
     if (titleSplitRef.current) {
@@ -107,6 +123,12 @@ const Project = ({ project, index }: ProjectProps) => {
     titleSplitRef.current = new SplitText(titleRef.current, { type: "chars" });
     yearSplitRef.current = new SplitText(yearRef.current, { type: "chars" });
 
+    if (hoverCircleRef.current) {
+      gsap.set(hoverCircleRef.current, {
+      autoAlpha: 0,
+    });
+    }
+
     gsap.set(titleSplitRef.current.chars, {
       yPercent: 110,
     });
@@ -115,12 +137,21 @@ const Project = ({ project, index }: ProjectProps) => {
       yPercent: 150,
     });
 
-    moveX.current = gsap.quickTo(projectRef.current, "x", {
+    moveCardX.current = gsap.quickTo(projectRef.current, "x", {
       duration: 3,
       ease: "power2.out",
     });
-    moveY.current = gsap.quickTo(projectRef.current, "y", {
+    moveCardY.current = gsap.quickTo(projectRef.current, "y", {
       duration: 3,
+      ease: "power2.out",
+    });
+
+    moveCircleX.current = gsap.quickTo(hoverCircleRef.current, "x", {
+      duration: .5,
+      ease: "power2.out",
+    });
+    moveCircleY.current = gsap.quickTo(hoverCircleRef.current, "y", {
+      duration: .5,
       ease: "power2.out",
     });
 
@@ -133,7 +164,7 @@ const Project = ({ project, index }: ProjectProps) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
-      onClick={() => console.log('oui')}
+      onClick={handleClick}
       key={index}
       style={{
         position: "absolute",
@@ -146,6 +177,9 @@ const Project = ({ project, index }: ProjectProps) => {
     >
       <div className="project-title" ref={titleRef}>Title</div>
       <div className="year" ref={yearRef}>2025</div>
+      <div className="hover-circle" ref={hoverCircleRef}>
+        <TfiArrowTopRight color="black"/>
+      </div>
     </div>
   )
 };
