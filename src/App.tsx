@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import './App.css'
+import './App.scss'
 import { Intro, Navbar, Canvas, Title } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
