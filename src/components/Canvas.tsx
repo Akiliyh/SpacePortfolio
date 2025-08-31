@@ -14,7 +14,12 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const infoDivRef = useRef<HTMLButtonElement>(null);
     const [showFlag, setShowFlag] = useState(false);
+
+    const [showInfoDiv, setShowInfoDiv] = useState(false);
+    const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
+    
     const CANVASSIZE = 1000000;
     const PROJECTSAMOUNT = 20;
 
@@ -96,16 +101,34 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     }, { dependencies: [showFlag], scope: containerRef }); // <-- scope is for selector text (optional)
 
-    useEffect(() => {
+    useGSAP(() => {
 
-    }, []);
+        if (showInfoDiv) {
+            gsap.to(infoDivRef.current, { height: window.innerHeight, y: 0, duration: 1.5, ease: "expo.out" });
+        } else {
+            gsap.to(infoDivRef.current, { height: 0, duration: 1.5, ease: "expo.out", onComplete: () => {setIsInfoDivMounted(false);} });
+        }
+
+
+    }, { dependencies: [showInfoDiv], scope: containerRef });
+
+    const handleProjectClick = contextSafe(() => {
+        if (showInfoDiv) {
+            setShowInfoDiv(false);
+        } 
+        else {
+            setIsInfoDivMounted(true);
+            setShowInfoDiv(true);
+        }
+    
+  });
 
     return (
         <div className="container" ref={containerRef}>
 
             <div ref={backgroundRef} className="backgroundCanvas">
                 {projectsRef.current.map((project, index) => (
-                    <Project key={index} project={project} index={index}></Project>
+                    <Project key={index} project={project} index={index} handleClick={handleProjectClick}></Project>
                 ))}
                 {children}
             </div>
@@ -124,6 +147,11 @@ const Canvas = ({ children }: PropsWithChildren) => {
                 <IoFlag style={{ fill: "url(#icon-gradient)" }} />
 
             </button>
+
+            {isInfoDivMounted && 
+            <div className="info" ref={infoDivRef}></div>
+            }
+
         </div>
     )
 };
