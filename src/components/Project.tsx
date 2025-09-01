@@ -10,9 +10,11 @@ type ProjectProps = {
   project: { x: number; y: number };
   index: number;
   handleClick: Function;
+  projectWidth: number;
+  projectHeight: number;
 };
 
-const Project = ({ project, index, handleClick }: ProjectProps) => {
+const Project = ({ project, index, handleClick, projectHeight, projectWidth }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLDivElement>(null);
@@ -176,8 +178,8 @@ const Project = ({ project, index, handleClick }: ProjectProps) => {
         position: "absolute",
         left: project.x,
         top: project.y,
-        width: 320,
-        height: 180,
+        width: projectWidth,
+        height: projectHeight,
         backgroundColor: "red",
       }}
     >
