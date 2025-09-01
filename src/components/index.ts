@@ -3,3 +3,5 @@ export { default as Project } from './Project';
 export { default as Intro } from './Intro';
 export { default as Navbar } from './Navbar';
 export { default as Title } from './Title';
+export { default as Flag } from './Flag';
+export { default as InfoPanel } from './InfoPanel';

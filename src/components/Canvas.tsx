@@ -4,8 +4,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
-import { IoFlag } from "react-icons/io5";
-import { Project } from "./index"
+import { Project, Flag, InfoPanel } from "./index"
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
@@ -13,8 +12,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const infoDivRef = useRef<HTMLButtonElement>(null);
+
     const [showFlag, setShowFlag] = useState(false);
 
     const [showInfoDiv, setShowInfoDiv] = useState(false);
@@ -22,6 +20,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
     
     const CANVASSIZE = 1000000;
     const PROJECTSAMOUNT = 20;
+    const PROJECTWIDTH = 320;
+    const PROJECTHEIGHT = 160;
 
     // const projects: { x: number; y: number }[] = [];
 
@@ -48,16 +48,20 @@ const Canvas = ({ children }: PropsWithChildren) => {
                 y: randomIntFromInterval(CANVASSIZE - 1000, CANVASSIZE + 1000),
             });
         }
+
+        projectsRef.current.push({
+                x: CANVASSIZE + (window.innerWidth / 2) - 320/2,
+                y: CANVASSIZE + (window.innerHeight / 2) - 180/2,
+            });
     }
 
     useGSAP(() => {
-        // // gsap code here...
-        // gsap.to('.box', { x: 360 }); // <-- automatically reverted
         Draggable.create(backgroundRef.current, {
             type: "x,y",
             inertia: true,
             dragResistance: 0.75,
             onDrag: function () {
+                // if element goes too far then we display the flag icon
                 if (Math.abs(this.x) > (window.innerWidth) || Math.abs(this.y) > (window.innerHeight)) {
                     setShowFlag(true);
                 } else {
@@ -90,29 +94,15 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     }, { scope: containerRef }); // <-- scope is for selector text (optional)
 
-    useGSAP(() => {
+    const handleProjectClick = contextSafe((index: number) => {
 
-        if (showFlag) {
-            gsap.to(buttonRef.current, { autoAlpha: 1, y: 0, duration: 1.5, ease: "expo.out" });
-        } else {
-            gsap.to(buttonRef.current, { autoAlpha: 0, y: 20, duration: .5, ease: "expo.in" });
-        }
+        // Putting the project on the left corner in view (TO CHANGE FOR MOBILE)
 
+        const curProjectX = projectsRef.current[index].x - (1000000 + (window.innerWidth / 6) - PROJECTWIDTH / 2); // /6 cause we want it on the left side to be visible div is 33vw
+        const curProjectY = projectsRef.current[index].y - (1000000 + (window.innerHeight / 2) - PROJECTHEIGHT / 2);
 
-    }, { dependencies: [showFlag], scope: containerRef }); // <-- scope is for selector text (optional)
-
-    useGSAP(() => {
-
-        if (showInfoDiv) {
-            gsap.to(infoDivRef.current, { height: window.innerHeight, y: 0, duration: 1.5, ease: "expo.out" });
-        } else {
-            gsap.to(infoDivRef.current, { height: 0, duration: 1.5, ease: "expo.out", onComplete: () => {setIsInfoDivMounted(false);} });
-        }
-
-
-    }, { dependencies: [showInfoDiv], scope: containerRef });
-
-    const handleProjectClick = contextSafe(() => {
+        console.log(curProjectX, curProjectY);
+        gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 2, ease: "expo.out" });
         if (showInfoDiv) {
             setShowInfoDiv(false);
         } 
@@ -123,33 +113,29 @@ const Canvas = ({ children }: PropsWithChildren) => {
     
   });
 
+  const closeProjectClick = contextSafe(() => {
+            setShowInfoDiv(false);
+  });
+
+  const unmountInfoDiv = contextSafe(() => {
+            setIsInfoDivMounted(true);
+  });
+
     return (
         <div className="container" ref={containerRef}>
 
             <div ref={backgroundRef} className="backgroundCanvas">
                 {projectsRef.current.map((project, index) => (
-                    <Project key={index} project={project} index={index} handleClick={handleProjectClick}></Project>
+                    <Project key={index} project={project} index={index} handleClick={() => handleProjectClick(index)} projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}></Project>
                 ))}
                 {children}
             </div>
-            <button className="center-button" title="Return back to origin" ref={buttonRef} onClick={() => {
-                gsap.to(backgroundRef.current, { x: 0, y: 0, duration: 2, ease: "power2.inOut" });
-                gsap.to(buttonRef.current, { autoAlpha: 0, y: 20, duration: .5, ease: "power2.inOut" });
-            }}>
-                <svg width="0em" height="0em">
-                    <linearGradient id="icon-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
-                        <stop stopColor="#9DAEF2" offset="0%" />
-                        <stop stopColor="#9BF0AF" offset="50%" />
-                        <stop stopColor="#F4A5A7" offset="100%" />
-                    </linearGradient>
-                </svg>
+            <Flag showFlag={showFlag} backgroundRef={backgroundRef}></Flag>
 
-                <IoFlag style={{ fill: "url(#icon-gradient)" }} />
-
-            </button>
+            <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div>
 
             {isInfoDivMounted && 
-            <div className="info" ref={infoDivRef}></div>
+            <InfoPanel showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
             }
 
         </div>
