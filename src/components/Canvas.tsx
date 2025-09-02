@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { Project, Flag, InfoPanel } from "./index"
+import projects from "../projects.json";
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
@@ -19,9 +20,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
     
     const CANVASSIZE = 1000000;
-    const PROJECTSAMOUNT = 20;
     const PROJECTWIDTH = 320;
-    const PROJECTHEIGHT = 160;
+    const PROJECTHEIGHT = 180;
 
     // const projects: { x: number; y: number }[] = [];
 
@@ -42,7 +42,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
         const randomIntFromInterval = (min: number, max: number) =>
             Math.floor(Math.random() * (max - min + 1) + min);
 
-        for (let i = 0; i < PROJECTSAMOUNT; i++) {
+        for (let i = 0; i < projects.length; i++) {
             projectsRef.current.push({
                 x: randomIntFromInterval(CANVASSIZE - 1000, CANVASSIZE + 1000),
                 y: randomIntFromInterval(CANVASSIZE - 1000, CANVASSIZE + 1000),
@@ -102,7 +102,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
         const curProjectY = projectsRef.current[index].y - (1000000 + (window.innerHeight / 2) - PROJECTHEIGHT / 2);
 
         console.log(curProjectX, curProjectY);
-        gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 2, ease: "expo.out" });
+        gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
         if (showInfoDiv) {
             setShowInfoDiv(false);
         } 
@@ -125,8 +125,11 @@ const Canvas = ({ children }: PropsWithChildren) => {
         <div className="container" ref={containerRef}>
 
             <div ref={backgroundRef} className="backgroundCanvas">
-                {projectsRef.current.map((project, index) => (
-                    <Project key={index} project={project} index={index} handleClick={() => handleProjectClick(index)} projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}></Project>
+                {projects.map((project, index) => (
+                    <>
+                    {console.log(project)}
+                    <Project key={index} project={project} coord={projectsRef.current[index]} index={index} handleClick={() => handleProjectClick(index)} projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}></Project>
+                    </>
                 ))}
                 {children}
             </div>
