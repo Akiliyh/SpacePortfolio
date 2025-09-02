@@ -7,17 +7,20 @@ import { TfiArrowTopRight } from "react-icons/tfi";
 gsap.registerPlugin(useGSAP, SplitText);
 
 type ProjectProps = {
-  project: { x: number; y: number };
+  coord: { x: number; y: number };
   index: number;
   handleClick: Function;
   projectWidth: number;
   projectHeight: number;
+  project: {title: string, year: number, image: string, video: string};
 };
 
-const Project = ({ project, index, handleClick, projectHeight, projectWidth }: ProjectProps) => {
+const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const hoverCircleRef = useRef<HTMLDivElement>(null);
   const moveCardX = useRef<(value: number) => void>(null);
@@ -52,6 +55,9 @@ const Project = ({ project, index, handleClick, projectHeight, projectWidth }: P
   });
 
   const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
+
+    gsap.to(imageRef.current, {zIndex: 0, autoAlpha: 0});
+    videoRef.current?.play();
 
     if (mouseEl.buttons > 0) { // if div is dragged (mouse buttons clicked) we don't apply any hover effect
       return;
@@ -90,6 +96,10 @@ const Project = ({ project, index, handleClick, projectHeight, projectWidth }: P
   })
 
   const handleHoverLeave = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
+
+    videoRef.current?.pause();
+    gsap.to(imageRef.current, {zIndex: 2, autoAlpha: 1});
+
     const el = mouseEl.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
     gsap.to(hoverCircleRef.current, { scale: 0, autoAlpha:0, duration: .6, ease: "power2.out" });
@@ -176,15 +186,29 @@ const Project = ({ project, index, handleClick, projectHeight, projectWidth }: P
       key={index}
       style={{
         position: "absolute",
-        left: project.x,
-        top: project.y,
+        left: coord.x,
+        top: coord.y,
         width: projectWidth,
         height: projectHeight,
-        backgroundColor: "red",
+        backgroundImage: "url(img" + project.image + ")",
+        backgroundSize: "cover"
       }}
     >
-      <div className="project-title" ref={titleRef}>Title</div>
-      <div className="year" ref={yearRef}>2025</div>
+
+      <img className="preview-image" ref={imageRef} src={"img" + project.image} alt=""/>
+
+      <video className="video" ref={videoRef} muted loop>
+        <source src={"video" + project.video} type="video/mp4" />
+      </video>
+
+      <div className="content">
+      <div className="project-title" ref={titleRef}>
+        {project.title}
+        </div>
+      <div className="year" ref={yearRef}>
+        {project.year}
+        </div>
+        </div>
       <div className="hover-circle" ref={hoverCircleRef}>
         <TfiArrowTopRight color="black"/>
       </div>
