@@ -56,12 +56,12 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
 
-    gsap.to(imageRef.current, {zIndex: 0, autoAlpha: 0});
-    videoRef.current?.play();
-
     if (mouseEl.buttons > 0) { // if div is dragged (mouse buttons clicked) we don't apply any hover effect
       return;
     }
+
+    gsap.to(imageRef.current, {zIndex: 0, autoAlpha: 0});
+    videoRef.current?.play();
 
     const el = mouseEl.currentTarget;
 

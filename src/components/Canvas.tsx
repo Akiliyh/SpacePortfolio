@@ -44,8 +44,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
         for (let i = 0; i < projects.length; i++) {
             projectsRef.current.push({
-                x: randomIntFromInterval(CANVASSIZE - 1000, CANVASSIZE + 1000),
-                y: randomIntFromInterval(CANVASSIZE - 1000, CANVASSIZE + 1000),
+                x: randomIntFromInterval(CANVASSIZE - 500, CANVASSIZE + 500),
+                y: randomIntFromInterval(CANVASSIZE - 500, CANVASSIZE + 500),
             });
         }
 
