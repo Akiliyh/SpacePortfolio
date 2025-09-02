@@ -197,7 +197,9 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
       <img className="preview-image" ref={imageRef} src={"img" + project.image} alt=""/>
 
-      <video className="video" ref={videoRef} muted loop>
+      <div className="filter"></div>
+
+      <video className="video" ref={videoRef} muted loop disablePictureInPicture>
         <source src={"video" + project.video} type="video/mp4" />
       </video>
 

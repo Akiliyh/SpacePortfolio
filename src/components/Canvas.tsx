@@ -15,6 +15,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const [showFlag, setShowFlag] = useState(false);
+    const [projectSelectedIndex, setProjectSelectedIndex] = useState(0);
 
     const [showInfoDiv, setShowInfoDiv] = useState(false);
     const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
@@ -110,6 +111,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
             setIsInfoDivMounted(true);
             setShowInfoDiv(true);
         }
+
+        setProjectSelectedIndex(index);
     
   });
 
@@ -127,7 +130,6 @@ const Canvas = ({ children }: PropsWithChildren) => {
             <div ref={backgroundRef} className="backgroundCanvas">
                 {projects.map((project, index) => (
                     <>
-                    {console.log(project)}
                     <Project key={index} project={project} coord={projectsRef.current[index]} index={index} handleClick={() => handleProjectClick(index)} projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}></Project>
                     </>
                 ))}
@@ -138,7 +140,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
             <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div>
 
             {isInfoDivMounted && 
-            <InfoPanel showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
+            <InfoPanel projectContent={projects[projectSelectedIndex]} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
             }
 
         </div>
