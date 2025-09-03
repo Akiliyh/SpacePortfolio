@@ -6,6 +6,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Archivo';
+  src: url('./assets/fonts/Archivo-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 * {
   font-family: 'ClashDisplay';
   font-weight: 500;
@@ -15,6 +23,10 @@
   margin: 0 0;
   text-align: center;
   overflow: hidden;
+}
+
+p {
+  font-family: 'Archivo';
 }
 
 .card {
@@ -54,6 +66,7 @@
   display: flex;
   justify-content: space-around;
   align-items: end;
+  touch-action: auto !important;
 
   .content {
     padding: 10px;
@@ -81,7 +94,7 @@
     transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
-    mix-blend-mode: difference;
+    // mix-blend-mode: difference;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -292,11 +305,13 @@
   height: 0;
   padding: 10px;
   color: var(--black);
+  overflow: scroll;
 
   .topbar {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 10px;
 
     .logo {
       display: flex;
@@ -307,6 +322,7 @@
     .tag {
       font-weight: 450;
       font-size: 2.25rem;
+      margin: 0;
     }
 
     img {
@@ -314,13 +330,20 @@
       width: 1.25rem;
       height: 1.25rem;
     }
+
+    .cross {
+      display: flex;
+      cursor: pointer;
+    }
+
+    
   }
 
   .content {
     padding: 10px;
     
     .video {
-      height: 50vh;
+      max-height: 80vh;
       object-fit: cover;
   width: 100%;
   background-color: var(--blue);
@@ -335,6 +358,7 @@
       p {
         width: 100%;
         text-align: left;
+        font-weight: 300;
       }
       
       .icons {
@@ -362,3 +386,10 @@
   height: 100vw;
   cursor: pointer;
 }
+
+  @media (max-width: 1024px) {
+
+    .container .info {
+      width: auto;
+    }
+  }
