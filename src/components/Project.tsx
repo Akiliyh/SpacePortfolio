@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP, SplitText);
 type ProjectProps = {
   coord: { x: number; y: number };
   index: number;
-  handleClick: Function;
+  handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => void;
   projectWidth: number;
   projectHeight: number;
   project: {title: string, year: number, image: string, video: string};
@@ -183,6 +183,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
       onClick={handleClick}
+      onTouchStart={handleClick}
       key={index}
       style={{
         position: "absolute",

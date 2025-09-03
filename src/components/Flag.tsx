@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(useGSAP);
 
 type FlagsProps = {
-  backgroundRef: React.RefObject<HTMLDivElement>;
+  backgroundRef: React.RefObject<HTMLDivElement | null>;
   showFlag: boolean;
 };
 
