@@ -18,6 +18,7 @@ type ProjectProps = {
 const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -61,6 +62,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     }
 
     gsap.to(imageRef.current, {zIndex: 0, autoAlpha: 0});
+    gsap.to(filterRef.current, { backdropFilter: "blur(20px)",  background: "linear-gradient(to top, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 60%)", duration: 0,  ease: "power2.out"});
     videoRef.current?.play();
 
     const el = mouseEl.currentTarget;
@@ -99,6 +101,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
     videoRef.current?.pause();
     gsap.to(imageRef.current, {zIndex: 2, autoAlpha: 1});
+
+    gsap.to(filterRef.current, { backdropFilter: "blur(0px)", duration: 0,  background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)",  ease: "power2.out"});
 
     const el = mouseEl.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
@@ -198,7 +202,15 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
       <img className="preview-image" ref={imageRef} src={"img" + project.image} alt=""/>
 
-      <div className="filter"></div>
+      <div className="filter" ref={filterRef}></div>
+      {/* <div className="filter" ref={filterRef} style={{
+    backdropFilter: "blur(800px)",
+    WebkitBackdropFilter: "blur(800px)" // for Safari
+  }}></div>
+  <div className="filter" ref={filterRef} style={{
+    backdropFilter: "blur(800px)",
+    WebkitBackdropFilter: "blur(800px)" // for Safari
+  }}></div> */}
 
       <video className="video" ref={videoRef} muted loop disablePictureInPicture>
         <source src={"video" + project.video} type="video/mp4" />
