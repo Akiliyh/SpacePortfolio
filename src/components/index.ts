@@ -5,3 +5,4 @@ export { default as Navbar } from './Navbar';
 export { default as Title } from './Title';
 export { default as Flag } from './Flag';
 export { default as InfoPanel } from './InfoPanel';
+export { default as Button } from './Button';

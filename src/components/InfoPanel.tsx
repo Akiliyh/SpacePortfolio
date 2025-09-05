@@ -5,6 +5,7 @@ import logo from '../assets/GBRDrop.png';
 import { FaReact } from "react-icons/fa";
 import { SiExpo } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
+import { Button } from "./index"
 
 type InfoPanelProps = {
     closeProjectClick: MouseEventHandler,
@@ -84,7 +85,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                         <h2 className="title">{projectContent.title}</h2>
                         <h2 className="year">{projectContent.year}</h2>
                         <h2 className="type">{projectContent.type}</h2>
-                        <a className="link" href={projectContent.link}></a>
+                        <Button href={projectContent.link}>View Link</Button>
                     </div>
                     <div className="row">
                         <p>{projectContent.paragraph}</p>
