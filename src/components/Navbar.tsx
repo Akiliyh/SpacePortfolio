@@ -6,7 +6,11 @@ import logo from '../assets/GBRDrop.png';
 
 gsap.registerPlugin(SplitText);
 
-const Navbar = () => {
+type NavbarProps = {
+  toggleAltPage: (e: HTMLDivElement) => void;
+};
+
+const Navbar = ({ toggleAltPage }: NavbarProps) => {
   const navbarRef = useRef<HTMLDivElement>(null);
   // Map of tab element -> its SplitText instances
   const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
@@ -67,13 +71,13 @@ const Navbar = () => {
       <div className="content">
         <h1 className="tag">GBR</h1>
         <div className="tabs">
-          <div className="about sub-tab" onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+          <div className="about sub-tab" onClick={(e) => toggleAltPage(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
             onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
             <span>About</span>
             <span>About</span>
           </div>
 
-          <div className="contact sub-tab" onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+          <div className="contact sub-tab" onClick={(e) => toggleAltPage(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
             onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
             <span>Contact</span>
             <span>Contact</span>
