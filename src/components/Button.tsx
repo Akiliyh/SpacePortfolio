@@ -16,8 +16,8 @@ const Button = ({ children, href }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const linkSplitRef = useRef<SplitText>(null);
-    const buttonSplitRef = useRef<SplitText>(null);
+    // const linkSplitRef = useRef<SplitText>(null);
+    // const buttonSplitRef = useRef<SplitText>(null);
 
     useGSAP(() => {
 

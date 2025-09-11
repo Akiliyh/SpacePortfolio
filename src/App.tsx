@@ -16,7 +16,7 @@ function App() {
   const [isInfoOver, setIsInfoOver] = useState(false);
   const [altPageType, setAltPageType] = useState('');
 
-  const { contextSafe } = useGSAP({ scope: appRef });
+  // const { contextSafe } = useGSAP({ scope: appRef });
 
   const toggleAltPage = (e: HTMLDivElement) => {
     // get altPageType
