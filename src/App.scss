@@ -275,12 +275,17 @@ p {
     display: flex;
     align-items: baseline;
     gap: 10px;
+    overflow: hidden;
+    width: 100vw;
+    justify-content: center;
   }
 
   img {
     width: 30px;
     height: 30px;
     padding-bottom: 10px;
+    display: block;
+    transform-box: fill-box; 
   }
 }
 
