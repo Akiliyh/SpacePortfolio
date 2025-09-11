@@ -48,6 +48,31 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
     }
   });
 
+  const handleClick = contextSafe((el: HTMLDivElement) => {
+    toggleAltPage(el);
+    const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
+    if (tabs) {
+
+    for (let i = 0; i < tabs.length; i++) {
+      if (tabs[i].classList != el.classList) {
+        tabs[i].classList.remove("active");
+        break;
+      }
+      
+    }
+    }
+
+    for (let i = 0; i < el.classList.length; i++) {
+      if (el.classList[i] == "active") {
+        el.classList.remove("active");
+        return;
+      }
+      
+    }
+
+    el.classList.add("active");
+  });
+
   useGSAP(() => {
     if (!navbarRef.current) return;
 
@@ -71,13 +96,13 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
       <div className="content">
         <h1 className="tag">GBR</h1>
         <div className="tabs">
-          <div className="about sub-tab" onClick={(e) => toggleAltPage(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+          <div className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
             onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
             <span>About</span>
             <span>About</span>
           </div>
 
-          <div className="contact sub-tab" onClick={(e) => toggleAltPage(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+          <div className="contact sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
             onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
             <span>Contact</span>
             <span>Contact</span>

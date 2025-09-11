@@ -12,7 +12,7 @@ type ProjectProps = {
   handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => void;
   projectWidth: number;
   projectHeight: number;
-  project: {title: string, year: number, image: string, video: string};
+  project: {title: string, year: number, image: string, video: string, videoPreview: string};
 };
 
 const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project }: ProjectProps) => {
@@ -213,7 +213,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   }}></div> */}
 
       <video className="video" ref={videoRef} muted loop disablePictureInPicture>
-        <source src={"video" + project.video} type="video/mp4" />
+        <source src={"video" + project.videoPreview} type="video/mp4" />
       </video>
 
       <div className="content">

@@ -241,6 +241,11 @@ p {
   color: var(--blue);
 }
 
+.navbar .tabs .sub-tab.active {
+  transform: translateY(30px);
+  color: var(--blue);
+}
+
 .navbar .tag {
   font-weight: 450;
   font-size: 2.25rem;
