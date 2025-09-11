@@ -6,6 +6,7 @@
         "year": 2024,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/zendrops-preview.mp4",
         "video": "/zendrops.mp4",
         "type": "Website"
     },
@@ -16,6 +17,7 @@
         "year": 2025,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/zendrops-preview.mp4",
         "video": "/zendrops.mp4",
         "type": "Website"
     },
@@ -26,6 +28,7 @@
         "year": 2023,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/zendrops-preview.mp4",
         "video": "/zendrops.mp4",
         "type": "Website"
     },
@@ -36,6 +39,7 @@
         "year": 2025,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/zendrops-preview.mp4",
         "video": "/zendrops.mp4",
         "type": "Website"
     },
@@ -46,6 +50,7 @@
         "year": 2025,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Website"
     },
@@ -56,6 +61,7 @@
         "year": 2025,
         "link": "oui.com",
         "image": "/zendrops.jpg",
+        "videoPreview": "/zendrops-preview.mp4",
         "video": "/zendrops.mp4",
         "type": "Website"
     },
@@ -66,6 +72,7 @@
         "year": 2025,
         "link": "oui.com",
         "image": "/knowyouratlas.jpg",
+        "videoPreview": "/knowyouratlas-preview.mp4",
         "video": "/knowyouratlas.mp4",
         "type": "Website"
     }
