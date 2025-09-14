@@ -81,20 +81,24 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                     <video onClick={handleVideoClick} ref={videoRef} key={projectContent.video} className="video" autoPlay muted loop disablePictureInPicture>
                         <source src={"video" + projectContent.video} type="video/mp4" />
                     </video>
-                    <div className="row">
-                        <h2 className="title">{projectContent.title}</h2>
-                        <h2 className="year">{projectContent.year}</h2>
-                        <h2 className="type">{projectContent.type}</h2>
-                        <Button href={projectContent.link}>View Link</Button>
-                    </div>
-                    <div className="row">
-                        <p>{projectContent.paragraph}</p>
-                    </div>
-                    <div className="row">
-                        <div className="icons">
-                            <FaReact size={30}/>
-                            <SiExpo size={30}/>
+                    <div className="text-content">
+                        <div>
+                            <div className="row">
+                                <h2 className="title">{projectContent.title}</h2>
+                                <h2 className="year">{projectContent.year}</h2>
+                                <h2 className="type">{projectContent.type}</h2>
+                            </div>
+                            <div className="row">
+                                <p>{projectContent.paragraph}</p>
+                            </div>
+                            <div className="row">
+                                <div className="icons">
+                                    <FaReact size={30} />
+                                    <SiExpo size={30} />
+                                </div>
+                            </div>
                         </div>
+                        <Button href={projectContent.link} positionSticky={true}>View Link</Button>
                     </div>
                 </div>
 

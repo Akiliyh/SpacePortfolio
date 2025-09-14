@@ -10,9 +10,10 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 type ButtonProps = PropsWithChildren<{
     href: string;
+    positionSticky: boolean;
 }>;
 
-const Button = ({ children, href }: ButtonProps) => {
+const Button = ({ children, href, positionSticky }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
@@ -32,7 +33,7 @@ const Button = ({ children, href }: ButtonProps) => {
 
     return (
         <div className="button">
-            {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
+            {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef} className={positionSticky ? "sticky" : ""}>
                 {children}
                 <div ref={arrowRef} style={{'display': 'flex'}}>
                 <TfiArrowTopRight size={20}></TfiArrowTopRight>

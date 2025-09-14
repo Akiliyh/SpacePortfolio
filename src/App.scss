@@ -306,6 +306,11 @@ p {
   }
 }
 
+.container .button a.sticky {
+  position: sticky;
+  top: 50%;
+}
+
 /* CENTER BUTTON */
 
 .container .center-button {
@@ -385,6 +390,16 @@ p {
       object-fit: cover;
   width: 100%;
   background-color: var(--blue);
+    }
+
+    .text-content {
+      display: flex;
+      gap: 30px;
+
+      >div:first-child {
+        width: 66%;
+        flex-grow: 4;
+      }
     }
 
     .row {
