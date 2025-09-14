@@ -3,7 +3,7 @@ import './App.scss'
 import { Intro, Navbar, Canvas, Title } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
-
+import { useMediaQuery } from 'react-responsive';
 
 
 
@@ -15,6 +15,8 @@ function App() {
   const [showAltPage, setShowAltPage] = useState(false);
   const [isInfoOver, setIsInfoOver] = useState(false);
   const [altPageType, setAltPageType] = useState('');
+
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   // const { contextSafe } = useGSAP({ scope: appRef });
 
@@ -45,7 +47,7 @@ function App() {
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.from(appContentRef.current, {
-      delay: 3,
+      delay: isMobile ? 2 : 3,
       duration: 2,
       ease: "expo.out",
       yPercent: 100,
