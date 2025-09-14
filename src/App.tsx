@@ -85,8 +85,8 @@ function App() {
   return (
     <div ref={appRef}>
       <Intro></Intro>
+      <Navbar toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)}></Navbar>
       <div className="app-content" ref={appContentRef}>
-        <Navbar toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)}></Navbar>
         <Canvas>
           <Title></Title>
         </Canvas>
