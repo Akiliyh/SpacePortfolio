@@ -15,6 +15,7 @@ type ButtonProps = PropsWithChildren<{
 const Button = ({ children, href }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const arrowRef = useRef<HTMLDivElement>(null);
 
     // const linkSplitRef = useRef<SplitText>(null);
     // const buttonSplitRef = useRef<SplitText>(null);
@@ -33,7 +34,9 @@ const Button = ({ children, href }: ButtonProps) => {
         <div className="button">
             {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
                 {children}
+                <div ref={arrowRef} style={{'display': 'flex'}}>
                 <TfiArrowTopRight size={20}></TfiArrowTopRight>
+                </div>
             </a>
                 : <button ref={buttonRef}>
                     {children}
