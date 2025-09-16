@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from "gsap/SplitText";
 import logo from '../assets/GBRDrop.png';
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(SplitText);
 
@@ -11,6 +12,8 @@ type NavbarProps = {
 };
 
 const Navbar = ({ toggleAltPage }: NavbarProps) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+
   const navbarRef = useRef<HTMLDivElement>(null);
   // Map of tab element -> its SplitText instances
   const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
@@ -90,6 +93,17 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
       splitMap.current.set(tab as HTMLDivElement, splits);
     });
   }, { scope: navbarRef });
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+    tl.from(navbarRef.current, {
+      delay: isMobile ? 2 : 3,
+      duration: 2,
+      ease: "expo.out",                                    
+      rotationX: 90,
+      transformOrigin: "50% 50% -160px",
+    })
+  })
 
   return (
     <nav className="navbar" ref={navbarRef}>

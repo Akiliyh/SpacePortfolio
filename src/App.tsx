@@ -52,6 +52,9 @@ function App() {
       ease: "expo.out",
       yPercent: 100,
       opacity: 0,
+      scaleX: 0.8,
+      rotationX: 80,
+      transformOrigin: "50% 100% -200px",
       onComplete: () => {
         setIsInfoOver(true);
       }
@@ -67,13 +70,18 @@ function App() {
         tl.to(appContentRef.current, {
           duration: 2,
           ease: "expo.out",
-          yPercent: 80,
+          yPercent: 100,
+          scaleX: 0.8,
+          rotationX: 80,
+          transformOrigin: "50% 100% -200px",
         })
       } else {
         tl.to(appContentRef.current, {
           duration: 2,
           ease: "expo.out",
           yPercent: 0,
+          scaleX: 1,
+          rotationX: 0
         })
       }
     }
