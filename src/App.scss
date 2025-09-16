@@ -190,7 +190,9 @@ p {
   z-index: 9999;
   border-radius: 100px;
   padding: 5px 20px;
-  box-shadow: 0px 4px 15px 15px rgba(2, 2, 99, 0.05);
+  box-shadow: 0px 0px 15px 15px rgba(2, 2, 99, 0.01);
+  transform-style: preserve-3d;
+  user-select: none;
 }
 
 .navbar .content {
@@ -326,7 +328,7 @@ p {
   color: var(--white);
   background: var(--white);
   border-radius: 100px;
-  box-shadow: 0px 4px 15px 15px rgba(2, 2, 99, 0.05);
+  box-shadow: 0px 0px 15px 48px rgba(2, 2, 99, 0.01);
   width: 40px;
   height: 40px;
   transition: .3s ease;
