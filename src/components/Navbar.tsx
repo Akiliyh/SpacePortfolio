@@ -108,8 +108,11 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
   return (
     <nav className="navbar" ref={navbarRef}>
       <div className="content">
-        <h1 className="tag">GBR</h1>
+        <h1 className="tag"><a href="/">GBR</a></h1>
+        
         <div className="tabs">
+          {!isMobile && 
+          <>
           <div className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
             onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
             <span>About</span>
@@ -121,6 +124,8 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
             <span>Contact</span>
             <span>Contact</span>
           </div>
+          </>
+          }
           <img src={logo} alt="" />
         </div>
       </div>
