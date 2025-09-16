@@ -137,7 +137,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
             </div>
             <Flag showFlag={showFlag} backgroundRef={backgroundRef}></Flag>
 
-            <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div>
+                {/*  */}
+            {/* <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div> */}
 
             {isInfoDivMounted && 
             <InfoPanel projectContent={projects[projectSelectedIndex]} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
