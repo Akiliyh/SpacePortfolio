@@ -494,4 +494,65 @@ p {
     top: 44px;
     cursor: pointer;
   }
+
+  .boxes {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    .green {
+      background-color: var(--green);
+      bottom: 60px;
+      right: 50px;
+      width: 350px;
+    }
+
+    .blue {
+      background-color: var(--blue);
+      bottom: 150px;
+      left: 50px;
+      height: 250px;
+    }
+
+    .red {
+      background-color: var(--red);
+      top: 150px;
+      right: 50px;
+      height: 250px;
+    }
+  }
+
+  .boxes div {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+  }
+
+  .content {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    padding: 20px;
+    display: flex;
+    color: var(--black);
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    span {
+      width: fit-content;
+      font-size: 5rem;
+      z-index: 1;
+    }
+  }
+
+  .copyrights {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    color: var(--black);
+    right: 50%;
+    width: 300px;
+    transform: translate(50%);
+  }
 }

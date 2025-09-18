@@ -7,7 +7,7 @@ import { SplitText } from "gsap/SplitText";
 import logo from '../assets/GBRDrop.png';
 import { useMediaQuery } from 'react-responsive';
 import BurgerMenuIcon from '../assets/hammenu.svg?react';
-import { RxCross2 } from "react-icons/rx";
+import { Offcanvas } from "./index"
 
 gsap.registerPlugin(SplitText);
 
@@ -22,7 +22,6 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
 
   const navbarRef = useRef<HTMLDivElement>(null);
   const navbarContainerRef = useRef<HTMLDivElement>(null);
-  const offCanvasRef = useRef<HTMLDivElement>(null);
   // Map of tab element -> its SplitText instances
   const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
 
@@ -85,7 +84,6 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
   });
 
   const handleBurgerClick = contextSafe((el: HTMLDivElement) => {
-    console.log('yes');
     if (isOffcanvasMenuOpen) {
       setIsOffcanvasMenuOpen(false);
     } else {
@@ -115,13 +113,7 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
     setIsOffcanvasMenuOpen(true);
   }, [isMobile])
 
-  useGSAP(() => {
-  gsap.to(offCanvasRef.current, {
-    duration: 1,
-    ease: "expo.out",
-    x: isOffcanvasMenuOpen ? "100%" : "0%"
-  });
-}, { dependencies: [isOffcanvasMenuOpen], scope: navbarContainerRef });
+
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -166,13 +158,7 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
           </div>
 
 
-          <div className="off-canvas-menu" ref={offCanvasRef}>
-            <span>ABOUT</span>
-            <div className="cross" onClick={(e) => handleBurgerClick(e.currentTarget)}>
-              
-              <RxCross2 size={25} color="black"/>
-            </div>
-          </div>
+          <Offcanvas isOffcanvasMenuOpen={isOffcanvasMenuOpen} handleBurgerClick={handleBurgerClick} ></Offcanvas>
         </>
 
       }

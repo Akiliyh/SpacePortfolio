@@ -99,6 +99,9 @@ function App() {
           <Title></Title>
         </Canvas>
       </div>
+      {/* <div className="alt-page-content">
+        <h1>test</h1>
+      </div> */}
     </div>
   )
 }
