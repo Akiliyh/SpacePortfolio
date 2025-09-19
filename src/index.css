@@ -15,6 +15,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*::selection {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
 a {
   font-weight: 500;
   color: var(--black);

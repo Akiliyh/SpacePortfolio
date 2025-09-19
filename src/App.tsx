@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import './App.scss'
-import { Intro, Navbar, Canvas, Title } from './components';
+import { Intro, Navbar, Canvas, Title, AltPage } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive';
@@ -99,9 +99,7 @@ function App() {
           <Title></Title>
         </Canvas>
       </div>
-      {/* <div className="alt-page-content">
-        <h1>test</h1>
-      </div> */}
+      <AltPage></AltPage>
     </div>
   )
 }
