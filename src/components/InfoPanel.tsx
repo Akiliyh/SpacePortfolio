@@ -85,13 +85,14 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                         <div>
                             <div className="row">
                                 <h2 className="title">{projectContent.title}</h2>
-                                <h2 className="year">{projectContent.year}</h2>
                                 <h2 className="type">{projectContent.type}</h2>
+                                <h2 className="year">{projectContent.year}</h2>
                             </div>
                             <div className="row">
                                 <p>{projectContent.paragraph}</p>
                             </div>
-                            <div className="row">
+                            <div className="row technologies">
+                                <span>Technologies</span>
                                 <div className="icons">
                                     <FaReact size={30} />
                                     <SiExpo size={30} />
