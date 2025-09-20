@@ -12,13 +12,15 @@ import { Offcanvas } from "./index"
 gsap.registerPlugin(SplitText);
 
 type NavbarProps = {
-  toggleAltPage: (e: HTMLDivElement) => void;
+  toggleAltPage: (e: HTMLDivElement) => void,
+  showAltPage: boolean,
+  altPageType: string
 };
 
-const Navbar = ({ toggleAltPage }: NavbarProps) => {
+const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
-  const [isOffcanvasMenuOpen, setIsOffcanvasMenuOpen] = useState(true);
+  const [isOffcanvasMenuOpen, setIsOffcanvasMenuOpen] = useState(false);
 
   const navbarRef = useRef<HTMLDivElement>(null);
   const navbarContainerRef = useRef<HTMLDivElement>(null);
@@ -110,7 +112,7 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
   }, { scope: navbarRef });
 
   useEffect(() => {
-    setIsOffcanvasMenuOpen(true);
+    setIsOffcanvasMenuOpen(false);
   }, [isMobile])
 
 
@@ -158,7 +160,7 @@ const Navbar = ({ toggleAltPage }: NavbarProps) => {
           </div>
 
 
-          <Offcanvas isOffcanvasMenuOpen={isOffcanvasMenuOpen} handleBurgerClick={handleBurgerClick} ></Offcanvas>
+          <Offcanvas showAltPage={showAltPage} altPageType={altPageType} toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} isOffcanvasMenuOpen={isOffcanvasMenuOpen} handleBurgerClick={handleBurgerClick} ></Offcanvas>
         </>
 
       }
