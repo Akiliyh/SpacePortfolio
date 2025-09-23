@@ -86,6 +86,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   });
 
   const handleBurgerClick = contextSafe((el: HTMLDivElement) => {
+    console.log(el);
     if (isOffcanvasMenuOpen) {
       setIsOffcanvasMenuOpen(false);
     } else {
@@ -155,12 +156,12 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
       {isMobile &&
         <>
-          <div className="burger-icon-container" onClick={(e) => handleBurgerClick(e.currentTarget)}>
+          <div className={isOffcanvasMenuOpen ? "burger-icon-container active" : "burger-icon-container"} onClick={(e) => handleBurgerClick(e.currentTarget)}>
             <BurgerMenuIcon></BurgerMenuIcon>
           </div>
 
 
-          <Offcanvas showAltPage={showAltPage} altPageType={altPageType} toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} isOffcanvasMenuOpen={isOffcanvasMenuOpen} handleBurgerClick={handleBurgerClick} ></Offcanvas>
+          <Offcanvas showAltPage={showAltPage} altPageType={altPageType} isOffcanvasMenuOpen={isOffcanvasMenuOpen} ></Offcanvas>
         </>
 
       }

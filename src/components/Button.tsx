@@ -35,13 +35,15 @@ const Button = ({ children, href, positionSticky, className = "" }: ButtonProps)
     return (
         <div className={"button " + className}>
             {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef} className={positionSticky ? "sticky" : ""}>
-                {children}
+                <span>{children}</span>
+                {/* <span>{children}</span> */}
                 <div ref={arrowRef} style={{'display': 'flex'}}>
                 <TfiArrowTopRight size={20}></TfiArrowTopRight>
                 </div>
             </a>
                 : <button ref={buttonRef}>
-                    {children}
+                    <span>{children}</span>
+                    {/* <span>{children}</span> */}
                 </button>
             }
 

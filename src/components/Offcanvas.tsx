@@ -1,5 +1,4 @@
-import { RxCross2 } from "react-icons/rx";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from "gsap/SplitText"
@@ -7,14 +6,12 @@ import { SplitText } from "gsap/SplitText"
 gsap.registerPlugin(useGSAP, SplitText);
 
 type OffcanvasProps = {
-    handleBurgerClick: (e: HTMLDivElement) => void,
     isOffcanvasMenuOpen: boolean,
-    toggleAltPage: (e: HTMLDivElement) => void,
     showAltPage: boolean,
     altPageType: string,
 };
 
-const Offcanvas = ({ handleBurgerClick, isOffcanvasMenuOpen, toggleAltPage, showAltPage, altPageType }: OffcanvasProps) => {
+const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType }: OffcanvasProps) => {
     const offCanvasRef = useRef<HTMLDivElement>(null);
     const aboutTitleRef = useRef<HTMLDivElement>(null);
     const contactTitleRef = useRef<HTMLDivElement>(null);
@@ -26,12 +23,7 @@ const Offcanvas = ({ handleBurgerClick, isOffcanvasMenuOpen, toggleAltPage, show
             x: !isOffcanvasMenuOpen ? "100%" : "0%"
         });
 
-        console.log(toggleAltPage);
     }, { dependencies: [isOffcanvasMenuOpen] });
-
-    useEffect (() => {
-
-    }, [altPageType])
 
     
     useGSAP(() => {
@@ -78,12 +70,6 @@ const Offcanvas = ({ handleBurgerClick, isOffcanvasMenuOpen, toggleAltPage, show
             </div>
             </div>
 
-            
-
-            <div className="cross" onClick={(e) => handleBurgerClick(e.currentTarget)}>
-
-                <RxCross2 size={25} color="black" />
-            </div>
 
             <div className="copyrights">
                 <span>©2025 - Guillaume Boucher</span>
