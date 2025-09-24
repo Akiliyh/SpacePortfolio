@@ -51,8 +51,8 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     useGSAP(() => {
 
         if (showInfoDiv) {
-            gsap.to(infoDivRef.current, { height: window.innerHeight - 20, paddingTop: 10, paddingBottom: 10, y: 0, duration: 1.5, ease: "expo.out" });
-            gsap.set(backgroundFallbackRef.current, { height: window.innerHeight });
+            gsap.to(infoDivRef.current, { height: "calc(100vh - 20px)", paddingTop: 10, paddingBottom: 10, y: 0, duration: 1.5, ease: "expo.out" });
+            gsap.set(backgroundFallbackRef.current, { height: "100vh" });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: .2, y: 0, duration: 1.5, ease: "expo.out" });
         } else {
             gsap.to(infoDivRef.current, { height: 0, paddingTop: 0, paddingBottom: 0, duration: 1.5, ease: "expo.out", onComplete: () => { unmountInfoDiv } });

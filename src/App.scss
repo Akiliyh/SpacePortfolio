@@ -515,7 +515,7 @@ p {
       a.sticky {
         left: 15px;
         width: fit-content;
-        top: 90%;
+        top: 85%;
       }
     }
   }
@@ -612,6 +612,7 @@ p {
       z-index: 1;
       overflow: hidden;
       height: 6rem; // TO MODIFY
+      text-wrap: nowrap;
     }
   }
 
@@ -623,6 +624,27 @@ p {
     right: 50%;
     width: 300px;
     transform: translate(50%);
+  }
+}
+
+  @media (max-width: 576px) {
+    .off-canvas-menu .content span{
+      font-size: 4rem;
+      height: 5rem;
+  }
+}
+
+@media (max-width: 576px) {
+    .off-canvas-menu .content span{
+      font-size: 4rem;
+      height: 5rem;
+  }
+}
+
+@media (max-width: 414px) {
+    .off-canvas-menu .content span{
+      font-size: 3rem;
+      height: 4rem;
   }
 }
 
