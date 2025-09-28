@@ -16,6 +16,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     const [showFlag, setShowFlag] = useState(false);
     const [projectSelectedIndex, setProjectSelectedIndex] = useState(0);
+    const [envBoxCoord, setEnvBoxCoord] = useState({x: 0, y: 0});
 
     const [showInfoDiv, setShowInfoDiv] = useState(false);
     const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
@@ -39,7 +40,18 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     // }
 
+    const getEnvBoxCoord = (x: number, y: number) => {
+            // We wanna have split boxes in the environment to know where the user it to generate new project tiles there
+            const newX = (-Math.floor((x + window.innerWidth/2) / window.innerWidth)); // we reverse the sign as it's inverted // x: is the pushed div coord
+            const newY = (-Math.floor((y + window.innerHeight/2) / window.innerHeight));
+            return {x: newX, y: newY}
+        };
+
     const projectsRef = useRef<{ x: number; y: number }[]>([]);
+
+    // PROJECTS PLACEMENTS
+    // keep in mind projects translate to [-1,1] to x and y axis on the env box coords
+
     const safeLeft: number = CANVASSIZE + (window.innerWidth / 2) - SAFEZONESIZE - PROJECTWIDTH;
     const safeRight: number = CANVASSIZE + (window.innerWidth / 2) + SAFEZONESIZE;
     const safeTop: number = CANVASSIZE + (window.innerHeight / 2) - SAFEZONESIZE - PROJECTHEIGHT;
@@ -51,8 +63,6 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const highestYValue: number = CANVASSIZE + (window.innerHeight / 2) + SAFEZONESIZE + PROJECTHEIGHT;
 
     if (projectsRef.current.length === 0) {
-        const randomIntFromInterval = (min: number, max: number) =>
-            Math.floor(Math.random() * (max - min + 1) + min);
 
         const isOverlapping = (x: number, y: number, buffer: number) => {
             for (let i = 0; i < projectsRef.current.length; i++) {
@@ -76,7 +86,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
             let newX: number = randomIntFromInterval(lowestXValue, highestXValue);
             let newY: number = randomIntFromInterval(lowestYValue, highestYValue);
 
-            do {
+            do { // TODO add exit value
                 newX = randomIntFromInterval(lowestXValue, highestXValue);
                 newY = randomIntFromInterval(lowestYValue, highestYValue);
             }
@@ -107,9 +117,13 @@ const Canvas = ({ children }: PropsWithChildren) => {
         //     });
 
         console.log(projectsRef.current);
+
+        // get projects box coord, we remove canvassize so it works well on div coord
+        console.log(getEnvBoxCoord((CANVASSIZE - projectsRef.current[0].x), CANVASSIZE - projectsRef.current[0].y));
     }
 
     useGSAP(() => {
+
         Draggable.create(backgroundRef.current, {
             type: "x,y",
             inertia: true,
@@ -122,6 +136,16 @@ const Canvas = ({ children }: PropsWithChildren) => {
                     setShowFlag(false);
                 }
                 // console.log(this.x, this.y, window.innerHeight, window.innerWidth);
+                console.log(this.x + window.innerHeight/2, this.y + window.innerWidth/2, window.innerHeight, window.innerWidth);
+
+                // CHECK WHICH BOX YOU ARE IN
+                const newCoord = getEnvBoxCoord(this.x, this.y);
+
+                if (envBoxCoord != newCoord) { // if different we update
+                    setEnvBoxCoord(newCoord);
+                }
+
+                console.log("Position of the box: " + newCoord.x + "," + newCoord.y);
 
             },
         });
