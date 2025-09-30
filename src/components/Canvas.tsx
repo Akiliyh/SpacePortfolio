@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
@@ -16,7 +16,8 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     const [showFlag, setShowFlag] = useState(false);
     const [projectSelectedIndex, setProjectSelectedIndex] = useState(0);
-    const [envBoxCoord, setEnvBoxCoord] = useState({x: 0, y: 0});
+    const [envBoxCoord, setEnvBoxCoord] = useState({ x: 0, y: 0 });
+    const [projectList, setProjectList] = useState<{ x: number; y: number }[]>([]);
 
     const [showInfoDiv, setShowInfoDiv] = useState(false);
     const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
@@ -41,28 +42,29 @@ const Canvas = ({ children }: PropsWithChildren) => {
     // }
 
     const getEnvBoxCoord = (x: number, y: number) => {
-            // We wanna have split boxes in the environment to know where the user it to generate new project tiles there
-            const newX = (-Math.floor((x + window.innerWidth/2) / window.innerWidth)); // we reverse the sign as it's inverted // x: is the pushed div coord
-            const newY = (-Math.floor((y + window.innerHeight/2) / window.innerHeight));
-            return {x: newX, y: newY}
-        };
+        // We wanna have split boxes in the environment to know where the user it to generate new project tiles there
+        const newX = (-Math.floor((x + window.innerWidth / 2) / window.innerWidth)); // we reverse the sign as it's inverted // x: is the pushed div coord
+        const newY = (-Math.floor((y + window.innerHeight / 2) / window.innerHeight));
+        return { x: newX, y: newY }
+    };
 
     const projectsRef = useRef<{ x: number; y: number }[]>([]);
 
-    // PROJECTS PLACEMENTS
-    // keep in mind projects translate to [-1,1] to x and y axis on the env box coords
 
-    const safeLeft: number = CANVASSIZE + (window.innerWidth / 2) - SAFEZONESIZE - PROJECTWIDTH;
-    const safeRight: number = CANVASSIZE + (window.innerWidth / 2) + SAFEZONESIZE;
-    const safeTop: number = CANVASSIZE + (window.innerHeight / 2) - SAFEZONESIZE - PROJECTHEIGHT;
-    const safeBottom: number = CANVASSIZE + (window.innerHeight / 2) + SAFEZONESIZE;
+    const populateProjects = (shiftValueX: number, shiftValueY: number) => {
+        // PROJECTS PLACEMENTS
+        // keep in mind projects translate to [-1,1] to x and y axis on the env box coords
 
-    const lowestXValue: number = CANVASSIZE - (window.innerWidth / 2) - SAFEZONESIZE;
-    const lowestYValue: number = CANVASSIZE - (window.innerHeight / 2) - SAFEZONESIZE;
-    const highestXValue: number = CANVASSIZE + (window.innerWidth / 2) + SAFEZONESIZE + PROJECTWIDTH;
-    const highestYValue: number = CANVASSIZE + (window.innerHeight / 2) + SAFEZONESIZE + PROJECTHEIGHT;
+        const safeLeft: number = CANVASSIZE + (window.innerWidth / 2) - SAFEZONESIZE - PROJECTWIDTH;
+        const safeRight: number = CANVASSIZE + (window.innerWidth / 2) + SAFEZONESIZE;
+        const safeTop: number = CANVASSIZE + (window.innerHeight / 2) - SAFEZONESIZE - PROJECTHEIGHT;
+        const safeBottom: number = CANVASSIZE + (window.innerHeight / 2) + SAFEZONESIZE;
 
-    if (projectsRef.current.length === 0) {
+        const lowestXValue: number = CANVASSIZE - (window.innerWidth / 2) - SAFEZONESIZE;
+        const lowestYValue: number = CANVASSIZE - (window.innerHeight / 2) - SAFEZONESIZE;
+        const highestXValue: number = CANVASSIZE + (window.innerWidth / 2) + SAFEZONESIZE + PROJECTWIDTH;
+        const highestYValue: number = CANVASSIZE + (window.innerHeight / 2) + SAFEZONESIZE + PROJECTHEIGHT;
+        // if (projectsRef.current.length === 0) {
 
         const isOverlapping = (x: number, y: number, buffer: number) => {
             for (let i = 0; i < projectsRef.current.length; i++) {
@@ -75,7 +77,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
                     y + PROJECTHEIGHT + buffer > p.y;
 
                 if (overlaps) {
-                    return true; 
+                    return true;
                 }
             }
 
@@ -83,12 +85,14 @@ const Canvas = ({ children }: PropsWithChildren) => {
         };
 
         for (let i = 0; i < projects.length; i++) {
-            let newX: number = randomIntFromInterval(lowestXValue, highestXValue);
-            let newY: number = randomIntFromInterval(lowestYValue, highestYValue);
+            let newX: number = randomIntFromInterval(lowestXValue + shiftValueX*window.innerWidth, highestXValue + shiftValueX*window.innerWidth);
+            let newY: number = randomIntFromInterval(lowestYValue + shiftValueY*window.innerHeight, highestYValue + shiftValueY*window.innerHeight);
+            let exitValue = 0;
 
-            do { // TODO add exit value
-                newX = randomIntFromInterval(lowestXValue, highestXValue);
-                newY = randomIntFromInterval(lowestYValue, highestYValue);
+            do {
+                newX = randomIntFromInterval(lowestXValue + shiftValueX*window.innerWidth, highestXValue + shiftValueX*window.innerWidth);
+                newY = randomIntFromInterval(lowestYValue + shiftValueY*window.innerHeight, highestYValue + shiftValueY*window.innerHeight);
+                exitValue++;
             }
             while (
                 (newX > safeLeft
@@ -96,12 +100,15 @@ const Canvas = ({ children }: PropsWithChildren) => {
                     && newY > safeTop
                     && newY < safeBottom
                 ) || isOverlapping(newX, newY, 10)
+                && exitValue < 100
+
             )
 
             projectsRef.current.push({
                 x: newX,
                 y: newY,
             });
+
         }
 
         // CENTER OF THE SCENE
@@ -117,10 +124,56 @@ const Canvas = ({ children }: PropsWithChildren) => {
         //     });
 
         console.log(projectsRef.current);
+        setProjectList([...projectsRef.current])
 
         // get projects box coord, we remove canvassize so it works well on div coord
-        console.log(getEnvBoxCoord((CANVASSIZE - projectsRef.current[0].x), CANVASSIZE - projectsRef.current[0].y));
+
+        // for (let i = 0; i < projectsRef.current.length; i++) {
+        //     console.log(getEnvBoxCoord((CANVASSIZE - projectsRef.current[i].x), CANVASSIZE - projectsRef.current[i].y));
+        // }
+        // }
     }
+
+    useEffect(() => {
+        populateProjects(0, 0);
+    }, []);
+
+    const [renderedProjects, setRenderedProjects] = useState<{ project: typeof projects[0]; coord: { x: number; y: number } }[]>([]);
+
+    useEffect(() => {
+        console.log("yesy");
+        console.log("yesy");
+        console.log("yesy");
+        console.log("yesy");
+        console.log("yesy");
+        console.log("yesy");
+        const elements: { project: typeof projects[0]; coord: { x: number; y: number } }[] = [];
+
+        projects.forEach((project, index) => {
+            const loops = projectsRef.current.length / projects.length;
+            console.log(loops);
+            for (let i = 0; i < loops; i++) {
+                const coordIndex = index * loops + i;
+                elements.push({ project, coord: projectsRef.current[coordIndex] });
+            }
+        });
+
+        setRenderedProjects(elements);
+    }, [projectList]);
+
+    const envBoxCoordRef = useRef(envBoxCoord);
+
+    useEffect(() => {
+        envBoxCoordRef.current = envBoxCoord;
+        console.log("placement changed");
+
+        console.log(envBoxCoordRef);
+
+        if (envBoxCoordRef.current.x > 2) {
+            populateProjects(3, 0);
+            console.log(projectsRef.current);
+        }
+    }, [envBoxCoord]);
 
     useGSAP(() => {
 
@@ -136,12 +189,12 @@ const Canvas = ({ children }: PropsWithChildren) => {
                     setShowFlag(false);
                 }
                 // console.log(this.x, this.y, window.innerHeight, window.innerWidth);
-                console.log(this.x + window.innerHeight/2, this.y + window.innerWidth/2, window.innerHeight, window.innerWidth);
+                console.log(this.x + window.innerHeight / 2, this.y + window.innerWidth / 2, window.innerHeight, window.innerWidth);
 
                 // CHECK WHICH BOX YOU ARE IN
                 const newCoord = getEnvBoxCoord(this.x, this.y);
 
-                if (envBoxCoord != newCoord) { // if different we update
+                if (envBoxCoordRef.current.x !== newCoord.x || envBoxCoordRef.current.y !== newCoord.y) { // if different we update
                     setEnvBoxCoord(newCoord);
                 }
 
@@ -149,6 +202,12 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
             },
         });
+
+    }, { scope: containerRef }); // <-- scope is for selector text (optional)
+
+    // GSAP observer
+
+    useGSAP(() => {
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -160,17 +219,14 @@ const Canvas = ({ children }: PropsWithChildren) => {
             });
         }, { threshold: 0.5 });
 
-        // attach observer to elements in the scope
-        containerRef.current?.querySelectorAll('.project-cards').forEach(el => {
-            observer.observe(el);
-        });
+        const projectElements = containerRef.current?.querySelectorAll('.project-cards');
+        projectElements?.forEach(el => observer.observe(el));
 
         return () => {
             observer.disconnect();
         };
 
-
-    }, { scope: containerRef }); // <-- scope is for selector text (optional)
+    }, { scope: containerRef, dependencies: [renderedProjects] })
 
     const handleProjectClick = contextSafe((index: number) => {
 
@@ -205,10 +261,11 @@ const Canvas = ({ children }: PropsWithChildren) => {
         <div className="container" ref={containerRef}>
 
             <div ref={backgroundRef} className="backgroundCanvas">
-                {projects.map((project, index) => (
-                    <>
-                        <Project key={index} project={project} coord={projectsRef.current[index]} index={index} handleClick={() => handleProjectClick(index)} projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}></Project>
-                    </>
+                {renderedProjects.map((el, i) => (
+                    <Project key={i} project={el.project} coord={el.coord}
+                        index={i} handleClick={() => handleProjectClick(i)}
+                        projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}
+                    />
                 ))}
                 {children}
             </div>
