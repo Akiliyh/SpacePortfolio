@@ -18,6 +18,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const [projectSelectedIndex, setProjectSelectedIndex] = useState(0);
     const [envBoxCoord, setEnvBoxCoord] = useState({ x: 0, y: 0 });
     const [projectList, setProjectList] = useState<{ x: number; y: number }[]>([]);
+    const [visitedCoord, setVisitedCoord] = useState([{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }, { x: 1, y: 1 }]);
 
     const [showInfoDiv, setShowInfoDiv] = useState(false);
     const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
@@ -47,6 +48,20 @@ const Canvas = ({ children }: PropsWithChildren) => {
         const newY = (-Math.floor((y + window.innerHeight / 2) / window.innerHeight));
         return { x: newX, y: newY }
     };
+
+    const isCoordVisited = (x: number, y: number) => {
+        // We check if the position has already been visited or not
+        for (const e of visitedCoord) {
+            if (e.x === x && e.y === y) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    useEffect(() => {
+        isCoordVisited(0, 0);
+    }, [visitedCoord])
 
     const projectsRef = useRef<{ x: number; y: number }[]>([]);
 
@@ -85,13 +100,13 @@ const Canvas = ({ children }: PropsWithChildren) => {
         };
 
         for (let i = 0; i < projects.length; i++) {
-            let newX: number = randomIntFromInterval(lowestXValue + shiftValueX*window.innerWidth, highestXValue + shiftValueX*window.innerWidth);
-            let newY: number = randomIntFromInterval(lowestYValue + shiftValueY*window.innerHeight, highestYValue + shiftValueY*window.innerHeight);
+            let newX: number = randomIntFromInterval(lowestXValue + shiftValueX * window.innerWidth, highestXValue + shiftValueX * window.innerWidth);
+            let newY: number = randomIntFromInterval(lowestYValue + shiftValueY * window.innerHeight, highestYValue + shiftValueY * window.innerHeight);
             let exitValue = 0;
 
             do {
-                newX = randomIntFromInterval(lowestXValue + shiftValueX*window.innerWidth, highestXValue + shiftValueX*window.innerWidth);
-                newY = randomIntFromInterval(lowestYValue + shiftValueY*window.innerHeight, highestYValue + shiftValueY*window.innerHeight);
+                newX = randomIntFromInterval(lowestXValue + shiftValueX * window.innerWidth, highestXValue + shiftValueX * window.innerWidth);
+                newY = randomIntFromInterval(lowestYValue + shiftValueY * window.innerHeight, highestYValue + shiftValueY * window.innerHeight);
                 exitValue++;
             }
             while (
@@ -134,6 +149,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
         // }
     }
 
+    // iniitialisation of projects
     useEffect(() => {
         populateProjects(0, 0);
     }, []);
@@ -141,21 +157,13 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const [renderedProjects, setRenderedProjects] = useState<{ project: typeof projects[0]; coord: { x: number; y: number } }[]>([]);
 
     useEffect(() => {
-        console.log("yesy");
-        console.log("yesy");
-        console.log("yesy");
-        console.log("yesy");
-        console.log("yesy");
-        console.log("yesy");
+
         const elements: { project: typeof projects[0]; coord: { x: number; y: number } }[] = [];
 
-        projects.forEach((project, index) => {
-            const loops = projectsRef.current.length / projects.length;
-            console.log(loops);
-            for (let i = 0; i < loops; i++) {
-                const coordIndex = index * loops + i;
-                elements.push({ project, coord: projectsRef.current[coordIndex] });
-            }
+        projectsRef.current.forEach((coord, i) => {
+
+            const project = projects[i % projects.length];
+            elements.push({ project, coord });
         });
 
         setRenderedProjects(elements);
@@ -169,38 +177,45 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
         console.log(envBoxCoordRef);
 
-        if (envBoxCoordRef.current.x > 2) {
-            populateProjects(3, 0);
+        let curPosX = envBoxCoordRef.current.x;
+        let curPosY = envBoxCoordRef.current.y;
+
+        if (!isCoordVisited(curPosX, curPosY)) {
+            populateProjects(curPosX, curPosY);
+
+            visitedCoord.push({ x: curPosX, y: curPosY });
             console.log(projectsRef.current);
         }
     }, [envBoxCoord]);
 
     useGSAP(() => {
 
+        const handleMove = function (this: any) {
+            // if element goes too far then we display the flag icon
+            if (Math.abs(this.x) > (window.innerWidth) || Math.abs(this.y) > (window.innerHeight)) {
+                setShowFlag(true);
+            } else {
+                setShowFlag(false);
+            }
+            // console.log(this.x, this.y, window.innerHeight, window.innerWidth);
+            console.log(this.x + window.innerHeight / 2, this.y + window.innerWidth / 2, window.innerHeight, window.innerWidth);
+
+            // CHECK WHICH BOX YOU ARE IN
+            const newCoord = getEnvBoxCoord(this.x, this.y);
+
+            if (envBoxCoordRef.current.x !== newCoord.x || envBoxCoordRef.current.y !== newCoord.y) { // if different we update
+                setEnvBoxCoord(newCoord);
+            }
+
+            console.log("Position of the box: " + newCoord.x + "," + newCoord.y);
+        }
+
         Draggable.create(backgroundRef.current, {
             type: "x,y",
             inertia: true,
             dragResistance: 0.75,
-            onDrag: function () {
-                // if element goes too far then we display the flag icon
-                if (Math.abs(this.x) > (window.innerWidth) || Math.abs(this.y) > (window.innerHeight)) {
-                    setShowFlag(true);
-                } else {
-                    setShowFlag(false);
-                }
-                // console.log(this.x, this.y, window.innerHeight, window.innerWidth);
-                console.log(this.x + window.innerHeight / 2, this.y + window.innerWidth / 2, window.innerHeight, window.innerWidth);
-
-                // CHECK WHICH BOX YOU ARE IN
-                const newCoord = getEnvBoxCoord(this.x, this.y);
-
-                if (envBoxCoordRef.current.x !== newCoord.x || envBoxCoordRef.current.y !== newCoord.y) { // if different we update
-                    setEnvBoxCoord(newCoord);
-                }
-
-                console.log("Position of the box: " + newCoord.x + "," + newCoord.y);
-
-            },
+            onDrag: handleMove,
+            onThrowUpdate: handleMove // onThrowUpdate means it fires even with the inertia on
         });
 
     }, { scope: containerRef }); // <-- scope is for selector text (optional)
@@ -245,7 +260,9 @@ const Canvas = ({ children }: PropsWithChildren) => {
             setShowInfoDiv(true);
         }
 
-        setProjectSelectedIndex(index);
+        // we want here to select the correct project regardless of the index
+        let projectIndex = index % projects.length;
+        setProjectSelectedIndex(projectIndex);
 
     });
 
@@ -265,6 +282,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
                     <Project key={i} project={el.project} coord={el.coord}
                         index={i} handleClick={() => handleProjectClick(i)}
                         projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}
+                        randomIntFromInterval={randomIntFromInterval}
                     />
                 ))}
                 {children}

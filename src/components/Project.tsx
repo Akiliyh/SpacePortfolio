@@ -13,9 +13,10 @@ type ProjectProps = {
   projectWidth: number;
   projectHeight: number;
   project: {title: string, year: number, image: string, video: string, videoPreview: string};
+  randomIntFromInterval: Function;
 };
 
-const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project }: ProjectProps) => {
+const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project, randomIntFromInterval }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
@@ -139,6 +140,11 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
         zIndex: 0
       });
   })
+
+   useGSAP(() => {
+    gsap.from(projectRef.current, { opacity: 0, scale: 0.6, rotate: randomIntFromInterval(-30, 30), duration: 1, ease: "power2.inOut" });
+    gsap.to(projectRef.current, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut" });
+  }, { scope: projectRef }); // <-- scope is for selector text (optional)
 
   useGSAP(() => {
 
