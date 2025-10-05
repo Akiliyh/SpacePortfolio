@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.scss'
 import { Intro, Navbar, Canvas, Title, AltPage } from './components';
 import { useGSAP } from '@gsap/react';
@@ -99,7 +99,7 @@ function App() {
           <Title></Title>
         </Canvas>
       </div>
-      <AltPage></AltPage>
+      <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></AltPage>
     </div>
   )
 }

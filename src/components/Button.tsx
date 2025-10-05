@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react"
+import type { MouseEventHandler, PropsWithChildren } from "react"
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { useRef } from "react"
 import { useGSAP } from '@gsap/react';
@@ -12,12 +12,14 @@ type ButtonProps = PropsWithChildren<{
     href?: string;
     className?: string;
     positionSticky?: boolean;
+    onClick?: (el: HTMLDivElement) => void;
 }>;
 
-const Button = ({ children, href, positionSticky, className = "" }: ButtonProps) => {
+const Button = ({ children, href, positionSticky, className = "", onClick }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // const linkSplitRef = useRef<SplitText>(null);
     // const buttonSplitRef = useRef<SplitText>(null);
@@ -33,7 +35,7 @@ const Button = ({ children, href, positionSticky, className = "" }: ButtonProps)
   }); // <-- scope is for selector text (optional)
 
     return (
-        <div className={"button " + className}>
+        <div className={className + " button"} onClick={() => {if (containerRef.current && onClick) onClick(containerRef.current);}} ref={containerRef}>
             {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef} className={positionSticky ? "sticky" : ""}>
                 <span>{children}</span>
                 {/* <span>{children}</span> */}
