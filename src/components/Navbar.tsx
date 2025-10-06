@@ -63,7 +63,18 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   const handleClick = contextSafe((el: HTMLDivElement) => {
     toggleAltPage(el);
     const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
+
     if (tabs) {
+
+      if (!showAltPage) {
+      for (let i = 0; i < tabs.length; i++) {
+        if (tabs[i].classList != el.classList) {
+          tabs[i].classList.remove("active");
+          break;
+        }
+
+      }
+    }
 
       for (let i = 0; i < tabs.length; i++) {
         if (tabs[i].classList != el.classList) {
@@ -116,6 +127,19 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     setIsOffcanvasMenuOpen(false);
   }, [isMobile])
 
+  // We remove tha active class if the show alt tab is closed
+  useEffect(() => {
+    const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
+
+    if (tabs) {
+
+      if (!showAltPage) {
+      for (let i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove("active");
+        }
+      }
+    }
+  }, [showAltPage])
 
 
   useGSAP(() => {

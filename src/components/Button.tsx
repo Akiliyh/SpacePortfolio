@@ -1,5 +1,5 @@
-import type { MouseEventHandler, PropsWithChildren } from "react"
-import { TfiArrowTopRight } from "react-icons/tfi";
+import type { PropsWithChildren } from "react"
+import { TfiArrowTopRight, TfiArrowDown } from "react-icons/tfi";
 import { useRef } from "react"
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
@@ -13,9 +13,10 @@ type ButtonProps = PropsWithChildren<{
     className?: string;
     positionSticky?: boolean;
     onClick?: (el: HTMLDivElement) => void;
+    isProject?: boolean,
 }>;
 
-const Button = ({ children, href, positionSticky, className = "", onClick }: ButtonProps) => {
+const Button = ({ children, href, positionSticky, className = "", onClick, isProject }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
@@ -38,14 +39,14 @@ const Button = ({ children, href, positionSticky, className = "", onClick }: But
         <div className={className + " button"} onClick={() => {if (containerRef.current && onClick) onClick(containerRef.current);}} ref={containerRef}>
             {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef} className={positionSticky ? "sticky" : ""}>
                 <span>{children}</span>
-                {/* <span>{children}</span> */}
+
                 <div ref={arrowRef} style={{'display': 'flex'}}>
                 <TfiArrowTopRight size={20}></TfiArrowTopRight>
                 </div>
             </a>
                 : <button ref={buttonRef}>
                     <span>{children}</span>
-                    {/* <span>{children}</span> */}
+                    {isProject && <TfiArrowDown size={20}></TfiArrowDown>}
                 </button>
             }
 

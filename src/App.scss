@@ -352,7 +352,7 @@ p {
   }
 }
 
- .button button{
+.button button {
   text-wrap: nowrap;
 }
 
@@ -506,19 +506,19 @@ p {
     .content {
       position: relative;
 
-    .button {
-      position: absolute;
-      height: 100%;
-      right: 15px;
-      top: 0;
+      .button {
+        position: absolute;
+        height: 100%;
+        right: 15px;
+        top: 0;
 
-      a.sticky {
-        left: 15px;
-        width: fit-content;
-        top: 85%;
+        a.sticky {
+          left: 15px;
+          width: fit-content;
+          top: 85%;
+        }
       }
     }
-  }
   }
 
 
@@ -588,8 +588,8 @@ p {
 
   .content {
     width: calc(100% - 100px);
-  height: calc(100% - 100px);
-  padding: 50px;
+    height: calc(100% - 100px);
+    padding: 50px;
     display: flex;
     color: var(--black);
     flex-direction: column;
@@ -627,24 +627,24 @@ p {
   }
 }
 
-  @media (max-width: 576px) {
-    .off-canvas-menu .content span{
-      font-size: 4rem;
-      height: 5rem;
+@media (max-width: 576px) {
+  .off-canvas-menu .content span {
+    font-size: 4rem;
+    height: 5rem;
   }
 }
 
 @media (max-width: 576px) {
-    .off-canvas-menu .content span{
-      font-size: 4rem;
-      height: 5rem;
+  .off-canvas-menu .content span {
+    font-size: 4rem;
+    height: 5rem;
   }
 }
 
 @media (max-width: 414px) {
-    .off-canvas-menu .content span{
-      font-size: 3rem;
-      height: 4rem;
+  .off-canvas-menu .content span {
+    font-size: 3rem;
+    height: 4rem;
   }
 }
 
@@ -667,6 +667,10 @@ p {
     gap: 50px;
     height: 70%;
 
+    &.contact {
+      grid-template-columns: 1.5fr 1fr;
+    }
+
     .info {
       display: flex;
       justify-content: center;
@@ -680,6 +684,11 @@ p {
         margin-left: auto;
       }
     }
+  }
+
+  .button.projects button {
+    background-color: var(--white);
+    color: var(--black);
   }
 
   .images {
@@ -697,6 +706,21 @@ p {
     left: 50%;
     transform: translate(-50%);
   }
+
+  .contact {
+
+    .linkedin svg{
+      fill: var(--blue);
+    }
+
+    .mail svg{
+      color: var(--red);
+    }
+
+    .location svg{
+      color: var(--green);
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -706,25 +730,26 @@ p {
     width: calc(100% - 50px);
     height: calc(100% - 50px);
 
-  h1 {
-    font-size: 2rem;
-  }
-  .content {
-    grid-template-columns: 1fr;
-    height: 90%;
-
-    .info {
-      justify-content: flex-start;
+    h1 {
+      font-size: 2rem;
     }
-  }
 
-  .images {
-    height: 45%;
-    width: 100%;
-  }
+    .content {
+      grid-template-columns: 1fr;
+      height: 90%;
 
-  p {
-    font-size: .875rem;
-  }
+      .info {
+        justify-content: flex-start;
+      }
+    }
+
+    .images {
+      height: 45%;
+      width: 100%;
+    }
+
+    p {
+      font-size: .875rem;
+    }
   }
 }
