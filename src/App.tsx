@@ -5,9 +5,6 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive';
 
-
-
-
 function App() {
 
   const appContentRef = useRef<HTMLDivElement>(null);

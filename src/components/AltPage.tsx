@@ -6,6 +6,7 @@ import { useRef, useEffect, useState } from "react"
 import { IoMailOutline, IoLocationOutline } from "react-icons/io5";
 import { FaLinkedinIn } from "react-icons/fa";
 import emailjs from '@emailjs/browser';
+import { TbLoader2 } from "react-icons/tb";
 
 type AltPageProps = {
   showAltPage: boolean,
@@ -23,8 +24,8 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ success: boolean; message: string | null }>({
-  success: false,
-  message: null,
+    success: false,
+    message: null,
   });
 
   const sendEmail = (e: any) => {
@@ -70,16 +71,16 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
       .finally(() => {
         setLoading(false);
       });
+    }
 
     // e.preventDefault();
     // setLoading(true);
 
     // setTimeout(() => {
     //   setStatus({ success: true, message: 'Message envoyé avec succès !' });
-    //   formRef.current.reset();
+    //   // formRef.current?.reset();
     //   setLoading(false);
     // }, 1000);
-    }
   };
 
   useGSAP(() => {
@@ -146,13 +147,15 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
         {
           altPageType === "contact" &&
           <>
-              <div className="about-text">
-                <div className="text">
-                  <h1>Contact me!</h1>
-                  <p>Reprehenderit voluptates exercitationem reiciendis ipsam, libero facere ex sequi amet dicta quasi quas voluptatibus, quibusdam hic voluptatum culpa rerum fuga qui, esse eos. Quidem nihil rerum ipsa quis perspiciatis ullam impedit. Sunt minus cupiditate tempora quos in veniam consequuntur modi ipsam! Quod atque consequuntur dolorem inventore animi odit nulla cum sint, fugiat sequi voluptates voluptatem aperiam iusto placeat accusantium eligendi assumenda illo omnis nesciunt ut ducimus necessitatibus!</p>
-                </div>
+            <div className="about-text">
+              <div className="text">
+                <h1>Contact me!</h1>
+                <p>Reprehenderit voluptates exercitationem reiciendis ipsam, libero facere ex sequi amet dicta quasi quas voluptatibus, quibusdam hic voluptatum culpa rerum fuga qui, esse eos. Quidem nihil rerum ipsa quis perspiciatis ullam impedit. Sunt minus cupiditate tempora quos in veniam consequuntur modi ipsam! Quod atque consequuntur dolorem inventore animi odit nulla cum sint, fugiat sequi voluptates voluptatem aperiam iusto placeat accusantium eligendi assumenda illo omnis nesciunt ut ducimus necessitatibus!</p>
+              </div>
+
+              {!isMobile &&
                 <div className="about-icons">
-                  <div className="mail">
+                  <div className="email">
                     <IoMailOutline />
                     <a href="mailto:guillaumeboucher.contact@gmail.com">
                       <span>guillaumebouch</span>
@@ -169,31 +172,62 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
                     <span>Paris, France</span>
                   </div>
                 </div>
+              }
+            </div>
+
+            <form className="form" ref={formRef} onSubmit={sendEmail}>
+              <div className="name">
+                <div className="first-name">
+                  <label htmlFor="firstname">First name *</label>
+                  <input type="text" name="firstname" id="firstname" required />
+                </div>
+                <div className="last-name">
+                  <label htmlFor="lastname">Last name *</label>
+                  <input type="text" name="lastname" id="lastname" required />
+                </div>
+              </div>
+              <div className="mail">
+                <label htmlFor="mail">Email *</label>
+                <input type="email" name="mail" id="mail" required />
               </div>
 
-              <form className="form" ref={formRef} onSubmit={sendEmail}>
-                <div className="name">
-                  <div className="first-name">
-                    <label htmlFor="firstname">First name *</label>
-                    <input type="text" name="firstname" id="firstname" required/>
-                  </div>
-                  <div className="last-name">
-                    <label htmlFor="lastname">Last name *</label>
-                    <input type="text" name="lastname" id="lastname" required/>
-                  </div>
-                </div>
-                <div className="mail">
-                  <label htmlFor="mail">Email *</label>
-                    <input type="email" name="mail" id="mail" required/>
-                </div>
+              <div className="message">
+                <label htmlFor="message">Message *</label>
+                <textarea name="message" rows={4} id="message" required></textarea>
+              </div>
 
-                <div className="message">
-                  <label htmlFor="message">Message *</label>
-                    <textarea name="message" rows={4} id="message" required></textarea>
+              {isMobile &&
+                <div className="about-icons">
+                  <div className="email">
+                    <IoMailOutline />
+                    <a href="mailto:guillaumeboucher.contact@gmail.com">
+                      <span>guillaumebouch</span>
+                      <span>er.contac</span>
+                      <span>t@gmail.com</span>
+                    </a>
+                  </div>
+                  <div className="linkedin">
+                    <FaLinkedinIn />
+                    <a href="https://www.linkedin.com/in/guillaume-boucher-628b01187/" target="_blank">Guillaume Boucher</a>
+                  </div>
+                  <div className="location">
+                    <IoLocationOutline />
+                    <span>Paris, France</span>
+                  </div>
                 </div>
-
-                <Button type={"submit"}>Submit</Button>
-              </form>
+              }
+              <div className="submit-container">
+                <Button type={"submit"} disabled={loading}>
+                  {loading ?
+                    'Sending...'
+                    :
+                    'Submit'
+                  }</Button>
+                {loading &&
+                  <TbLoader2 className="spinner" />
+                }
+              </div>
+            </form>
           </>
         }
 
