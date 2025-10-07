@@ -352,11 +352,50 @@ p {
   }
 }
 
-.button button {
-  text-wrap: nowrap;
+.button a, .button button{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  cursor: pointer;
+  overflow: hidden;
+
+  .sub-tab {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: 0.2s ease color, 0.5s ease transform;
+    overflow: hidden;
+
+    span:last-child {
+      position: absolute;
+      top: -20px;
+    }
+  }
 }
 
-.container .button a.sticky {
+.button a {
+  .sub-tab {
+
+  span:last-child {
+      position: absolute;
+      top: -24px;
+    }
+  }
+}
+
+.button button {
+  text-wrap: nowrap;
+  transition: .5s ease;
+}
+
+button:disabled,
+button[disabled]{
+  opacity: 0.8;
+  color: white;
+  cursor: not-allowed;
+}
+
+.container .button .sticky {
   position: sticky;
   top: 50%;
 }
@@ -691,16 +730,17 @@ p {
       flex-direction: column;
       justify-content: space-around;
 
-      .about-icons {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+    }
 
-        >div {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
+    .about-icons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      >div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
     }
 
@@ -711,12 +751,13 @@ p {
       gap: 20px;
 
       >div {
-      display: flex;
-      text-align: left;
-      gap: 10px;
+        display: flex;
+        text-align: left;
+        gap: 10px;
       }
 
-      .mail, .message {
+      .mail,
+      .message {
         flex-direction: column;
         gap: 0;
       }
@@ -725,7 +766,8 @@ p {
         font-size: 1.25rem;
       }
 
-      input, textarea{
+      input,
+      textarea {
         font-family: 'Archivo';
         font-weight: 300;
         font-size: 1rem;
@@ -735,16 +777,16 @@ p {
         color: var(--black);
       }
 
-      .message textarea{
+      .message textarea {
         resize: vertical;
       }
     }
 
-    
+
   }
 
   .button.projects button {
-    background-color: transparent;
+    background-color: var(--white-bg);
     color: var(--black);
   }
 
@@ -766,16 +808,41 @@ p {
 
   .contact {
 
-    .linkedin svg{
+    .linkedin svg {
       fill: var(--blue);
     }
 
-    .mail svg{
+    .email svg {
       color: var(--red);
     }
 
-    .location svg{
+    .location svg {
       color: var(--green);
+    }
+
+    .submit-container {
+
+      display: flex;
+      align-items: center;
+
+      .spinner {
+      animation: spinner-animation 1s infinite ease;
+      margin: 0 10px;
+      color: var(--blue);
+    }
+    }
+
+    
+
+
+    @keyframes spinner-animation {
+      0% {
+        transform: rotate(0turn);
+      }
+
+      100% {
+        transform: rotate(1turn);
+      }
     }
   }
 }
@@ -795,21 +862,22 @@ p {
       grid-template-columns: 1fr;
       height: 90%;
 
-    &.contact {
-      grid-template-columns: 1fr;
+      &.contact {
+        grid-template-columns: 1fr;
 
-      .name>div {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
+        .name>div {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
 
-      .button {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 50px;
+        .button {
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 50px;
+          transition: 1s ease;
+        }
       }
-    }
 
       .info {
         justify-content: flex-start;

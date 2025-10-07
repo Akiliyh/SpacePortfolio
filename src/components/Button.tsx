@@ -15,42 +15,94 @@ type ButtonProps = PropsWithChildren<{
     onClick?: (el: HTMLDivElement) => void;
     isProject?: boolean,
     type?: 'submit' | 'reset' | 'button' | undefined,
+    disabled?: boolean,
 }>;
 
-const Button = ({ children, href, positionSticky, className = "", onClick, isProject, type = 'button' }: ButtonProps) => {
+const Button = ({ children, href, positionSticky, className = "", onClick, isProject, type = 'button', disabled }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // const linkSplitRef = useRef<SplitText>(null);
-    // const buttonSplitRef = useRef<SplitText>(null);
+    const { contextSafe } = useGSAP({ scope: containerRef });
+    // Map of tab element -> its SplitText instances
+    const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
 
-    useGSAP(() => {
+    const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
+    const tab = el.querySelector('.sub-tab') as HTMLDivElement | null;
+    if (!tab) return;
 
-    // linkSplitRef.current = new SplitText(linkRef.current, { type: "chars" });
-    // buttonSplitRef.current = new SplitText(buttonRef.current, { type: "chars" });
+    gsap.to(tab, { y: 0, duration: 0.1, ease: "expo.out" });
 
-    
+    const splits = splitMap.current.get(tab);
+    if (splits) {
+      splits.forEach(split => {
+        gsap.fromTo(
+          split.chars,
+          { yPercent: 100 },
+          { yPercent: 0, duration: 0.6, stagger: 0.01, ease: "expo.out" }
+        );
+      });
+    }
+  });
 
+  const handleHoverLeave = contextSafe((el: HTMLDivElement) => {
+    const tab = el.querySelector('.sub-tab') as HTMLDivElement | null;
+    if (!tab) return;
 
-  }); // <-- scope is for selector text (optional)
+    gsap.to(tab, { y: 0, duration: 0.1, ease: "expo.in" });
+
+    const splits = splitMap.current.get(tab);
+    if (splits) {
+      splits.forEach(split => {
+        gsap.to(split.chars, {
+          yPercent: 100,
+          duration: 0.6,
+          stagger: 0.01,
+          ease: "expo.out"
+        });
+      });
+    }
+  });
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    const tabs = containerRef.current.querySelectorAll('.sub-tab');
+    tabs.forEach(tab => {
+      const spans = tab.querySelectorAll('span');
+      const splits: SplitText[] = [];
+      spans.forEach(span => {
+        const split = new SplitText(span, { type: 'chars' });
+        gsap.set(split.chars, { yPercent: 100 });
+        splits.push(split);
+      });
+      splitMap.current.set(tab as HTMLDivElement, splits);
+    });
+  }, { scope: containerRef });
 
     return (
-        <div className={className + " button"} onClick={() => {if (containerRef.current && onClick) onClick(containerRef.current);}} ref={containerRef}>
-            {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef} className={positionSticky ? "sticky" : ""}>
-                <span>{children}</span>
+        <div className={className + " button"} onClick={() => { if (containerRef.current && onClick) onClick(containerRef.current); }} ref={containerRef} >
+            <div onMouseEnter={(e) => handleHoverEnter(e.currentTarget)} onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} className={positionSticky ? "sticky" : ""}>
+            {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
+                <div className="sub-tab" >
+                    <span>{children}</span>
+                    <span>{children}</span>
+                </div>
 
-                <div ref={arrowRef} style={{'display': 'flex'}}>
-                <TfiArrowTopRight size={20}></TfiArrowTopRight>
+
+                <div ref={arrowRef} style={{ 'display': 'flex' }}>
+                    <TfiArrowTopRight size={20}></TfiArrowTopRight>
                 </div>
             </a>
-                : <button type={type} ref={buttonRef}>
-                    <span>{children}</span>
+                : <button type={type} ref={buttonRef} disabled={disabled}>
+                    <div className="sub-tab">
+                        <span>{children}</span>
+                        <span>{children}</span>
+                    </div>
                     {isProject && <TfiArrowDown size={20}></TfiArrowDown>}
                 </button>
             }
-
+</div>
         </div>
     )
 };
