@@ -82,16 +82,11 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log(showAltPage);
-  }, [showAltPage])
-
   useGSAP(() => {
     if (prevAltPageType.current !== altPageType) {
       gsap.killTweensOf(contentRef.current);
+      gsap.set(contentRef.current, { opacity: 0, yPercent: -10 });
     }
-
-    gsap.set(contentRef.current, { opacity: 0, yPercent: -10 });
 
     const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
