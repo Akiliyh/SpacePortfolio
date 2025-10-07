@@ -2,9 +2,10 @@ import { Button } from "./index"
 import { useMediaQuery } from 'react-responsive';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { IoMailOutline, IoLocationOutline } from "react-icons/io5";
 import { FaLinkedinIn } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
 
 type AltPageProps = {
   showAltPage: boolean,
@@ -17,7 +18,69 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const altPageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const prevAltPageType = useRef<string | null>(null);
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ success: boolean; message: string | null }>({
+  success: false,
+  message: null,
+  });
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    if (formRef.current) {
+
+    // On envoie le formulaire à toi
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_MESSAGE_TEMPLATE_ID,
+      formRef.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    ).then(
+      (result) => {
+        console.log("Message sent to you:", result.text);
+
+        // On envoie un accusé de réception
+        emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID,
+          {
+            firstname: formRef.current?.firstname.valueOf,
+            lastname: formRef.current?.lastname.valueOf,
+            email: formRef.current?.mail.valueOf,
+            message: formRef.current?.message.valueOf,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+      },
+      (error) => {
+        console.error("Error sending:", error.text);
+      }
+    )
+      .then(() => {
+        setStatus({ success: true, message: 'Message envoyé avec succès !' });
+        formRef.current?.reset();
+      })
+      .catch((error) => {
+        setStatus({ success: false, message: "Échec de l'envoi. Réessayez plus tard." });
+        console.error('EmailJS error:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    // e.preventDefault();
+    // setLoading(true);
+
+    // setTimeout(() => {
+    //   setStatus({ success: true, message: 'Message envoyé avec succès !' });
+    //   formRef.current.reset();
+    //   setLoading(false);
+    // }, 1000);
+    }
+  };
 
   useEffect(() => {
     console.log(showAltPage);
@@ -91,7 +154,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
               <div className="about-text">
                 <div className="text">
                   <h1>Contact me!</h1>
-                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates exercitationem reiciendis ipsam, libero facere ex sequi amet dicta quasi quas voluptatibus, quibusdam hic voluptatum culpa rerum fuga qui, esse eos. Quidem nihil rerum ipsa quis perspiciatis ullam impedit. Recusandae laudantium quaerat vel reprehenderit, beatae veritatis laborum modi tenetur alias nemo omnis, consectetur obcaecati deleniti architecto non quasi inventore distinctio nostrum debitis commodi sequi? Sunt minus cupiditate tempora quos in veniam consequuntur modi ipsam! Quod atque consequuntur dolorem inventore animi odit nulla cum sint, fugiat sequi voluptates voluptatem aperiam iusto placeat accusantium eligendi assumenda illo omnis nesciunt ut ducimus necessitatibus!</p>
+                  <p>Reprehenderit voluptates exercitationem reiciendis ipsam, libero facere ex sequi amet dicta quasi quas voluptatibus, quibusdam hic voluptatum culpa rerum fuga qui, esse eos. Quidem nihil rerum ipsa quis perspiciatis ullam impedit. Sunt minus cupiditate tempora quos in veniam consequuntur modi ipsam! Quod atque consequuntur dolorem inventore animi odit nulla cum sint, fugiat sequi voluptates voluptatem aperiam iusto placeat accusantium eligendi assumenda illo omnis nesciunt ut ducimus necessitatibus!</p>
                 </div>
                 <div className="about-icons">
                   <div className="mail">
@@ -104,7 +167,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
                   </div>
                   <div className="linkedin">
                     <FaLinkedinIn />
-                    <a href="https://www.linkedin.com/in/guillaume-boucher-628b01187/" target="_blank"></a>
+                    <a href="https://www.linkedin.com/in/guillaume-boucher-628b01187/" target="_blank">Guillaume Boucher</a>
                   </div>
                   <div className="location">
                     <IoLocationOutline />
@@ -113,29 +176,29 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
                 </div>
               </div>
 
-              <div className="form">
+              <form className="form" ref={formRef} onSubmit={sendEmail}>
                 <div className="name">
                   <div className="first-name">
-                    <span>First name *</span>
-                    <input type="text" />
+                    <label htmlFor="firstname">First name *</label>
+                    <input type="text" name="firstname" id="firstname" required/>
                   </div>
                   <div className="last-name">
-                    <span>Last name *</span>
-                    <input type="text" />
+                    <label htmlFor="lastname">Last name *</label>
+                    <input type="text" name="lastname" id="lastname" required/>
                   </div>
                 </div>
                 <div className="mail">
-                  <span>Email *</span>
-                    <input type="mail" />
+                  <label htmlFor="mail">Email *</label>
+                    <input type="email" name="mail" id="mail" required/>
                 </div>
 
                 <div className="message">
-                  <span>Message *</span>
-                    <input type="text"/>
+                  <label htmlFor="message">Message *</label>
+                    <textarea name="message" rows={4} id="message" required></textarea>
                 </div>
 
-                <Button>Submit</Button>
-              </div>
+                <Button type={"submit"}>Submit</Button>
+              </form>
           </>
         }
 

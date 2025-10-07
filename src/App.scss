@@ -684,10 +684,67 @@ p {
         margin-left: auto;
       }
     }
+
+    .about-text {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .about-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        >div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+
+      >div {
+      display: flex;
+      text-align: left;
+      gap: 10px;
+      }
+
+      .mail, .message {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      label {
+        font-size: 1.25rem;
+      }
+
+      input, textarea{
+        font-family: 'Archivo';
+        font-weight: 300;
+        font-size: 1rem;
+        padding: 10px;
+        background-color: var(--white-bg);
+        border: 0;
+        color: var(--black);
+      }
+
+      .message textarea{
+        resize: vertical;
+      }
+    }
+
+    
   }
 
   .button.projects button {
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
   }
 
@@ -701,7 +758,7 @@ p {
   }
 
   .button.projects {
-    position: absolute;
+    position: fixed;
     bottom: 50px;
     left: 50%;
     transform: translate(-50%);
@@ -737,6 +794,22 @@ p {
     .content {
       grid-template-columns: 1fr;
       height: 90%;
+
+    &.contact {
+      grid-template-columns: 1fr;
+
+      .name>div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .button {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+      }
+    }
 
       .info {
         justify-content: flex-start;

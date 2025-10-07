@@ -14,9 +14,10 @@ type ButtonProps = PropsWithChildren<{
     positionSticky?: boolean;
     onClick?: (el: HTMLDivElement) => void;
     isProject?: boolean,
+    type?: 'submit' | 'reset' | 'button' | undefined,
 }>;
 
-const Button = ({ children, href, positionSticky, className = "", onClick, isProject }: ButtonProps) => {
+const Button = ({ children, href, positionSticky, className = "", onClick, isProject, type = 'button' }: ButtonProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const arrowRef = useRef<HTMLDivElement>(null);
@@ -44,7 +45,7 @@ const Button = ({ children, href, positionSticky, className = "", onClick, isPro
                 <TfiArrowTopRight size={20}></TfiArrowTopRight>
                 </div>
             </a>
-                : <button ref={buttonRef}>
+                : <button type={type} ref={buttonRef}>
                     <span>{children}</span>
                     {isProject && <TfiArrowDown size={20}></TfiArrowDown>}
                 </button>
