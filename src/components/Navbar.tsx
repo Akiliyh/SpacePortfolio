@@ -154,7 +154,8 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   });
 
   return (
-    <div className="navbar-container" ref={navbarContainerRef}>
+    <div className="navbar-container">
+      <div ref={navbarContainerRef}>
       <nav className="navbar" ref={navbarRef}>
         <div className="content">
           <h1 className="tag"><a href="/">GBR</a></h1>
@@ -189,6 +190,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
         </>
 
       }
+    </div>
     </div>
   );
 };

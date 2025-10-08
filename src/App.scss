@@ -179,8 +179,10 @@ p {
 
 .navbar-container {
   z-index: 2;
-  position: relative;
-  transform-style: preserve-3d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .navbar {
