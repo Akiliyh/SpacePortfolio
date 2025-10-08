@@ -141,6 +141,23 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     }
   }, [showAltPage])
 
+  // We remove tha active class if the show alt tab is closed
+  useEffect(() => {
+    const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
+
+    if (tabs) {
+
+      for (let i = 0; i < tabs.length; i++) {
+        if (tabs[i].classList[0] === altPageType) {
+          tabs[i].classList.add("active");
+        } else {
+          tabs[i].classList.remove("active");
+        }
+        }
+
+    }
+  }, [altPageType])
+
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -186,7 +203,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
           </div>
 
 
-          <Offcanvas showAltPage={showAltPage} altPageType={altPageType} isOffcanvasMenuOpen={isOffcanvasMenuOpen} ></Offcanvas>
+          <Offcanvas handleBurgerClick={handleBurgerClick} handleClick={handleClick} showAltPage={showAltPage} altPageType={altPageType} isOffcanvasMenuOpen={isOffcanvasMenuOpen} ></Offcanvas>
         </>
 
       }

@@ -253,7 +253,6 @@ p {
 }
 
 .navbar .tabs .sub-tab.active {
-  transform: translateY(30px);
   color: var(--blue);
 }
 
@@ -641,6 +640,7 @@ button[disabled]{
       display: flex;
       flex-direction: column;
       justify-content: center;
+      cursor: pointer;
     }
 
     .sub-tab.active {

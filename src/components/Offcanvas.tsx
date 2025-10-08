@@ -9,9 +9,11 @@ type OffcanvasProps = {
     isOffcanvasMenuOpen: boolean,
     showAltPage: boolean,
     altPageType: string,
+    handleBurgerClick: (el: HTMLDivElement) => void,
+    handleClick: (el: HTMLDivElement) => void
 };
 
-const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType }: OffcanvasProps) => {
+const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurgerClick, handleClick }: OffcanvasProps) => {
     const offCanvasRef = useRef<HTMLDivElement>(null);
     const aboutTitleRef = useRef<HTMLDivElement>(null);
     const contactTitleRef = useRef<HTMLDivElement>(null);
@@ -57,10 +59,10 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType }: OffcanvasP
     return (
         <div className="off-canvas-menu" ref={offCanvasRef}>
             <div className="content">
-                <div className={((altPageType === "about") && (showAltPage)) ? "active about sub-tab" : "about sub-tab"}>
+                <div className={((altPageType === "about") && (showAltPage)) ? "about sub-tab active" : "about sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
                 <span ref={aboutTitleRef}>ABOUT</span>
                 </div>
-                <div className={((altPageType === "contact") && (showAltPage)) ? "active contact sub-tab" : "contact sub-tab"}>
+                <div className={((altPageType === "contact") && (showAltPage)) ? "contact sub-tab active" : "contact sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
                 <span ref={contactTitleRef}>CONTACT</span>
                 </div>
             <div className="boxes">

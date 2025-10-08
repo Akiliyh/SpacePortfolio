@@ -8,3 +8,5 @@ export { default as InfoPanel } from './InfoPanel';
 export { default as Button } from './Button';
 export { default as Offcanvas } from './Offcanvas';
 export { default as AltPage } from './AltPage';
+export { default as About } from './About';
+export { default as ContactForm } from './ContactForm';
