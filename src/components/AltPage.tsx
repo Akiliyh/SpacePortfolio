@@ -61,7 +61,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
       <div className={"content " + altPageType} ref={contentRef}>
         {
           altPageType === "about" &&
-          <About isMobile={isMobile} toggleAltPage={toggleAltPage} altPageType={altPageType}></About>
+          <About isMobile={isMobile} toggleAltPage={toggleAltPage}></About>
         }
 
 

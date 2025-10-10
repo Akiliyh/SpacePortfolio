@@ -61,6 +61,7 @@ const ContactForm = ({isMobile} : ContactFormProps) => {
       })
       .finally(() => {
         setLoading(false);
+        console.log(status);
       });
     }
 
