@@ -6,6 +6,9 @@ import { FaReact } from "react-icons/fa";
 import { SiExpo } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "./index"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 type InfoPanelProps = {
     closeProjectClick: MouseEventHandler,
@@ -51,7 +54,8 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     useGSAP(() => {
 
         if (showInfoDiv) {
-            gsap.to(infoDivRef.current, { height: "calc(100vh - 20px)", paddingTop: 10, paddingBottom: 10, y: 0, duration: 1.5, ease: "expo.out" });
+            gsap.to(infoDivRef.current, { duration: .5, scrollTo: 0, ease: "expo.out" });
+            gsap.to(infoDivRef.current, { height: "calc(100vh - 10px)", paddingTop: 0, paddingBottom: 10, y: 0, duration: 1.5, ease: "expo.out" });
             gsap.set(backgroundFallbackRef.current, { height: "100vh" });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: .2, y: 0, duration: 1.5, ease: "expo.out" });
         } else {
@@ -64,7 +68,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     }, { dependencies: [showInfoDiv], scope: containerRef });
 
     return (
-        <div ref={containerRef}>
+        <div ref={containerRef} className="info-container">
             <div className="background-fallback" onClick={closeProjectClick} ref={backgroundFallbackRef}></div>
             <div className="info" ref={infoDivRef}>
                 <div className="topbar">
