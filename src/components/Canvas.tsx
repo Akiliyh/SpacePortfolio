@@ -1,15 +1,23 @@
-import type { PropsWithChildren } from "react"
+import type { Dispatch, SetStateAction, PropsWithChildren } from "react";
 import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
-import { Project, Flag, InfoPanel } from "./index"
+import { Project, Flag } from "./index"
 import projects from "../projects.json";
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
-const Canvas = ({ children }: PropsWithChildren) => {
+type ProjectContent = { title: string; paragraph: string; year: number; image: string; video: string; link: string; type: string; };
+
+type CanvasProps = PropsWithChildren<{
+    isInfoDivMountedState: [boolean, Dispatch<SetStateAction<boolean>>],
+    showInfoDivState: [boolean, Dispatch<SetStateAction<boolean>>],
+    projectContentState: [ProjectContent, Dispatch<SetStateAction<ProjectContent>>],
+}>;
+
+const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState } : CanvasProps) => {
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -20,8 +28,10 @@ const Canvas = ({ children }: PropsWithChildren) => {
     const [projectList, setProjectList] = useState<{ x: number; y: number }[]>([]);
     const [visitedCoord, setVisitedCoord] = useState([{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }, { x: 1, y: 1 }]);
 
-    const [showInfoDiv, setShowInfoDiv] = useState(false);
-    const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
+    // info elements
+    const [isInfoDivMounted, setIsInfoDivMounted] = isInfoDivMountedState;
+    const [showInfoDiv, setShowInfoDiv] = showInfoDivState;
+    const [projectContent, setProjectContent] = projectContentState;
 
     const CANVASSIZE = 1000000;
     const PROJECTWIDTH = 320;
@@ -183,7 +193,7 @@ const Canvas = ({ children }: PropsWithChildren) => {
         if (!isCoordVisited(curPosX, curPosY)) {
             populateProjects(curPosX, curPosY);
 
-            visitedCoord.push({ x: curPosX, y: curPosY });
+            setVisitedCoord(prev => [...prev, { x: curPosX, y: curPosY }]);
             console.log(projectsRef.current);
         }
     }, [envBoxCoord]);
@@ -266,13 +276,9 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
     });
 
-    const closeProjectClick = contextSafe(() => {
-        setShowInfoDiv(false);
-    });
-
-    const unmountInfoDiv = contextSafe(() => {
-        setIsInfoDivMounted(true);
-    });
+    useEffect(() => {
+        setProjectContent(projects[projectSelectedIndex]);
+    }, [projectSelectedIndex])
 
     return (
         <div className="container" ref={containerRef}>
@@ -291,10 +297,6 @@ const Canvas = ({ children }: PropsWithChildren) => {
 
             {/*  */}
             {/* <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div> */}
-
-            {isInfoDivMounted &&
-                <InfoPanel projectContent={projects[projectSelectedIndex]} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
-            }
 
         </div>
     )

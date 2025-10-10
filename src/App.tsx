@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import './App.scss'
-import { Intro, Navbar, Canvas, Title, AltPage } from './components';
+import { Intro, Navbar, Canvas, Title, AltPage, InfoPanel } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive';
@@ -12,6 +12,13 @@ function App() {
   const [showAltPage, setShowAltPage] = useState(false);
   const [isInfoOver, setIsInfoOver] = useState(false);
   const [altPageType, setAltPageType] = useState('');
+
+  // Info Page elements
+  const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
+  const [showInfoDiv, setShowInfoDiv] = useState(false);
+  type ProjectContent = {  title: string;  paragraph: string;  year: number;  image: string;  video: string;  link: string;  type: string;};
+
+  const [projectContent, setProjectContent] = useState<ProjectContent>({ title: "",  paragraph: "",  year: 0,  image: "",  video: "",  link: "",  type: ""});
 
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
@@ -58,6 +65,26 @@ function App() {
     })
   })
 
+  const closeProjectClick = (() => {
+        setShowInfoDiv(false);
+    });
+
+  const unmountInfoDiv = (() => {
+      setIsInfoDivMounted(true);
+  });
+
+  useEffect(() => {
+    console.log(isInfoDivMounted);
+  }, [isInfoDivMounted])
+
+  useEffect(() => {
+    console.log(projectContent);
+  }, [projectContent])
+
+  useEffect(() => {
+    console.log(showInfoDiv);
+  }, [showInfoDiv])
+
   useGSAP(() => {
     if (isInfoOver) {
 
@@ -92,10 +119,13 @@ function App() {
       <Intro></Intro>
       <Navbar toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></Navbar>
       <div className="app-content" ref={appContentRef}>
-        <Canvas>
+        <Canvas isInfoDivMountedState={[isInfoDivMounted, setIsInfoDivMounted]} showInfoDivState={[showInfoDiv, setShowInfoDiv]} projectContentState={[projectContent, setProjectContent]} >
           <Title></Title>
         </Canvas>
       </div>
+      {isInfoDivMounted &&
+        <InfoPanel projectContent={projectContent} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
+      }
       <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></AltPage>
     </div>
   )

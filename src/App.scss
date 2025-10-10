@@ -396,7 +396,7 @@ button[disabled]{
   cursor: not-allowed;
 }
 
-.container .button .sticky {
+.info-container .button .sticky {
   position: sticky;
   top: 50%;
 }
@@ -427,7 +427,7 @@ button[disabled]{
   }
 }
 
-.container .info {
+.info-container .info {
   position: fixed;
   width: calc(66vw - 20px); // fix the padding
   right: 0;
@@ -436,6 +436,7 @@ button[disabled]{
   z-index: 9999;
   height: 0;
   padding: 10px;
+  padding-top: 0;
   color: var(--black);
   overflow: scroll;
 
@@ -443,7 +444,10 @@ button[disabled]{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
 
     .logo {
       display: flex;
@@ -473,6 +477,7 @@ button[disabled]{
 
   .content {
     padding: 10px;
+    padding-top: 0;
 
     .video {
       max-height: 80vh;
@@ -526,7 +531,7 @@ button[disabled]{
   }
 }
 
-.container .background-fallback {
+.info-container .background-fallback {
   position: fixed;
   width: 100vw;
   left: 0;
@@ -540,7 +545,7 @@ button[disabled]{
 
 @media (max-width: 1024px) {
 
-  .container .info {
+  .info-container .info {
     width: calc(100vw - 20px);
 
     .content {
