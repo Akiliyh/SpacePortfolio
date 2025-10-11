@@ -16,9 +16,9 @@ function App() {
   // Info Page elements
   const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
   const [showInfoDiv, setShowInfoDiv] = useState(false);
-  type ProjectContent = {  title: string;  paragraph: string;  year: number;  image: string;  video: string;  link: string;  type: string;};
+  type ProjectContent = {  title: string;  paragraph: string;  year: number;  image: string;  video: string;  link: string;  type: string; images: Array<string>};
 
-  const [projectContent, setProjectContent] = useState<ProjectContent>({ title: "",  paragraph: "",  year: 0,  image: "",  video: "",  link: "",  type: ""});
+  const [projectContent, setProjectContent] = useState<ProjectContent>({ title: "",  paragraph: "",  year: 0,  image: "",  video: "",  link: "",  type: "", images: ['']});
 
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 

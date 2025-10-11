@@ -14,7 +14,7 @@ type InfoPanelProps = {
     closeProjectClick: MouseEventHandler,
     showInfoDiv: boolean,
     unmountInfoDiv: Function,
-    projectContent: { title: string, paragraph: string, year: number, image: string, video: string, link: string, type: string };
+    projectContent: { title: string, paragraph: string, year: number, image: string, video: string, link: string, type: string, images: Array<string> };
 };
 
 const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectContent }: InfoPanelProps) => {
@@ -95,6 +95,13 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             <div className="row">
                                 <p>{projectContent.paragraph}</p>
                             </div>
+                            { projectContent.images.length != 0 &&
+                            <div className="row image-gallery">
+                                {projectContent.images.map((el, i) => (
+                                    <img className={i.toString()} src={"img" + el} alt="" />
+                                ))}
+                            </div>
+                            }
                             <div className="row technologies">
                                 <span>Technologies</span>
                                 <div className="icons">

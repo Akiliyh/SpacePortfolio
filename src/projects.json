@@ -5,10 +5,11 @@
         "paragraph": "Oui",
         "year": 2024,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
-        "videoPreview": "/zendrops-preview.mp4",
-        "video": "/zendrops.mp4",
-        "type": "Website"
+        "image": "/zendrops/zendrops.jpg",
+        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "video": "/zendrops/zendrops.mp4",
+        "type": "Website",
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
     },
     {
         "id": 2,
@@ -16,10 +17,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
-        "videoPreview": "/zendrops-preview.mp4",
-        "video": "/zendrops.mp4",
-        "type": "Website"
+        "image": "/zendrops/zendrops.jpg",
+        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "video": "/zendrops/zendrops.mp4",
+        "type": "Website",
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
     },
     {
         "id": 3,
@@ -27,10 +29,11 @@
         "paragraph": "Oui",
         "year": 2023,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
-        "videoPreview": "/zendrops-preview.mp4",
-        "video": "/zendrops.mp4",
-        "type": "Website"
+        "image": "/zendrops/zendrops.jpg",
+        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "video": "/zendrops/zendrops.mp4",
+        "type": "Website",
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
     },
     {
         "id": 4,
@@ -38,10 +41,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
-        "videoPreview": "/zendrops-preview.mp4",
-        "video": "/zendrops.mp4",
-        "type": "Website"
+        "image": "/zendrops/zendrops.jpg",
+        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "video": "/zendrops/zendrops.mp4",
+        "type": "Website",
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
     },
     {
         "id": 5,
@@ -49,10 +53,11 @@
         "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "year": 2025,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
+        "image": "/zendrops/zendrops.jpg",
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
-        "type": "Website"
+        "type": "Website",
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
     },
     {
         "id": 6,
@@ -60,10 +65,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/zendrops.jpg",
-        "videoPreview": "/zendrops-preview.mp4",
-        "video": "/zendrops.mp4",
-        "type": "Website"
+        "image": "/zendrops/zendrops.jpg",
+        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "video": "/zendrops/zendrops.mp4",
+        "type": "Website",
+        "images" : []
     },
     {
         "id": 7,
@@ -71,10 +77,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/knowyouratlas.jpg",
-        "videoPreview": "/knowyouratlas-preview.mp4",
-        "video": "/knowyouratlas.mp4",
-        "type": "Website"
+        "image": "/knowyouratlas/knowyouratlas.jpg",
+        "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
+        "video": "/knowyouratlas/knowyouratlas.mp4",
+        "type": "Website",
+        "images" : []
     }
     ,
     {
@@ -83,10 +90,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/knowyouratlas.jpg",
-        "videoPreview": "/knowyouratlas-preview.mp4",
-        "video": "/knowyouratlas.mp4",
-        "type": "Website"
+        "image": "/knowyouratlas/knowyouratlas.jpg",
+        "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
+        "video": "/knowyouratlas/knowyouratlas.mp4",
+        "type": "Website",
+        "images" : []
     }
     ,
     {
@@ -95,10 +103,11 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/knowyouratlas.jpg",
-        "videoPreview": "/knowyouratlas-preview.mp4",
-        "video": "/knowyouratlas.mp4",
-        "type": "Website"
+        "image": "/knowyouratlas/knowyouratlas.jpg",
+        "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
+        "video": "/knowyouratlas/knowyouratlas.mp4",
+        "type": "Website",
+        "images" : []
     }
     ,
     {
@@ -107,9 +116,10 @@
         "paragraph": "Oui",
         "year": 2025,
         "link": "oui.com",
-        "image": "/knowyouratlas.jpg",
-        "videoPreview": "/knowyouratlas-preview.mp4",
-        "video": "/knowyouratlas.mp4",
-        "type": "Website"
+        "image": "/knowyouratlas/knowyouratlas.jpg",
+        "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
+        "video": "/knowyouratlas/knowyouratlas.mp4",
+        "type": "Website",
+        "images" : []
     }
 ]
