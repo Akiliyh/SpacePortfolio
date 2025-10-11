@@ -9,26 +9,26 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 
 type ButtonProps = PropsWithChildren<{
-    href?: string;
-    className?: string;
-    positionSticky?: boolean;
-    onClick?: (el: HTMLDivElement) => void;
-    isProject?: boolean,
-    type?: 'submit' | 'reset' | 'button' | undefined,
-    disabled?: boolean,
+  href?: string;
+  className?: string;
+  positionSticky?: boolean;
+  onClick?: (el: HTMLDivElement) => void;
+  isProject?: boolean,
+  type?: 'submit' | 'reset' | 'button' | undefined,
+  disabled?: boolean,
 }>;
 
 const Button = ({ children, href, positionSticky, className = "", onClick, isProject, type = 'button', disabled }: ButtonProps) => {
-    const linkRef = useRef<HTMLAnchorElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const arrowRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const { contextSafe } = useGSAP({ scope: containerRef });
-    // Map of tab element -> its SplitText instances
-    const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
+  const { contextSafe } = useGSAP({ scope: containerRef });
+  // Map of tab element -> its SplitText instances
+  const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
 
-    const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
+  const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
     const tab = el.querySelector('.sub-tab') as HTMLDivElement | null;
     if (!tab) return;
 
@@ -80,31 +80,36 @@ const Button = ({ children, href, positionSticky, className = "", onClick, isPro
     });
   }, { scope: containerRef });
 
-    return (
-        <div className={className + " button"} onClick={() => { if (containerRef.current && onClick) onClick(containerRef.current); }} ref={containerRef} >
-            <div onMouseEnter={(e) => handleHoverEnter(e.currentTarget)} onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} className={positionSticky ? "sticky" : ""}>
-            {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
-                <div className="sub-tab" >
-                    <span>{children}</span>
-                    <span>{children}</span>
-                </div>
+  return (
+    <div className={className + " button"} onClick={() => { if (containerRef.current && onClick) onClick(containerRef.current); }} ref={containerRef} >
+      <div onMouseEnter={(e) => handleHoverEnter(e.currentTarget)} onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} className={positionSticky ? "sticky" : ""}>
+        {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
 
+          {children &&
+            <div className="sub-tab" >
+              <span>{children}</span>
+              <span>{children}</span>
+            </div>
+          }
 
-                <div ref={arrowRef} style={{ 'display': 'flex' }}>
-                    <TfiArrowTopRight size={20}></TfiArrowTopRight>
-                </div>
-            </a>
-                : <button type={type} ref={buttonRef} disabled={disabled}>
-                    <div className="sub-tab">
-                        <span>{children}</span>
-                        <span>{children}</span>
-                    </div>
-                    {isProject && <TfiArrowDown size={20}></TfiArrowDown>}
-                </button>
+          <div ref={arrowRef} style={{ 'display': 'flex' }}>
+            <TfiArrowTopRight size={20}></TfiArrowTopRight>
+          </div>
+        </a>
+          : <button type={type} ref={buttonRef} disabled={disabled}>
+            
+            {children &&
+              <div className="sub-tab">
+                <span>{children}</span>
+                <span>{children}</span>
+              </div>
             }
-</div>
-        </div>
-    )
+            {isProject && <TfiArrowDown size={20}></TfiArrowDown>}
+          </button>
+        }
+      </div>
+    </div>
+  )
 };
 
 export default Button;

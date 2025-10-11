@@ -72,7 +72,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
 
 
       </div>
-      <Button className={altPageType + " projects"} onClick={toggleAltPage} isProject={true}>Return back to projects</Button>
+      <Button className={altPageType + " projects"} onClick={toggleAltPage} isProject={true}>{!isMobile && "Return back to projects"}</Button>
     </div>
   )
 };

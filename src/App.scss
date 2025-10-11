@@ -353,7 +353,8 @@ p {
   }
 }
 
-.button a, .button button{
+.button a,
+.button button {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -377,7 +378,7 @@ p {
 .button a {
   .sub-tab {
 
-  span:last-child {
+    span:last-child {
       position: absolute;
       top: -24px;
     }
@@ -390,7 +391,7 @@ p {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   opacity: 0.8;
   color: white;
   cursor: not-allowed;
@@ -448,6 +449,7 @@ button[disabled]{
     position: sticky;
     top: 0;
     background-color: var(--white);
+    z-index: 1;
 
     .logo {
       display: flex;
@@ -493,6 +495,25 @@ button[disabled]{
       >div:first-child {
         width: 66%;
         flex-grow: 4;
+      }
+
+      .image-gallery {
+        display: flex;
+        flex-direction: column;
+
+        img {
+          width: 80%;
+          padding: 10px 0;
+          max-width: 500px;
+
+          &:nth-child(even) {
+            margin-left: auto;
+          }
+
+          &:nth-child(odd) {
+            margin-right: auto;
+          }
+        }
       }
     }
 
@@ -728,6 +749,7 @@ button[disabled]{
 
       .button {
         margin-left: auto;
+        width: fit-content;
       }
     }
 
@@ -833,13 +855,13 @@ button[disabled]{
       align-items: center;
 
       .spinner {
-      animation: spinner-animation 1s infinite ease;
-      margin: 0 10px;
-      color: var(--blue);
-    }
+        animation: spinner-animation 1s infinite ease;
+        margin: 0 10px;
+        color: var(--blue);
+      }
     }
 
-    
+
 
 
     @keyframes spinner-animation {
@@ -854,50 +876,72 @@ button[disabled]{
   }
 }
 
-@media (max-width: 1024px) {
-
+@media (max-width: 768px) {
   .alt-page {
-    padding: 25px;
-    width: calc(100% - 50px);
-    height: calc(100% - 50px);
-
-    h1 {
-      font-size: 2rem;
-    }
 
     .content {
-      grid-template-columns: 1fr;
-      height: 90%;
-
-      &.contact {
-        grid-template-columns: 1fr;
-
-        .name>div {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .button {
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 50px;
-          transition: 1s ease;
-        }
+      .name {
+        flex-wrap: wrap;
       }
 
-      .info {
-        justify-content: flex-start;
-      }
-    }
-
-    .images {
-      height: 45%;
-      width: 100%;
-    }
-
-    p {
-      font-size: .875rem;
     }
   }
-}
+  }
+
+  @media (max-width: 1024px) {
+
+    .alt-page {
+      padding: 25px;
+      width: calc(100% - 50px);
+      height: calc(100% - 50px);
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .projects.button {
+        right: 0;
+        left: auto;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+        height: 90%;
+
+        .contact.button {
+          margin-right: auto;
+        }
+
+        &.contact {
+          grid-template-columns: 1fr;
+          display: block;
+
+          .name>div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .button {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            transition: 1s ease;
+          }
+        }
+
+        .info {
+          justify-content: flex-start;
+        }
+      }
+
+      .images {
+        height: 45%;
+        width: 100%;
+      }
+
+      p {
+        font-size: .875rem;
+      }
+    }
+  }
