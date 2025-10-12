@@ -7,6 +7,7 @@ import { SiExpo } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "./index"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -24,6 +25,8 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     const containerRef = useRef<HTMLDivElement>(null);
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+
+    const isMobile = useMediaQuery({ query: '(min-width: 767px)' });
 
     useEffect(() => {
         if (isVideoPlaying) {
@@ -54,12 +57,12 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     useGSAP(() => {
 
         if (showInfoDiv) {
-            gsap.to(infoDivRef.current, { duration: .5, scrollTo: 0, ease: "expo.out" });
-            gsap.to(infoDivRef.current, { height: "calc(100vh - 10px)", paddingTop: 0, paddingBottom: 10, y: 0, duration: 1.5, ease: "expo.out" });
+            gsap.to(infoDivRef.current, { y: "100vh", duration: .5, scrollTo: 0, ease: "expo.out" });
+            gsap.to(infoDivRef.current, { y: 0, paddingTop: 0, paddingBottom: 10, duration: 1.5, ease: "expo.out" });
             gsap.set(backgroundFallbackRef.current, { height: "100vh" });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: .2, y: 0, duration: 1.5, ease: "expo.out" });
         } else {
-            gsap.to(infoDivRef.current, { height: 0, paddingTop: 0, paddingBottom: 0, duration: 1.5, ease: "expo.out", onComplete: () => { unmountInfoDiv } });
+            gsap.to(infoDivRef.current, { y: "100vh", paddingTop: 0, paddingBottom: 0, duration: 1.5, ease: "expo.out", onComplete: () => { unmountInfoDiv } });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: 0, duration: .5, ease: "expo.out" });
             gsap.set(backgroundFallbackRef.current, { height: 0, autoAlpha: 0, delay: .1 });
         }
@@ -110,7 +113,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                                 </div>
                             </div>
                         </div>
-                        <Button href={projectContent.link} positionSticky={true}>View Link</Button>
+                        <Button href={projectContent.link} positionSticky={true}>{isMobile ? "View Link" : ""}</Button>
                     </div>
                 </div>
 

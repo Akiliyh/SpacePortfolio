@@ -33,6 +33,9 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     const [showInfoDiv, setShowInfoDiv] = showInfoDivState;
     const [projectContent, setProjectContent] = projectContentState;
 
+    console.log(isInfoDivMounted);
+    console.log(projectContent);
+
     const CANVASSIZE = 1000000;
     const PROJECTWIDTH = 320;
     const PROJECTHEIGHT = 180;
