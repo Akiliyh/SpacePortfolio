@@ -3,6 +3,9 @@ import { useMediaQuery } from 'react-responsive';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from "react"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 type AltPageProps = {
   showAltPage: boolean,
@@ -16,6 +19,14 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
   const altPageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const prevAltPageType = useRef<string | null>(null);
+
+  const handleClick = ((el: any) => {
+    toggleAltPage(el);
+
+    // scroll up top not to see the mess
+    // to fix later
+    gsap.to(window, { duration: 1, scrollTo: 0, ease: "expo.out" });
+  });
 
   useGSAP(() => {
     if (prevAltPageType.current !== altPageType) {
@@ -72,7 +83,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
 
 
       </div>
-      <Button className={altPageType + " projects"} onClick={toggleAltPage} isProject={true}>{!isMobile && "Return back to projects"}</Button>
+      <Button className={altPageType + " projects"} onClick={handleClick} isProject={true}>{!isMobile && "Return back to projects"}</Button>
     </div>
   )
 };
