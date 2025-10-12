@@ -432,7 +432,7 @@ button[disabled] {
   position: fixed;
   width: calc(66vw - 20px); // fix the padding
   right: 0;
-  bottom: 0;
+  top: 0;
   background-color: var(--white);
   z-index: 9999;
   height: 0;
@@ -440,6 +440,7 @@ button[disabled] {
   padding-top: 0;
   color: var(--black);
   overflow: scroll;
+  height: calc(100vh - 10px);
 
   .topbar {
     display: flex;
@@ -736,6 +737,24 @@ button[disabled] {
 
     &.contact {
       grid-template-columns: 1.5fr 1fr;
+
+      .alert {
+          transition: 0.8s ease;
+          opacity: 0;
+          margin: 20px 0;
+          position: absolute;
+          bottom: 0;
+          transform: translateY(50px);
+          background-color: var(--green);
+          width: 100%;
+          text-wrap: nowrap;
+          padding: 10px;
+
+          &.show-alert {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
     }
 
     .info {
@@ -778,6 +797,7 @@ button[disabled] {
       flex-direction: column;
       justify-content: center;
       gap: 20px;
+      position: relative;
 
       >div {
         display: flex;
@@ -886,62 +906,89 @@ button[disabled] {
 
     }
   }
-  }
+}
 
-  @media (max-width: 1024px) {
+@media (max-width: 1024px) {
 
-    .alt-page {
-      padding: 25px;
-      width: calc(100% - 50px);
-      height: calc(100% - 50px);
+  .alt-page {
+    padding: 25px;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
 
-      h1 {
-        font-size: 2rem;
+    h1 {
+      font-size: 2rem;
+    }
+
+    .projects.button {
+      right: 0;
+      left: auto;
+    }
+
+    .content {
+      grid-template-columns: 1fr;
+      height: 90%;
+
+      .contact.button {
+        margin-right: auto;
       }
 
-      .projects.button {
-        right: 0;
-        left: auto;
-      }
-
-      .content {
+      &.contact {
         grid-template-columns: 1fr;
-        height: 90%;
+        display: block;
 
-        .contact.button {
+        .alert {
+          transition: 0.8s ease;
+          opacity: 0;
+          margin: 20px 0;
+          position: absolute;
+          bottom: 0;
+          transform: translate(-50%, 50px);
+          left: 50%;
+          right: 50%;
+          background-color: var(--green);
+          width: 100%;
+          text-wrap: nowrap;
+          padding: 10px;
+
+          &.show-alert {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+      }
+
+        .name>div {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .submit-container {
+          margin-left: auto;
           margin-right: auto;
-        }
+          margin-bottom: 50px;
+          transition: 1s ease;
+          position: relative;
+          z-index: 1;
 
-        &.contact {
-          grid-template-columns: 1fr;
-          display: block;
-
-          .name>div {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-          }
-
-          .button {
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 50px;
-            transition: 1s ease;
+          .spinner {
+            position: absolute;
+            right: -50px;
           }
         }
 
-        .info {
-          justify-content: flex-start;
-        }
-      }
-
-      .images {
-        height: 45%;
-        width: 100%;
-      }
-
-      p {
-        font-size: .875rem;
+      .info {
+        justify-content: flex-start;
       }
     }
+
+    .images {
+      height: 45%;
+      width: 100%;
+    }
+
+    p {
+      font-size: .875rem;
+    }
   }
+}
