@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
@@ -12,7 +12,7 @@ type ProjectProps = {
   handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => void;
   projectWidth: number;
   projectHeight: number;
-  project: {title: string, year: number, image: string, video: string, videoPreview: string};
+  project: { title: string, year: number, image: string, video: string, videoPreview: string };
   randomIntFromInterval: Function;
 };
 
@@ -32,6 +32,37 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   const titleSplitRef = useRef<SplitText>(null);
   const yearSplitRef = useRef<SplitText>(null);
+
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  // we store the starting point of touch
+
+  const handleTouchStart = (e: any) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    setIsDragging(false);
+  };
+
+  const handleTouchMove = (e: any) => {
+    const touch = e.touches[0];
+    const dx = Math.abs(touch.clientX - touchStartRef.current.x);
+    const dy = Math.abs(touch.clientY - touchStartRef.current.y);
+    // we take difference to see if the element is dragged or not
+
+    if (dx > 10 || dy > 10) {
+      setIsDragging(true);
+    }
+
+    handleMouseMove(e);
+  };
+
+  const handleTouchEnd = (e: any) => {
+    if (!isDragging) {
+      handleClick(e);
+    }
+    setIsDragging(false);
+  };
+
 
   const { contextSafe } = useGSAP({ scope: projectRef });
 
@@ -53,7 +84,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       moveCardY.current(gsap.utils.clamp(-30, 30, offsetCardY));
     }
 
-    
+
   });
 
   const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
@@ -62,8 +93,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       return;
     }
 
-    gsap.to(imageRef.current, {zIndex: 0, autoAlpha: 0});
-    gsap.to(filterRef.current, { backdropFilter: "blur(20px)",  background: "linear-gradient(to top, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 60%)", duration: 0,  ease: "power2.out"});
+    gsap.to(imageRef.current, { zIndex: 0, autoAlpha: 0 });
+    gsap.to(filterRef.current, { backdropFilter: "blur(20px)", background: "linear-gradient(to top, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 60%)", duration: 0, ease: "power2.out" });
     videoRef.current?.play();
 
     const el = mouseEl.currentTarget;
@@ -92,8 +123,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
 
     gsap.set(projectRef.current, {
-        zIndex: 1
-      });
+      zIndex: 1
+    });
 
 
   })
@@ -101,13 +132,13 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   const handleHoverLeave = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
 
     videoRef.current?.pause();
-    gsap.to(imageRef.current, {zIndex: 2, autoAlpha: 1});
+    gsap.to(imageRef.current, { zIndex: 2, autoAlpha: 1 });
 
-    gsap.to(filterRef.current, { backdropFilter: "blur(0px)", duration: 0,  background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)",  ease: "power2.out"});
+    gsap.to(filterRef.current, { backdropFilter: "blur(0px)", duration: 0, background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)", ease: "power2.out" });
 
     const el = mouseEl.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
-    gsap.to(hoverCircleRef.current, { scale: 0, autoAlpha:0, duration: .6, ease: "power2.out" });
+    gsap.to(hoverCircleRef.current, { scale: 0, autoAlpha: 0, duration: .6, ease: "power2.out" });
     // goes back to center
     if (moveCardX.current && moveCardY.current) {
       moveCardX.current(0);
@@ -137,11 +168,11 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     }
 
     gsap.set(projectRef.current, {
-        zIndex: 0
-      });
+      zIndex: 0
+    });
   })
 
-   useGSAP(() => {
+  useGSAP(() => {
     gsap.from(projectRef.current, { opacity: 0, scale: 0.6, rotate: randomIntFromInterval(-30, 30), duration: 1, ease: "power2.inOut" });
     gsap.to(projectRef.current, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut" });
   }, { scope: projectRef }); // <-- scope is for selector text (optional)
@@ -153,8 +184,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
     if (hoverCircleRef.current) {
       gsap.set(hoverCircleRef.current, {
-      autoAlpha: 0,
-    });
+        autoAlpha: 0,
+      });
     }
 
     gsap.set(titleSplitRef.current.chars, {
@@ -193,7 +224,9 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
       onClick={handleClick}
-      onTouchStart={handleClick}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       key={index}
       style={{
         position: "absolute",
@@ -206,7 +239,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       }}
     >
 
-      <img className="preview-image" ref={imageRef} src={"img" + project.image} alt=""/>
+      <img className="preview-image" ref={imageRef} src={"img" + project.image} alt="" />
 
       <div className="filter" ref={filterRef}></div>
       {/* <div className="filter" ref={filterRef} style={{
@@ -223,15 +256,15 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       </video>
 
       <div className="content">
-      <div className="project-title" ref={titleRef}>
-        {project.title}
+        <div className="project-title" ref={titleRef}>
+          {project.title}
         </div>
-      <div className="year" ref={yearRef}>
-        {project.year}
+        <div className="year" ref={yearRef}>
+          {project.year}
         </div>
-        </div>
+      </div>
       <div className="hover-circle" ref={hoverCircleRef}>
-        <TfiArrowTopRight color="black"/>
+        <TfiArrowTopRight color="black" />
       </div>
     </div>
   )
