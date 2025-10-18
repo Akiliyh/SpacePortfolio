@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
 import { TfiArrowTopRight } from "react-icons/tfi";
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -36,6 +37,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   const [isDragging, setIsDragging] = useState(false);
   const touchStartRef = useRef({ x: 0, y: 0 });
   // we store the starting point of touch
+
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   const handleTouchStart = (e: any) => {
     const touch = e.touches[0];
@@ -251,21 +254,27 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     WebkitBackdropFilter: "blur(800px)" // for Safari
   }}></div> */}
 
-      <video className="video" ref={videoRef} muted loop disablePictureInPicture>
-        <source src={"video" + project.videoPreview} type="video/mp4" />
-      </video>
+      {!isMobile &&
+        <>
+          <video className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
+            <source src={"video" + project.videoPreview} type="video/mp4" />
+          </video>
 
-      <div className="content">
-        <div className="project-title" ref={titleRef}>
-          {project.title}
-        </div>
-        <div className="year" ref={yearRef}>
-          {project.year}
-        </div>
-      </div>
-      <div className="hover-circle" ref={hoverCircleRef}>
-        <TfiArrowTopRight color="black" />
-      </div>
+
+          <div className="content">
+            <div className="project-title" ref={titleRef}>
+              {project.title}
+            </div>
+            <div className="year" ref={yearRef}>
+              {project.year}
+            </div>
+          </div>
+
+          <div className="hover-circle" ref={hoverCircleRef}>
+            <TfiArrowTopRight color="black" />
+          </div>
+        </>
+      }
     </div>
   )
 };
