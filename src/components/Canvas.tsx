@@ -9,7 +9,7 @@ import projects from "../projects.json";
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
-type ProjectContent = { title: string; paragraph: string; year: number; image: string; video: string; link: string; type: string; images: Array<string>};
+type ProjectContent = { title: string; paragraph: string; year: number; image: string; video: string; link: string; type: string; images: Array<string> };
 
 type CanvasProps = PropsWithChildren<{
     isInfoDivMountedState: [boolean, Dispatch<SetStateAction<boolean>>],
@@ -17,7 +17,7 @@ type CanvasProps = PropsWithChildren<{
     projectContentState: [ProjectContent, Dispatch<SetStateAction<ProjectContent>>],
 }>;
 
-const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState } : CanvasProps) => {
+const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState }: CanvasProps) => {
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -139,6 +139,21 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
         }
 
+        // console.log(projectsRef.current);
+        // if (projectsRef.current.length > 20) {
+        //     console.log("AHAHAHAHA" + projectsRef.current.length);
+        //     // projectsRef.current.splice(0, 10);
+        //     setVisitedCoord(prev => {
+        //         const updated = [...prev];
+        //         if (updated.length > 6) {
+        //             updated.splice(0, 1); // remove the oldest (first) element
+        //         }
+        //         return updated;
+        //     });
+        //     console.log("AHAHAHAHA" + projectsRef.current.length);
+        //     console.log(projectsRef.current);
+        // }
+
         // CENTER OF THE SCENE
 
         // projectsRef.current.push({
@@ -151,8 +166,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
         //         y: CANVASSIZE + (window.innerHeight / 2),
         //     });
 
-        console.log(projectsRef.current);
-        setProjectList([...projectsRef.current])
+
 
         // get projects box coord, we remove canvassize so it works well on div coord
 
@@ -197,6 +211,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
             populateProjects(curPosX, curPosY);
 
             setVisitedCoord(prev => [...prev, { x: curPosX, y: curPosY }]);
+            setProjectList([...projectsRef.current]);
             console.log(projectsRef.current);
         }
     }, [envBoxCoord]);
