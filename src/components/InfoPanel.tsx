@@ -15,7 +15,7 @@ type InfoPanelProps = {
     closeProjectClick: MouseEventHandler,
     showInfoDiv: boolean,
     unmountInfoDiv: Function,
-    projectContent: { title: string, paragraph: string, year: number, image: string, video: string, link: string, type: string, images: Array<string> };
+    projectContent: { title: string, paragraph: string, year: string, image: string, video: string, link: string, type: string, images: Array<string> };
 };
 
 const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectContent }: InfoPanelProps) => {

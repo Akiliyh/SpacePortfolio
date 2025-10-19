@@ -155,8 +155,19 @@ p {
 }
 
 .project-cards .project-title {
-  font-size: 1.7rem;
   z-index: 2;
+  width: 50%;
+  font-size: 1.7rem;
+
+  &.long {
+    font-size: 1.4rem;
+    margin-bottom: .2rem;
+  }
+
+  &.very-long {
+    font-size: .8rem;
+    margin-bottom: .6rem;
+  }
 }
 
 .project-cards .year {

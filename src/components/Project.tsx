@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
@@ -13,7 +13,7 @@ type ProjectProps = {
   handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => void;
   projectWidth: number;
   projectHeight: number;
-  project: { title: string, year: number, image: string, video: string, videoPreview: string };
+  project: { title: string, year: string, image: string, video: string, videoPreview: string, images: Array<string> };
   randomIntFromInterval: Function;
 };
 
@@ -35,6 +35,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   const yearSplitRef = useRef<SplitText>(null);
 
   const [isDragging, setIsDragging] = useState(false);
+  const [projectClasses, setProjectClasses] = useState('project-title');
   const touchStartRef = useRef({ x: 0, y: 0 });
   // we store the starting point of touch
 
@@ -221,6 +222,15 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   }, { scope: projectRef }); // <-- scope is for selector text (optional)
 
+  // we add classes base on title length to better style it
+  useEffect(() => {
+    if (project.title.length > 13) {
+      setProjectClasses('project-title very-long');
+    } else if(project.title.length > 8) {
+      setProjectClasses('project-title long');
+    }
+  }, [])
+
   return (
     <div className="project-cards" ref={projectRef}
       onMouseMove={handleMouseMove}
@@ -262,7 +272,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
 
           <div className="content">
-            <div className="project-title" ref={titleRef}>
+            <div className={projectClasses} ref={titleRef}>
               {project.title}
             </div>
             <div className="year" ref={yearRef}>
