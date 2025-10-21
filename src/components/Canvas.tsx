@@ -213,12 +213,14 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
             for (let i = -1; i <= 1; i++) {
                 for (let j = -1; j <= 1; j++) {
                 if (!visitedCoord.some(coord => coord.x === curPosX + j && coord.y === curPosY + i)) {
-                    setVisitedCoord(prev => [...prev, { x: curPosX + j, y: curPosY + i }]);
+                    // setVisitedCoord(prev => [...prev, { x: curPosX + j, y: curPosY + i }]);
                     
                 }
                 console.log("HAAHHAA", curPosX + j, curPosY + i);
                 }
             }
+
+            setVisitedCoord(prev => [...prev, { x: curPosX, y: curPosY }]);
             
             setProjectList([...projectsRef.current]);
             console.log(projectsRef.current);

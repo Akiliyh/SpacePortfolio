@@ -53,7 +53,7 @@
         "paragraph": "Rythm Keys is a minimalist web game (realised the typo years after). This project was created only by curiosity in one month during spring of 2022. Inspired by rhythm games, Rythm Keys’ concept is quite straight-forward, you only need to type at the right time the key matching the one that is falling on the screen. The difficulty increases each time you type a correct key! Will you manage to beat the 147 letters record without cheating? Every file has been created from scratch by myself.",
         "year": "2022",
         "link": "rythmkeys.netlify.app",
-        "image": "/rythm-keys/rk.webp",
+        "image": "/rythm-keys/rk-thumbnail.jpg",
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Web game",
@@ -90,7 +90,7 @@
         "paragraph": "Karaokeys is a web site during my first year of IMAC engineering school, it uses many APIs to retrieve the video of the music and the synchronized lyrics to sing along with it. Only 3 songs are available for now.",
         "year": "2024",
         "link": "https://github.com/Akiliyh/Karaokeys",
-        "image": "/knowyouratlas/knowyouratlas.jpg",
+        "image": "/karaokeys/karaokeys-thumbnail.jpg",
         "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
         "video": "/knowyouratlas/knowyouratlas.mp4",
         "type": "Website",
@@ -116,7 +116,7 @@
         "paragraph": "The T Language is a constructed language created in the summer of 2022 and still in development to this day. It aims to be an extremely simple language to learn in the manner of a new Esperanto. The language has a very small vocabulary with a set of about 200 words and an exceptionally small phonological inventory as well. Like Japanese and Toki pona, it forms new words by combining existing words. For example, a sheet of paper can be said 'Crat cerit' 'Writing surface/ Surface for pen'. In this way, many words can be said in different ways and much is left to the interpretation of the speaker.",
         "year": "2022-2025",
         "link": "https://thetlanguage.netlify.app/",
-        "image": "/tlanguage/tlanguage.jpg",
+        "image": "/tlanguage/tlanguage-thumbnail.jpg",
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Language",
@@ -133,6 +133,19 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Language",
+        "images" : []
+    }
+    ,
+    {
+        "id": 12,
+        "title": "Miloni",
+        "paragraph": "yes",
+        "year": "2025",
+        "link": "",
+        "image": "/miloni/miloni-thumbnail.jpg",
+        "videoPreview": "/miloni/miloni-thumbnail.jpg",
+        "video": "/sample-video.mp4",
+        "type": "Business",
         "images" : []
     }
 ]
