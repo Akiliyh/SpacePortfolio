@@ -2,7 +2,7 @@ import { Button, ContactForm, About } from "./index"
 import { useMediaQuery } from 'react-responsive';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -19,6 +19,24 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
   const altPageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const prevAltPageType = useRef<string | null>(null);
+
+  useEffect(() => {
+    const contentEl = altPageRef.current;
+    if (!contentEl) return;
+
+    // we get "normal tabbable" elements
+    const focusable = contentEl.querySelectorAll<HTMLElement>(
+      'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+
+    focusable.forEach((el) => {
+      if (showAltPage) {
+        el.removeAttribute("tabindex");
+      } else {
+        el.setAttribute("tabindex", "-1");
+      }
+    });
+  }, [showAltPage]);
 
   const handleClick = ((el: any) => {
     toggleAltPage(el);

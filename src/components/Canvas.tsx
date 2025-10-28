@@ -15,9 +15,10 @@ type CanvasProps = PropsWithChildren<{
     isInfoDivMountedState: [boolean, Dispatch<SetStateAction<boolean>>],
     showInfoDivState: [boolean, Dispatch<SetStateAction<boolean>>],
     projectContentState: [ProjectContent, Dispatch<SetStateAction<ProjectContent>>],
+    showAltPage: boolean,
 }>;
 
-const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState }: CanvasProps) => {
+const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState, showAltPage }: CanvasProps) => {
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -176,6 +177,28 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
         // }
     }
 
+    // we remove the tab possibilities when the div is not active
+
+    useEffect(() => {
+        const contentEl = containerRef.current;
+        if (!contentEl) return;
+
+        // we get all the focusable elemets
+        const focusable = contentEl.querySelectorAll<HTMLElement>(
+            'a[href], button, video, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusable.forEach((el) => {
+            // if (el.getAttribute("data-manual-tabindex") === "true") return;
+
+            if (!showAltPage) {
+                el.setAttribute("tabindex", "0");
+            } else {
+                el.setAttribute("tabindex", "-1");
+            }
+        });
+    }, [showAltPage]);
+
     // iniitialisation of projects
     useEffect(() => {
         populateProjects(0, 0);
@@ -315,10 +338,12 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
     return (
         <div className="container" ref={containerRef}>
+            <Flag showFlag={showFlag} backgroundRef={backgroundRef}></Flag>
 
             <div ref={backgroundRef} className="backgroundCanvas">
                 {renderedProjects.map((el, i) => (
                     <Project key={i} project={el.project} coord={el.coord}
+                        showAltPage={showAltPage}
                         index={i} handleClick={() => handleProjectClick(i)}
                         projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}
                         randomIntFromInterval={randomIntFromInterval}
@@ -326,7 +351,6 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
                 ))}
                 {children}
             </div>
-            <Flag showFlag={showFlag} backgroundRef={backgroundRef}></Flag>
 
             {/*  */}
             {/* <div className="crosshair" style={{position: 'absolute', zIndex: '9999999', top: '50%', backgroundColor: 'blue', width: '10px', height: '10px', left: '50%', borderRadius: '50px'}}></div> */}

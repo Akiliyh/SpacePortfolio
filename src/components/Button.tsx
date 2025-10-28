@@ -81,8 +81,9 @@ const Button = ({ children, href, positionSticky, className = "", onClick, isPro
   }, { scope: containerRef });
 
   return (
-    <div className={className + " button"} onClick={() => { if (containerRef.current && onClick) onClick(containerRef.current); }} ref={containerRef} >
-      <div onMouseEnter={(e) => handleHoverEnter(e.currentTarget)} onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} className={positionSticky ? "sticky" : ""}>
+    <div className={className + " button"} onClick={() => { if (containerRef.current && onClick) onClick(containerRef.current); }} ref={containerRef}>
+      <div onMouseEnter={(e) => handleHoverEnter(e.currentTarget)} onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} className={positionSticky ? "sticky" : ""}
+        onFocus={(e) => handleHoverEnter(e.currentTarget)}  onBlur={(e) => handleHoverLeave(e.currentTarget)}>
         {href ? <a href={'https://' + href} rel="noopener" target="_blank" ref={linkRef}>
 
           {children &&

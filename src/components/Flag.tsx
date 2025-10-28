@@ -25,7 +25,7 @@ const Flag = ({ backgroundRef, showFlag }: FlagsProps) => {
   }, { dependencies: [showFlag], scope: buttonRef }); // <-- scope is for selector text (optional)
 
   return (
-    <button className="center-button" title="Return back to origin" ref={buttonRef} onClick={() => {
+    <button tabIndex={0} className="center-button" title="Return back to origin" ref={buttonRef} onClick={() => {
       if (backgroundRef) {
         gsap.to(backgroundRef.current, { x: 0, y: 0, duration: 2, ease: "power2.inOut" });
       }

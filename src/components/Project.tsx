@@ -10,14 +10,15 @@ gsap.registerPlugin(useGSAP, SplitText);
 type ProjectProps = {
   coord: { x: number; y: number };
   index: number;
-  handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => void;
+  handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => void;
   projectWidth: number;
   projectHeight: number;
   project: { title: string, year: string, image: string, video: string, videoPreview: string, images: Array<string> };
   randomIntFromInterval: Function;
+  showAltPage : boolean,
 };
 
-const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project, randomIntFromInterval }: ProjectProps) => {
+const Project = ({ coord, index, handleClick, projectHeight, projectWidth, project, randomIntFromInterval, showAltPage }: ProjectProps) => {
 
   const projectRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
@@ -40,6 +41,28 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   // we store the starting point of touch
 
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+
+  // we remove the tab possibilities when the div is not active
+
+    useEffect(() => {
+        const contentEl = projectRef.current;
+        if (!contentEl) return;
+
+        // we get all the focusable elemets
+        const focusable = contentEl.querySelectorAll<HTMLElement>(
+            'a[href], button, video, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusable.forEach((el) => {
+            if (el.getAttribute("data-manual-tabindex") === "true") return;
+
+            if (showAltPage) {
+                el.setAttribute("tabindex", "0");
+            } else {
+                el.setAttribute("tabindex", "-1");
+            }
+        });
+    }, [showAltPage]);
 
   const handleTouchStart = (e: any) => {
     const touch = e.touches[0];
@@ -91,17 +114,15 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   });
 
-  const handleHoverEnter = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
+  const handleHoverEnter = contextSafe((event: React.MouseEvent<HTMLDivElement> | React.FocusEvent<HTMLDivElement>) => {
 
-    if (mouseEl.buttons > 0) { // if div is dragged (mouse buttons clicked) we don't apply any hover effect
-      return;
-    }
+    if ("buttons" in event && event.buttons > 0) return; // if div is dragged (mouse buttons clicked) we don't apply any hover effect
 
     gsap.to(imageRef.current, { zIndex: 0, autoAlpha: 0 });
     gsap.to(filterRef.current, { backdropFilter: "blur(20px)", background: "linear-gradient(to top, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 60%)", duration: 0, ease: "power2.out" });
     videoRef.current?.play();
 
-    const el = mouseEl.currentTarget;
+    const el = event.currentTarget;
 
     gsap.to(el, { scale: 1.5, duration: .6, ease: "power2.out" });
     gsap.to(hoverCircleRef.current, { scale: 1.5, autoAlpha: 1, duration: .6, ease: "power2.out" });
@@ -133,14 +154,14 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   })
 
-  const handleHoverLeave = contextSafe((mouseEl: React.MouseEvent<HTMLDivElement>) => {
+  const handleHoverLeave = contextSafe((event: React.MouseEvent<HTMLDivElement> | React.FocusEvent<HTMLDivElement>) => {
 
     videoRef.current?.pause();
     gsap.to(imageRef.current, { zIndex: 2, autoAlpha: 1 });
 
     gsap.to(filterRef.current, { backdropFilter: "blur(0px)", duration: 0, background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)", ease: "power2.out" });
 
-    const el = mouseEl.currentTarget;
+    const el = event.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
     gsap.to(hoverCircleRef.current, { scale: 0, autoAlpha: 0, duration: .6, ease: "power2.out" });
     // goes back to center
@@ -233,6 +254,9 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   return (
     <div className="project-cards" ref={projectRef}
+      title={project.title + " " + project.year}
+      tabIndex={0}
+      data-manual-tabindex="true"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
@@ -240,6 +264,10 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onFocus={handleHoverEnter}  
+      onBlur={handleHoverLeave}
+
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e); }}}
       key={index}
       style={{
         position: "absolute",
@@ -266,7 +294,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
       {!isMobile &&
         <>
-          <video className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
+          <video tabIndex={-1} className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
             <source src={"video" + project.videoPreview} type="video/mp4" />
           </video>
 

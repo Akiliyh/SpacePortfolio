@@ -118,15 +118,15 @@ function App() {
     <div ref={appRef}>
       <Intro></Intro>
       <Navbar toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></Navbar>
+      <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></AltPage>
       <div className="app-content" ref={appContentRef}>
-        <Canvas isInfoDivMountedState={[isInfoDivMounted, setIsInfoDivMounted]} showInfoDivState={[showInfoDiv, setShowInfoDiv]} projectContentState={[projectContent, setProjectContent]} >
+        <Canvas isInfoDivMountedState={[isInfoDivMounted, setIsInfoDivMounted]} showAltPage={showAltPage} showInfoDivState={[showInfoDiv, setShowInfoDiv]} projectContentState={[projectContent, setProjectContent]} >
           <Title></Title>
         </Canvas>
       </div>
       {isInfoDivMounted &&
         <InfoPanel projectContent={projectContent} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
       }
-      <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></AltPage>
     </div>
   )
 }

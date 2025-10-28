@@ -152,6 +152,14 @@ p {
     z-index: 2;
     height: 100%;
   }
+
+  // a11y
+
+    &:focus-visible {
+      box-shadow: 0 0 0 .2rem var(--blue) !important;
+      outline: 0;
+      color: var(--blue);
+    }
 }
 
 .project-cards .project-title {
@@ -207,7 +215,8 @@ p {
   background-color: white;
   z-index: 10;
   border-radius: 100px;
-  padding: 5px 20px;
+  padding: 0 20px;
+  padding-left: 10px;
   box-shadow: 0px 3px 10px rgba(2, 2, 99, 0.05);
   transform-style: preserve-3d;
   user-select: none;
@@ -221,6 +230,12 @@ p {
   gap: 100px;
   align-items: center;
   transition: 1s ease;
+}
+
+.navbar .tabs {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .navbar .tabs,
@@ -242,6 +257,8 @@ p {
   flex-direction: column;
   position: relative;
   transition: .2s ease color, .5s ease transform;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .navbar .tabs .sub-tab span {
@@ -278,6 +295,9 @@ p {
 
 .navbar .tag a {
   font-weight: 450;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50px;
 }
 
 .navbar img {
@@ -319,6 +339,21 @@ p {
 @media (max-width: 768px) {
   .navbar .content {
     gap: 10px;
+  }
+}
+
+// navbar accessibility
+
+.navbar {
+
+  .tabs {
+
+    .sub-tab:focus-visible {
+      box-shadow: 0 0 0 0.1rem var(--blue) !important;
+      outline: 0;
+      color: var(--blue);
+      border-radius: 50px;
+    }
   }
 }
 
@@ -411,6 +446,12 @@ button[disabled] {
 .info-container .button .sticky {
   position: sticky;
   top: 50%;
+
+  a, button {
+    &:focus-visible {
+        outline: 4px auto deepskyblue;
+      }
+  }
 }
 
 /* CENTER BUTTON */
@@ -484,6 +525,19 @@ button[disabled] {
     .cross {
       display: flex;
       cursor: pointer;
+
+      svg {
+        padding: 3px;
+
+        &:focus-visible {
+        box-shadow: 0 0 0 0.1rem var(--blue) !important;
+        outline: 0;
+        border-radius: 50px;
+      }
+
+      }
+
+      
     }
 
 
@@ -498,6 +552,11 @@ button[disabled] {
       object-fit: cover;
       width: 100%;
       background-color: var(--blue);
+
+      &:focus-visible {
+        box-shadow: 0 0 0 0.2rem var(--blue) !important;
+        outline: 0;
+      }
     }
 
     .text-content {
@@ -796,6 +855,12 @@ button[disabled] {
       flex-direction: column;
       gap: 15px;
 
+      a {
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 10px;
+      }
+
       >div {
         display: flex;
         align-items: center;
@@ -840,6 +905,12 @@ button[disabled] {
       .message textarea {
         resize: vertical;
       }
+
+
+      input:focus-visible, textarea:focus-visible {
+        box-shadow: 0 0 0 0.1rem var(--blue) !important;
+        outline: 0;
+      }
     }
 
 
@@ -866,7 +937,14 @@ button[disabled] {
     transform: translate(-50%);
   }
 
+  button:focus-visible:not(.submit-container button, .about.content button) {
+      transition: none;
+      box-shadow: 0 0 0 0.1rem var(--blue) !important;
+      outline: 0;
+    }
+
   .contact {
+
 
     .linkedin svg {
       fill: var(--blue);

@@ -179,14 +179,16 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
           <div className="tabs">
             <>
-              <div style={{ display: isMobile ? "none" : "block" }} className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
-                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
+              <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)}  onBlur={(e) => handleHoverLeave(e.currentTarget)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); }}}>
                 <span>About</span>
                 <span>About</span>
               </div>
 
-              <div style={{ display: isMobile ? "none" : "block" }} className="contact sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
-                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)}>
+              <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="contact sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)}  onBlur={(e) => handleHoverLeave(e.currentTarget)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); }}}>
                 <span>Contact</span>
                 <span>Contact</span>
               </div>

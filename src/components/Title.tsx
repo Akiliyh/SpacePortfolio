@@ -27,6 +27,10 @@ const Title = () => {
             linesClass: "split-parent",
         });
 
+        parentSplit.lines.forEach((line) => {
+            (line as HTMLElement).tabIndex = -1;
+        });
+
         const childSplit = new SplitText(textRef.current, { type: "chars" });
 
         const tl = gsap.timeline({ repeat: -1 });
@@ -62,7 +66,7 @@ const Title = () => {
     }, [curPhraseIndex]);
 
     return (
-        <h1 className="title" ref={textRef} style={{ left: position.left, top: position.top }}>
+        <h1 tabIndex={-1} className="title" ref={textRef} style={{ left: position.left, top: position.top }}>
             {phrases[curPhraseIndex]}
         </h1>
     )

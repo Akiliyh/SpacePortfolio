@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type MouseEventHandler } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import logo from '../assets/GBRDrop.png';
@@ -12,7 +12,7 @@ import { useMediaQuery } from 'react-responsive';
 gsap.registerPlugin(ScrollToPlugin);
 
 type InfoPanelProps = {
-    closeProjectClick: MouseEventHandler,
+    closeProjectClick: (e?: React.SyntheticEvent) => void,
     showInfoDiv: boolean,
     unmountInfoDiv: Function,
     projectContent: { title: string, paragraph: string, year: string, image: string, video: string, link: string, type: string, images: Array<string> };
@@ -27,6 +27,26 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     const [isVideoPlaying, setIsVideoPlaying] = useState(true);
 
     const isMobile = useMediaQuery({ query: '(min-width: 767px)' });
+
+    // we remove the tab possibilities when the div is not active
+
+    useEffect(() => {
+        const contentEl = containerRef.current;
+        if (!contentEl) return;
+
+        // we get all the focusable elemets
+        const focusable = contentEl.querySelectorAll<HTMLElement>(
+            'a[href], button, video, textarea, input, select, svg[tabindex], [tabindex]:not([tabindex="-1"])'
+        );
+
+        focusable.forEach((el) => {
+            if (showInfoDiv) {
+                el.setAttribute("tabindex", "0");
+            } else {
+                el.setAttribute("tabindex", "-1");
+            }
+        });
+    }, [showInfoDiv]);
 
     useEffect(() => {
         if (isVideoPlaying) {
@@ -73,14 +93,15 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     return (
         <div ref={containerRef} className="info-container">
             <div className="background-fallback" onClick={closeProjectClick} ref={backgroundFallbackRef}></div>
-            <div className="info" ref={infoDivRef}>
+            <div className="info" ref={infoDivRef} tabIndex={-1}>
                 <div className="topbar">
                     <div className="logo">
                         <h1 className="tag">GBR</h1>
                         <img src={logo} alt="" />
                     </div>
-                    <div className="cross" onClick={closeProjectClick}>
-                        <RxCross2 size={25} />
+                    <div className="cross">
+                        <RxCross2 size={25} onClick={closeProjectClick} tabIndex={0} data-manual-tabindex="true"
+                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); closeProjectClick(e); } }} />
                     </div>
                 </div>
 
@@ -98,12 +119,12 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             <div className="row">
                                 <p>{projectContent.paragraph}</p>
                             </div>
-                            { projectContent.images.length != 0 &&
-                            <div className="row image-gallery">
-                                {projectContent.images.map((el, i) => (
-                                    <img className={i.toString()} src={"img" + el} alt="" />
-                                ))}
-                            </div>
+                            {projectContent.images.length != 0 &&
+                                <div className="row image-gallery">
+                                    {projectContent.images.map((el, i) => (
+                                        <img className={i.toString()} src={"img" + el} alt="" />
+                                    ))}
+                                </div>
                             }
                             <div className="row technologies">
                                 <span>Technologies</span>
