@@ -2,12 +2,33 @@ import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import logo from '../assets/GBRDrop.png';
-import { FaReact } from "react-icons/fa";
-import { SiExpo } from "react-icons/si";
+import { FaReact, FaLanguage } from "react-icons/fa";
+import { TbBrandCpp } from "react-icons/tb";
+import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "./index"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useMediaQuery } from 'react-responsive';
+import React from "react";
+
+const iconMap: Record<string, React.ReactElement> = {
+    React: <FaReact size={30} />,
+    Expo: <SiExpo size={30} />,
+    P5: <SiP5Dotjs size={30}/>,
+    Unity: <SiUnity size={30}/>,
+    Cardboard: <SiGooglecardboard size={30}/>,
+    Supabase: <SiSupabase size={30}/>,
+    Latex: <SiLatex size={30}/>,
+    Figma: <SiFigma size={30}/>, 
+    Rive: <SiRive size={30}/>, 
+    Mapbox: <SiMapbox size={30}/>, 
+    OpenGL: <SiOpengl size={30}/>,
+    CPP: <TbBrandCpp size={30}/>,
+    NodeDotJs: <SiNodedotjs size={30}/>,
+    Javascript: <SiJavascript size={30}/>,
+    Language: <FaLanguage size={30} />,
+    AffinityDesigner: <SiAffinitydesigner size={30} />,
+};
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -15,7 +36,7 @@ type InfoPanelProps = {
     closeProjectClick: (e?: React.SyntheticEvent) => void,
     showInfoDiv: boolean,
     unmountInfoDiv: Function,
-    projectContent: { title: string, paragraph: string, year: string, image: string, video: string, link: string, type: string, images: Array<string> };
+    projectContent: { title: string, paragraph: string, year: string, image: string, video: string, link: string, type: string, images: Array<string>, technos: Array<string> };
 };
 
 const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectContent }: InfoPanelProps) => {
@@ -129,8 +150,9 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             <div className="row technologies">
                                 <span>Technologies</span>
                                 <div className="icons">
-                                    <FaReact size={30} />
-                                    <SiExpo size={30} />
+                                    {projectContent.technos.map((tech) => (
+                                        <>{iconMap[tech]}</>
+                                    ))}
                                 </div>
                             </div>
                         </div>

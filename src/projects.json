@@ -2,14 +2,15 @@
     {
         "id": 1,
         "title": "Zendrops.",
-        "paragraph": "Oui",
+        "paragraph": "zendrops. is a personal project started in the summer of 2022. It is a zen game (hence its name) which the aim is to click/touch to draw colorful circles like water drops in a relaxing background music. A little beta was first brought to life in HTML/Javascript. In the year after I reworked this little concept bringing it to the mobile world using React Native and expo, extra features were added, like drops customization, changing music etc. Download the mobile app now to relax! (Android only).",
         "year": "2022-2024",
         "link": "zendrops.netlify.app/",
         "image": "/zendrops/zendrops.jpg",
         "videoPreview": "/zendrops/zendrops-preview.mp4",
         "video": "/zendrops/zendrops.mp4",
         "type": "Website",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
+        "images" : ["/zendrops/logo.jpg", "/zendrops/gameplay.png", "/zendrops/gameplay2.png", "/zendrops/gameplay3.png", "/zendrops/design_examples.png"],
+        "technos" : ["React", "Expo", "AffinityDesigner"]
     },
     {
         "id": 2,
@@ -21,7 +22,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
+        "technos" : ["Javascript", "P5"]
     },
     {
         "id": 3,
@@ -33,7 +35,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
+        "technos" : ["React", "Supabase", "Figma"]
     },
     {
         "id": 4,
@@ -45,7 +48,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Short-film participation",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
+        "technos" : ["Latex", "Language"]
     },
     {
         "id": 5,
@@ -57,7 +61,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Web game",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"]
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
+        "technos" : ["Javascript", "AffinityDesigner"]
     },
     {
         "id": 6,
@@ -69,7 +74,8 @@
         "videoPreview": "/zendrops/zendrops-preview.mp4",
         "video": "/zendrops/zendrops.mp4",
         "type": "AR web application",
-        "images" : []
+        "images" : [],
+        "technos" : ["React", "AffinityDesigner"]
     },
     {
         "id": 7,
@@ -81,7 +87,8 @@
         "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
         "video": "/knowyouratlas/knowyouratlas.mp4",
         "type": "Web game",
-        "images" : []
+        "images" : [],
+        "technos" : ["Javascript", "Rive", "Mapbox"]
     }
     ,
     {
@@ -94,7 +101,8 @@
         "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
         "video": "/knowyouratlas/knowyouratlas.mp4",
         "type": "Website",
-        "images" : []
+        "images" : [],
+        "technos" : ["Javascript"]
     }
     ,
     {
@@ -107,7 +115,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : []
+        "images" : [],
+        "technos" : ["React", "NodeJs"]
     }
     ,
     {
@@ -120,7 +129,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Language",
-        "images" : []
+        "images" : [],
+        "technos" : ["Language"]
     }
     ,
     {
@@ -133,7 +143,8 @@
         "videoPreview": "/sample-video.mp4",
         "video": "/sample-video.mp4",
         "type": "Language",
-        "images" : []
+        "images" : [],
+        "technos" : ["OpenGL", "CPP"]
     }
     ,
     {
@@ -146,6 +157,7 @@
         "videoPreview": "/miloni/miloni-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Business",
-        "images" : []
+        "images" : [],
+        "technos" : ["Figma"]
     }
 ]
