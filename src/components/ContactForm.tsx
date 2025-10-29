@@ -97,7 +97,7 @@ const ContactForm = ({ isMobile }: ContactFormProps) => {
       <div className="about-text">
         <div className="text">
           <h1>Contact me!</h1>
-          <p>Reprehenderit voluptates exercitationem reiciendis ipsam, libero facere ex sequi amet dicta quasi quas voluptatibus, quibusdam hic voluptatum culpa rerum fuga qui, esse eos. Quidem nihil rerum ipsa quis perspiciatis ullam impedit. Sunt minus cupiditate tempora quos in veniam consequuntur modi ipsam! Quod atque consequuntur dolorem inventore animi odit nulla cum sint, fugiat sequi voluptates voluptatem aperiam iusto placeat accusantium eligendi assumenda illo omnis nesciunt ut ducimus necessitatibus!</p>
+          <p>As a future multimedia engineer I am eager to explore new horizons, those being related to UX/UI design, web design, motion design or game design. If you have a project or an idea to share with me, don't hesitate to contact me! Feel free to connect on LinkedIn! I am currently looking for an internship abroad in Europe for May until August 2026.</p>
         </div>
 
         {!isMobile &&

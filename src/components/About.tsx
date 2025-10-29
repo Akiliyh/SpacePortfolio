@@ -27,7 +27,7 @@ const About = ({isMobile, toggleAltPage} : AboutProps) => {
                   <img src={picture} alt="A Selfie picture of Guillaume Boucher" />
                 </div>
               }
-              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque  euismod enim at est dictum maximus. Nunc in lorem nec diam consequat  euismod. Proin justo nibh, mattis id nulla eu, semper interdum quam.  Morbi non aliquet erat. Proin mattis, leo varius eleifend consectetur,  erat dolor bibendum nisl, condimentum dignissim ex magna quis dolor.  Curabitur convallis at orci ac maximus. Quisque ut metus diam. Sed  placerat orci sed libero luctus dapibus. Donec id scelerisque metus.  Nunc quis neque id magna ornare dapibus.</p>
+              <p> My name is Guillaume Boucher, I am a French student currently in 4th year of a creative engineering course in ESIEE Paris, France. I would consider myself as a creative and curious person. I love to challenge myself by creating new projects and ideas and to see how far they come alive. I am looking for an internship from May to August 2026 for a new experience abroad. Feel free to hit me up if you are interested!</p>
               <Button className="contact" onClick={(e) => handleClick(e)}>Contact me</Button>
             </div>
           </>
