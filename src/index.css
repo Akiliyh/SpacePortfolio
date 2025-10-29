@@ -27,7 +27,7 @@ a {
 }
 
 a:focus-visible {
-  box-shadow: 0 0 0 0.1rem var(--blue-subtle) !important;
+  box-shadow: 0 0 0 0.1rem var(--blue) !important;
   outline: 0;
 }
 
