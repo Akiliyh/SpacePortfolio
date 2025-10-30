@@ -48,6 +48,15 @@ p {
   cursor: grab;
 }
 
+.backgroundCanvas::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  z-index: 0;
+}
+
 .container {
   position: relative;
   width: 100vw;
@@ -155,11 +164,11 @@ p {
 
   // a11y
 
-    &:focus-visible {
-      box-shadow: 0 0 0 .2rem var(--blue) !important;
-      outline: 0;
-      color: var(--blue);
-    }
+  &:focus-visible {
+    box-shadow: 0 0 0 .2rem var(--blue) !important;
+    outline: 0;
+    color: var(--blue);
+  }
 }
 
 .project-cards .project-title {
@@ -206,7 +215,7 @@ p {
 
 .navbar {
   position: fixed;
-  top: 30px;
+  top: 35px;
   left: 50%;
   right: 50%;
   width: fit-content;
@@ -447,10 +456,11 @@ button[disabled] {
   position: sticky;
   top: 50%;
 
-  a, button {
+  a,
+  button {
     &:focus-visible {
-        outline: 4px auto deepskyblue;
-      }
+      outline: 4px auto deepskyblue;
+    }
   }
 }
 
@@ -530,14 +540,14 @@ button[disabled] {
         padding: 3px;
 
         &:focus-visible {
-        box-shadow: 0 0 0 0.1rem var(--blue) !important;
-        outline: 0;
-        border-radius: 50px;
-      }
+          box-shadow: 0 0 0 0.1rem var(--blue) !important;
+          outline: 0;
+          border-radius: 50px;
+        }
 
       }
 
-      
+
     }
 
 
@@ -602,6 +612,14 @@ button[disabled] {
       justify-content: space-between;
       min-height: 50px;
       align-items: center;
+      flex-wrap: wrap;
+      min-height: 80px;
+      column-gap: 20px;
+
+      h2 {
+        text-wrap: nowrap;
+        margin: 0;
+      }
 
       p {
         width: 100%;
@@ -809,22 +827,22 @@ button[disabled] {
       grid-template-columns: 1.5fr 1fr;
 
       .alert {
-          transition: 0.8s ease;
-          opacity: 0;
-          margin: 20px 0;
-          position: absolute;
-          bottom: 0;
-          transform: translateY(50px);
-          background-color: var(--green);
-          width: 100%;
-          text-wrap: nowrap;
-          padding: 10px;
+        transition: 0.8s ease;
+        opacity: 0;
+        margin: 20px 0;
+        position: absolute;
+        bottom: 0;
+        transform: translateY(50px);
+        background-color: var(--green);
+        width: 100%;
+        text-wrap: nowrap;
+        padding: 10px;
 
-          &.show-alert {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        &.show-alert {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
     }
 
     .info {
@@ -907,7 +925,8 @@ button[disabled] {
       }
 
 
-      input:focus-visible, textarea:focus-visible {
+      input:focus-visible,
+      textarea:focus-visible {
         box-shadow: 0 0 0 0.1rem var(--blue) !important;
         outline: 0;
       }
@@ -944,10 +963,10 @@ button[disabled] {
   }
 
   button:focus-visible:not(.submit-container button, .about.content button) {
-      transition: none;
-      box-shadow: 0 0 0 0.1rem var(--blue) !important;
-      outline: 0;
-    }
+    transition: none;
+    box-shadow: 0 0 0 0.1rem var(--blue) !important;
+    outline: 0;
+  }
 
   .contact {
 
@@ -1051,25 +1070,25 @@ button[disabled] {
         }
       }
 
-        .name>div {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-        }
+      .name>div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
 
-        .submit-container {
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 50px;
-          transition: 1s ease;
-          position: relative;
-          z-index: 1;
+      .submit-container {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        transition: 1s ease;
+        position: relative;
+        z-index: 1;
 
-          .spinner {
-            position: absolute;
-            right: -50px;
-          }
+        .spinner {
+          position: absolute;
+          right: -50px;
         }
+      }
 
       .info {
         justify-content: flex-start;
