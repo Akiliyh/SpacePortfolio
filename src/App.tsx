@@ -16,9 +16,9 @@ function App() {
   // Info Page elements
   const [isInfoDivMounted, setIsInfoDivMounted] = useState(false);
   const [showInfoDiv, setShowInfoDiv] = useState(false);
-  type ProjectContent = {  title: string;  paragraph: string;  year: string;  image: string;  video: string;  link: string;  type: string; images: Array<string>};
+  type ProjectContent = {  title: string;  paragraph: string;  year: string;  image: string;  video: string;  link: string;  type: string; images: Array<string>, technos: Array<string>};
 
-  const [projectContent, setProjectContent] = useState<ProjectContent>({ title: "",  paragraph: "",  year: "0",  image: "",  video: "",  link: "",  type: "", images: ['']});
+  const [projectContent, setProjectContent] = useState<ProjectContent>({ title: "",  paragraph: "",  year: "0",  image: "",  video: "",  link: "",  type: "", images: [''], technos: ['']});
 
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
@@ -92,7 +92,7 @@ function App() {
       const tl = gsap.timeline();
       if (showAltPage) {
         tl.to(appContentRef.current, {
-          duration: 2,
+          duration: isMobile ? 0 : 2,
           ease: "expo.out",
           yPercent: 100,
           scaleX: 0.8,

@@ -62,6 +62,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
   const handleClick = contextSafe((el: HTMLDivElement) => {
     toggleAltPage(el);
+    
     const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
 
     if (tabs) {

@@ -9,7 +9,7 @@ import projects from "../projects.json";
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
-type ProjectContent = { title: string; paragraph: string; year: string; image: string; video: string; link: string; type: string; images: Array<string> };
+type ProjectContent = { title: string; paragraph: string; year: string; image: string; video: string; link: string; type: string; images: Array<string>, technos: Array<string> };
 
 type CanvasProps = PropsWithChildren<{
     isInfoDivMountedState: [boolean, Dispatch<SetStateAction<boolean>>],
