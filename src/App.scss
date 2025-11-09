@@ -46,15 +46,8 @@ p {
   height: 2000000px;
   background: transparent;
   cursor: grab;
-}
-
-.backgroundCanvas::before {
-  content: "";
-  position: fixed;
-  inset: 0;
   background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
-  z-index: 0;
 }
 
 .container {
@@ -842,6 +835,13 @@ button[disabled] {
           opacity: 1;
           transform: translateY(0);
         }
+      }
+
+
+      .name>div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
       }
     }
 
