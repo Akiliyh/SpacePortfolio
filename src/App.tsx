@@ -29,8 +29,14 @@ function App() {
   // make direct links work
 
   useEffect(() => {
+
+    // we dynamically redirect to home if unknown
+
     const path = window.location.pathname.replace("/", "");
-    if (path && !path.startsWith("projects")) {
+
+    if (path && path != "contact" && path != "about" && !path.startsWith("projects")) {
+      window.location.replace("/");
+    } else if (path && !path.startsWith("projects")) {
       setAltPageType(path);
       setShowAltPage(true);
       window.history.replaceState({ altPageType: path }, "", `/${path}`);
