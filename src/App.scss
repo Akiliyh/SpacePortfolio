@@ -814,7 +814,7 @@ button[disabled] {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 50px;
-    height: 70%;
+    min-height: 70%;
 
     &.contact {
       grid-template-columns: 1.5fr 1fr;
