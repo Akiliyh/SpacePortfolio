@@ -275,12 +275,12 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
         top: coord.y,
         width: projectWidth,
         height: projectHeight,
-        backgroundImage: "url(img" + project.image + ")",
+        backgroundImage: "url(/img" + project.image + ")",
         backgroundSize: "cover"
       }}
     >
 
-      <img className="preview-image" ref={imageRef} src={"img" + project.image} alt="" />
+      <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" />
 
       <div className="filter" ref={filterRef}></div>
       {/* <div className="filter" ref={filterRef} style={{
@@ -295,7 +295,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       {!isMobile &&
         <>
           <video tabIndex={-1} className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
-            <source src={"video" + project.videoPreview} type="video/mp4" />
+            <source src={"/video" + project.videoPreview} type="video/mp4" />
           </video>
 
 

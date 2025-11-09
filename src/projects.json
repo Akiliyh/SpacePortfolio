@@ -10,7 +10,8 @@
         "video": "/zendrops/zendrops.mp4",
         "type": "Website",
         "images" : ["/zendrops/logo.jpg", "/zendrops/gameplay.png", "/zendrops/gameplay2.png", "/zendrops/gameplay3.png", "/zendrops/design_examples.png"],
-        "technos" : ["React", "Expo", "AffinityDesigner"]
+        "technos" : ["React", "Expo", "AffinityDesigner"],
+        "url" : "/projects/zendrops"
     },
     {
         "id": 2,
@@ -19,11 +20,12 @@
         "year": "2025",
         "link": "colorimac.netlify.app/",
         "image": "/colorimac/colorimac-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/colorimac/colorimac-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
-        "technos" : ["Javascript", "P5"]
+        "images" : ["/colorimac/colorimac-thumbnail.jpg", "/colorimac/colorimac-thumbnail.jpg"],
+        "technos" : ["Javascript", "P5"],
+        "url" : "/projects/colorimac"
     },
     {
         "id": 3,
@@ -32,11 +34,12 @@
         "year": "2025",
         "link": "dorianstudio.fr",
         "image": "/dorianstudio/dorianstudio-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/dorianstudio/dorianstudio-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
-        "technos" : ["React", "Supabase", "Figma"]
+        "images" : ["/dorianstudio/dorianstudio-thumbnail.jpg", "/dorianstudio/dorianstudio-thumbnail.jpg"],
+        "technos" : ["React", "Supabase", "Figma"],
+        "url" : "/projects/dorian-studio"
     },
     {
         "id": 4,
@@ -45,11 +48,12 @@
         "year": "2020-2021",
         "link": "www.youtube.com/watch?v=VQx-YENQNOM",
         "image": "/the-hunt/the-hunt.webp",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/the-hunt/the-hunt.webp",
         "video": "/sample-video.mp4",
         "type": "Short-film participation",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
-        "technos" : ["Latex", "Language"]
+        "images" : ["/the-hunt/the-hunt.webp", "/the-hunt/the-hunt.webp"],
+        "technos" : ["Latex", "Language"],
+        "url" : "/projects/the-hunt-savage-within"
     },
     {
         "id": 5,
@@ -58,11 +62,12 @@
         "year": "2022",
         "link": "rythmkeys.netlify.app",
         "image": "/rythm-keys/rk-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/rythm-keys/rk-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Web game",
-        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
-        "technos" : ["Javascript", "AffinityDesigner"]
+        "images" : ["/rythm-keys/rk-thumbnail.jpg", "/rythm-keys/rk-thumbnail.jpg"],
+        "technos" : ["Javascript", "AffinityDesigner"],
+        "url" : "/projects/rythm-keys"
     },
     {
         "id": 6,
@@ -71,11 +76,12 @@
         "year": "2023",
         "link": "https://spart-lium.univ-lemans.fr/spart-ac/",
         "image": "/spartac/spartac.webp",
-        "videoPreview": "/zendrops/zendrops-preview.mp4",
+        "videoPreview": "/spartac/spartac.webp",
         "video": "/zendrops/zendrops.mp4",
         "type": "AR web application",
-        "images" : [],
-        "technos" : ["React", "AffinityDesigner"]
+        "images" : ["/spartac/spartac.webp", "/spartac/spartac.webp"],
+        "technos" : ["React", "AffinityDesigner"],
+        "url" : "/projects/spart-ac"
     },
     {
         "id": 7,
@@ -87,8 +93,9 @@
         "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
         "video": "/knowyouratlas/knowyouratlas.mp4",
         "type": "Web game",
-        "images" : [],
-        "technos" : ["Javascript", "Rive", "Mapbox"]
+        "images" : ["/knowyouratlas/knowyouratlas.jpg", "/knowyouratlas/knowyouratlas.jpg"],
+        "technos" : ["Javascript", "Rive", "Mapbox"],
+        "url" : "/projects/knowyouratlas"
     }
     ,
     {
@@ -98,25 +105,27 @@
         "year": "2024",
         "link": "github.com/Akiliyh/Karaokeys",
         "image": "/karaokeys/karaokeys-thumbnail.jpg",
-        "videoPreview": "/knowyouratlas/knowyouratlas-preview.mp4",
+        "videoPreview": "/karaokeys/karaokeys-thumbnail.jpg",
         "video": "/knowyouratlas/knowyouratlas.mp4",
         "type": "Website",
-        "images" : [],
-        "technos" : ["Javascript"]
+        "images" : ["/karaokeys/karaokeys-thumbnail.jpg", "/karaokeys/karaokeys-thumbnail.jpg"],
+        "technos" : ["Javascript"],
+        "url" : "/projects/karaokeys"
     }
     ,
     {
         "id": 9,
         "title": "Tennisdle",
-        "paragraph": "Oui",
+        "paragraph": "Tennisdle is a little webgame about guessing the correct tennis player based on their attributes (ranking, nationality, age, handedness, etc.). Try to guess the mystery tennis player of the day! Each day, a new player is randomly selected from the top 100 rankings. With every incorrect guess, you will receive clues such as the player's nationality, ranking, or playing style to help you find the correct answer!",
         "year": "2025",
         "link": "tennisdle.netlify.app",
         "image": "/tennisdle/tennisdle-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/tennisdle/tennisdle-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Website",
-        "images" : [],
-        "technos" : ["React", "NodeJs"]
+        "images" : ["/tennisdle/tennisdle-thumbnail.jpg", "/tennisdle/tennisdle-thumbnail.jpg"],
+        "technos" : ["React", "NodeJs"],
+        "url" : "/projects/tennisdle"
     }
     ,
     {
@@ -126,11 +135,12 @@
         "year": "2022-2025",
         "link": "thetlanguage.netlify.app/",
         "image": "/tlanguage/tlanguage-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/tlanguage/tlanguage-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Language",
-        "images" : [],
-        "technos" : ["Language"]
+        "images" : ["/tlanguage/tlanguage-thumbnail.jpg", "/tlanguage/tlanguage-thumbnail.jpg"],
+        "technos" : ["Language"],
+        "url" : "/projects/t-language"
     }
     ,
     {
@@ -140,24 +150,26 @@
         "year": "2025",
         "link": "github.com/NinaGoislot/Phantom",
         "image": "/phantom/phantom-thumbnail.jpg",
-        "videoPreview": "/sample-video.mp4",
+        "videoPreview": "/phantom/phantom-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Language",
-        "images" : [],
-        "technos" : ["OpenGL", "CPP"]
+        "images" : ["/phantom/phantom-thumbnail.jpg", "/phantom/phantom-thumbnail.jpg"],
+        "technos" : ["OpenGL", "CPP"],
+        "url" : "/projects/phantom"
     }
     ,
     {
         "id": 12,
         "title": "Miloni",
-        "paragraph": "yes",
+        "paragraph": "In our engineering course, we were tasked with developing a business scenario focused on revitalizing the beautiful region of Corsica, France. As a fictitious regional development agency, our mission was to enhance local tourism by attracting visitors to lesser-known areas, promoting a more balanced and sustainable flow of tourism across the island. Our goal was to highlight Corsica’s cultural heritage and amplify the voices of local residents, ensuring that tourism growth benefits the community as a whole. To achieve this, we designed a campaign centered around local tales and traditions, transforming them into engaging activities and thematic trails. Through this initiative, we aimed to make Corsica’s stories accessible to a wider audience while offering visitors authentic, meaningful experiences that go beyond the well-trodden tourist paths.",
         "year": "2025",
         "link": "",
         "image": "/miloni/miloni-thumbnail.jpg",
         "videoPreview": "/miloni/miloni-thumbnail.jpg",
         "video": "/sample-video.mp4",
         "type": "Business",
-        "images" : [],
-        "technos" : ["Figma"]
+        "images" : ["/miloni/miloni-thumbnail.jpg", "/miloni/miloni-thumbnail.jpg"],
+        "technos" : ["Figma"],
+        "url" : "/projects/miloni"
     }
 ]

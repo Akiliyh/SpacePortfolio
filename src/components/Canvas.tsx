@@ -9,7 +9,7 @@ import projects from "../projects.json";
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
-type ProjectContent = { title: string; paragraph: string; year: string; image: string; video: string; link: string; type: string; images: Array<string>, technos: Array<string> };
+type ProjectContent = { title: string; paragraph: string; year: string; image: string; video: string; link: string; type: string; images: Array<string>, technos: Array<string>, url: string };
 
 type CanvasProps = PropsWithChildren<{
     isInfoDivMountedState: [boolean, Dispatch<SetStateAction<boolean>>],
@@ -27,7 +27,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     const [projectSelectedIndex, setProjectSelectedIndex] = useState(0);
     const [envBoxCoord, setEnvBoxCoord] = useState({ x: 0, y: 0 });
     const [projectList, setProjectList] = useState<{ x: number; y: number }[]>([]);
-    const [visitedCoord, setVisitedCoord] = useState([{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }, { x: 1, y: 1 }, { x: -1, y: -1}, { x: -1, y: 0}, { x: -1, y: 1}, { x: 1, y: -1}]);
+    const [visitedCoord, setVisitedCoord] = useState([{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }, { x: 1, y: 1 }, { x: -1, y: -1 }, { x: -1, y: 0 }, { x: -1, y: 1 }, { x: 1, y: -1 }]);
 
     // info elements
     const [isInfoDivMounted, setIsInfoDivMounted] = isInfoDivMountedState;
@@ -235,16 +235,16 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
             for (let i = -1; i <= 1; i++) {
                 for (let j = -1; j <= 1; j++) {
-                if (!visitedCoord.some(coord => coord.x === curPosX + j && coord.y === curPosY + i)) {
-                    // setVisitedCoord(prev => [...prev, { x: curPosX + j, y: curPosY + i }]);
-                    
-                }
-                console.log("HAAHHAA", curPosX + j, curPosY + i);
+                    if (!visitedCoord.some(coord => coord.x === curPosX + j && coord.y === curPosY + i)) {
+                        // setVisitedCoord(prev => [...prev, { x: curPosX + j, y: curPosY + i }]);
+
+                    }
+                    console.log("HAAHHAA", curPosX + j, curPosY + i);
                 }
             }
 
             setVisitedCoord(prev => [...prev, { x: curPosX, y: curPosY }]);
-            
+
             setProjectList([...projectsRef.current]);
             console.log(projectsRef.current);
         }
@@ -310,6 +310,9 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     }, { scope: containerRef, dependencies: [renderedProjects] })
 
     const handleProjectClick = contextSafe((index: number) => {
+        // we want here to select the correct project regardless of the index
+        const projectIndex = index % projects.length;
+        const clickedProject = projects[projectIndex];
 
         // Putting the project on the left corner in view (TO CHANGE FOR MOBILE)
 
@@ -318,16 +321,17 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
         console.log(curProjectX, curProjectY);
         gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
-        if (showInfoDiv) {
+
+        if (projectContent.url === clickedProject.url && showInfoDiv) {
             setShowInfoDiv(false);
-        }
-        else {
+        } else {
             setIsInfoDivMounted(true);
+            setProjectSelectedIndex(projectIndex);
+            setProjectContent({ ...clickedProject });
+            // here we clone so that in app useeffect its state changes and everything works fine
             setShowInfoDiv(true);
         }
 
-        // we want here to select the correct project regardless of the index
-        let projectIndex = index % projects.length;
         setProjectSelectedIndex(projectIndex);
 
     });
