@@ -6,6 +6,7 @@ import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { Project, Flag } from "./index"
 import projects from "../projects.json";
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
 
@@ -19,6 +20,8 @@ type CanvasProps = PropsWithChildren<{
 }>;
 
 const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectContentState, showAltPage }: CanvasProps) => {
+
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
     const backgroundRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +41,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     console.log(projectContent);
 
     const CANVASSIZE = 1000000;
-    const PROJECTWIDTH = 320;
+    const PROJECTWIDTH = isMobile ? 180 : 320; // we reduce the size for mobile
     const PROJECTHEIGHT = 180;
     const SAFEZONESIZE = 200;
 
