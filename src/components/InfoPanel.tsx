@@ -14,18 +14,18 @@ import React from "react";
 const iconMap: Record<string, React.ReactElement> = {
     React: <FaReact size={30} />,
     Expo: <SiExpo size={30} />,
-    P5: <SiP5Dotjs size={30}/>,
-    Unity: <SiUnity size={30}/>,
-    Cardboard: <SiGooglecardboard size={30}/>,
-    Supabase: <SiSupabase size={30}/>,
-    Latex: <SiLatex size={30}/>,
-    Figma: <SiFigma size={30}/>, 
-    Rive: <SiRive size={30}/>, 
-    Mapbox: <SiMapbox size={30}/>, 
-    OpenGL: <SiOpengl size={30}/>,
-    CPP: <TbBrandCpp size={30}/>,
-    NodeDotJs: <SiNodedotjs size={30}/>,
-    Javascript: <SiJavascript size={30}/>,
+    P5: <SiP5Dotjs size={30} />,
+    Unity: <SiUnity size={30} />,
+    Cardboard: <SiGooglecardboard size={30} />,
+    Supabase: <SiSupabase size={30} />,
+    Latex: <SiLatex size={30} />,
+    Figma: <SiFigma size={30} />,
+    Rive: <SiRive size={30} />,
+    Mapbox: <SiMapbox size={30} />,
+    OpenGL: <SiOpengl size={30} />,
+    CPP: <TbBrandCpp size={30} />,
+    NodeDotJs: <SiNodedotjs size={30} />,
+    Javascript: <SiJavascript size={30} />,
     Language: <FaLanguage size={30} />,
     AffinityDesigner: <SiAffinitydesigner size={30} />,
 };
@@ -127,9 +127,13 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                 </div>
 
                 <div className="content">
-                    <video onClick={handleVideoClick} ref={videoRef} key={projectContent.video} className="video" autoPlay muted loop disablePictureInPicture>
-                        <source src={"/video" + projectContent.video} type="video/mp4" />
-                    </video>
+                    {!projectContent.video.endsWith("webp") ?
+                        <video onClick={handleVideoClick} ref={videoRef} key={projectContent.video} className="video" autoPlay muted loop disablePictureInPicture>
+                            <source src={"/video" + projectContent.video} type="video/mp4" />
+                        </video>
+                        :
+                        <img src={"/img" + projectContent.video} className="video" alt="" />
+                    }
                     <div className="text-content">
                         <div>
                             <div className="row">
