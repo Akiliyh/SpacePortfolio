@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guillaume-boucher.com/sitemap.xml
