@@ -68,7 +68,6 @@ function App() {
     const state = event.state;
 
     if (!state) {
-      setAltPageType("");
       setShowAltPage(false);
       setShowInfoDiv(false);
       return;
@@ -78,7 +77,6 @@ function App() {
       setAltPageType(state.altPageType);
       setShowAltPage(true);
     } else {
-      setAltPageType("");
       setShowAltPage(false);
     }
 
@@ -108,7 +106,6 @@ function App() {
 
 
     if (altPageType === newType) {
-    setAltPageType("");
     setShowAltPage(false);
     window.history.pushState({}, "", "/");
   } else {
