@@ -78,7 +78,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.from(altPageRef.current, {
-      delay: isMobile ? 4 : 5,
+      delay: isMobile ? 4 : (showAltPage ? 0 : 5),
       ease: "expo.out",
       opacity: 0,
     });

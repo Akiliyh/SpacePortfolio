@@ -11,7 +11,12 @@ function App() {
 
   const appContentRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<HTMLDivElement>(null);
-  const [showAltPage, setShowAltPage] = useState(false);
+
+  const initialPath = window.location.pathname.replace("/", "");
+
+  const isKnownAlt = initialPath === "about" || initialPath === "contact";
+
+  const [showAltPage, setShowAltPage] = useState(isKnownAlt);
   const [isInfoOver, setIsInfoOver] = useState(false);
   const [altPageType, setAltPageType] = useState('');
 
@@ -131,7 +136,7 @@ function App() {
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.from(appContentRef.current, {
-      delay: isMobile ? 2 : 3,
+      delay: isMobile ? 2 : (showAltPage ? 0 : 3),
       duration: 2,
       ease: "expo.out",
       yPercent: 100,
