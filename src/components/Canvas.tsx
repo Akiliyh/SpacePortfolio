@@ -41,8 +41,8 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     console.log(projectContent);
 
     const CANVASSIZE = 1000000;
-    const PROJECTWIDTH = isMobile ? 180 : 320; // we reduce the size for mobile
-    const PROJECTHEIGHT = 180;
+    const PROJECTWIDTH = isMobile ? 200 : 320; // we reduce the size for mobile
+    const PROJECTHEIGHT = isMobile ? 112.5 : 180;
     const SAFEZONESIZE = 200;
 
     // const projects: { x: number; y: number }[] = [];
