@@ -69,11 +69,11 @@ const ContactForm = ({ isMobile }: ContactFormProps) => {
       }
     )
       .then(() => {
-        setStatus({ success: true, message: 'Message envoyé avec succès !' });
+        setStatus({ success: true, message: 'Message sent successfully!' });
         formRef.current?.reset();
       })
       .catch((error) => {
-        setStatus({ success: false, message: "Échec de l'envoi. Réessayez plus tard." });
+        setStatus({ success: false, message: "Sending failed. Try again later." });
         console.error('EmailJS error:', error);
       })
       .finally(() => {
