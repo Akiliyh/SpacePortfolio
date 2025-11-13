@@ -43,7 +43,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     const CANVASSIZE = 1000000;
     const PROJECTWIDTH = isMobile ? 200 : 320; // we reduce the size for mobile
     const PROJECTHEIGHT = isMobile ? 112.5 : 180;
-    const SAFEZONESIZE = 200;
+    const SAFEZONESIZE = isMobile ? 150 : 200;
 
     // const projects: { x: number; y: number }[] = [];
 
@@ -323,7 +323,9 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
         const curProjectY = projectsRef.current[index].y - (1000000 + (window.innerHeight / 2) - PROJECTHEIGHT / 2);
 
         console.log(curProjectX, curProjectY);
-        gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
+
+        // move canvas based on project position (only on desktop)
+        !isMobile && gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
 
         if (projectContent.url === clickedProject.url && showInfoDiv) {
             setShowInfoDiv(false);
