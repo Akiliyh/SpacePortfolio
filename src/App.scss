@@ -299,10 +299,13 @@ p {
 }
 
 .navbar .tag a {
-  font-weight: 450;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 50px;
+
+  span div{
+    font-weight: 450;
+  }
 }
 
 .navbar img {
