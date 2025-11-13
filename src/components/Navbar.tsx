@@ -30,7 +30,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
   const { contextSafe } = useGSAP({ scope: navbarRef });
 
-  const handleHoverLogoEnter = contextSafe((el: HTMLSpanElement) => {
+  const handleHoverLogoEnter = contextSafe(() => {
     const split = new SplitText(titleRef.current, { type: 'chars' });
 
     if (split) {
@@ -48,7 +48,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     }
   });
 
-  const handleHoverLogoLeave = contextSafe((el: HTMLSpanElement) => {
+  const handleHoverLogoLeave = contextSafe(() => {
     const split = new SplitText(titleRef.current, { type: 'chars' });
 
     if (split) {
@@ -209,12 +209,12 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
         <nav className="navbar" ref={navbarRef}>
           <div className="content">
             <h1 className="tag"
-            onFocus={(e) => handleHoverLogoEnter(e.currentTarget)}
-                  onBlur={(e) => handleHoverLogoLeave(e.currentTarget)}
+            onFocus={() => handleHoverLogoEnter()}
+                  onBlur={() => handleHoverLogoLeave()}
             ><a href="/">
                 <span ref={titleRef}
-                  onMouseEnter={(e) => handleHoverLogoEnter(e.currentTarget)}
-                  onMouseLeave={(e) => handleHoverLogoLeave(e.currentTarget)}
+                  onMouseEnter={() => handleHoverLogoEnter()}
+                  onMouseLeave={() => handleHoverLogoLeave()}
                 >GBR</span></a></h1>
 
             <div className="tabs">
