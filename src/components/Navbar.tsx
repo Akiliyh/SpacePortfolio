@@ -23,11 +23,43 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   const [isOffcanvasMenuOpen, setIsOffcanvasMenuOpen] = useState(false);
 
   const navbarRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
   const navbarContainerRef = useRef<HTMLDivElement>(null);
   // Map of tab element -> its SplitText instances
   const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
 
   const { contextSafe } = useGSAP({ scope: navbarRef });
+
+  const handleHoverLogoEnter = contextSafe((el: HTMLSpanElement) => {
+    const split = new SplitText(titleRef.current, { type: 'chars' });
+
+    if (split) {
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        split.chars,
+        { yPercent: 0 },
+        { yPercent: 100, duration: 0.8, stagger: 0.1, ease: "power3.inOut" }
+      )
+        .to(
+          split.chars,
+          { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
+        );
+    }
+  });
+
+  const handleHoverLogoLeave = contextSafe((el: HTMLSpanElement) => {
+    const split = new SplitText(titleRef.current, { type: 'chars' });
+
+    if (split) {
+      const tl = gsap.timeline();
+
+      tl.to(
+          split.chars,
+          { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
+        );
+    }
+  });
 
   const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
     gsap.to(el, { y: 0, duration: 0.1, ease: "expo.out" });
@@ -62,20 +94,20 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
   const handleClick = contextSafe((el: HTMLDivElement) => {
     toggleAltPage(el);
-    
+
     const tabs = navbarRef.current?.querySelectorAll('.sub-tab');
 
     if (tabs) {
 
       if (!showAltPage) {
-      for (let i = 0; i < tabs.length; i++) {
-        if (tabs[i].classList != el.classList) {
-          tabs[i].classList.remove("active");
-          break;
-        }
+        for (let i = 0; i < tabs.length; i++) {
+          if (tabs[i].classList != el.classList) {
+            tabs[i].classList.remove("active");
+            break;
+          }
 
+        }
       }
-    }
 
       for (let i = 0; i < tabs.length; i++) {
         if (tabs[i].classList != el.classList) {
@@ -135,7 +167,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     if (tabs) {
 
       if (!showAltPage) {
-      for (let i = 0; i < tabs.length; i++) {
+        for (let i = 0; i < tabs.length; i++) {
           tabs[i].classList.remove("active");
         }
       }
@@ -154,7 +186,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
         } else {
           tabs[i].classList.remove("active");
         }
-        }
+      }
 
     }
   }, [altPageType])
@@ -174,43 +206,50 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   return (
     <div className="navbar-container">
       <div ref={navbarContainerRef}>
-      <nav className="navbar" ref={navbarRef}>
-        <div className="content">
-          <h1 className="tag"><a href="/">GBR</a></h1>
+        <nav className="navbar" ref={navbarRef}>
+          <div className="content">
+            <h1 className="tag"
+            onFocus={(e) => handleHoverLogoEnter(e.currentTarget)}
+                  onBlur={(e) => handleHoverLogoLeave(e.currentTarget)}
+            ><a href="/">
+                <span ref={titleRef}
+                  onMouseEnter={(e) => handleHoverLogoEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleHoverLogoLeave(e.currentTarget)}
+                >GBR</span></a></h1>
 
-          <div className="tabs">
-            <>
-              <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
-                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)}  onBlur={(e) => handleHoverLeave(e.currentTarget)}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); }}}>
-                <span>About</span>
-                <span>About</span>
-              </div>
+            <div className="tabs">
+              <>
+                <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="about sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)} onBlur={(e) => handleHoverLeave(e.currentTarget)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); } }}>
+                  <span>About</span>
+                  <span>About</span>
+                </div>
 
-              <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="contact sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
-                onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)}  onBlur={(e) => handleHoverLeave(e.currentTarget)}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); }}}>
-                <span>Contact</span>
-                <span>Contact</span>
-              </div>
-            </>
-            <img src={logo} alt="" />
+                <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="contact sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)} onBlur={(e) => handleHoverLeave(e.currentTarget)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); } }}>
+                  <span>Contact</span>
+                  <span>Contact</span>
+                </div>
+              </>
+              <img src={logo} alt="" />
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {isMobile &&
-        <>
-          <div className={isOffcanvasMenuOpen ? "burger-icon-container active" : "burger-icon-container"} onClick={(e) => handleBurgerClick(e.currentTarget)}>
-            <BurgerMenuIcon></BurgerMenuIcon>
-          </div>
+        {isMobile &&
+          <>
+            <div className={isOffcanvasMenuOpen ? "burger-icon-container active" : "burger-icon-container"} onClick={(e) => handleBurgerClick(e.currentTarget)}>
+              <BurgerMenuIcon></BurgerMenuIcon>
+            </div>
 
 
-          <Offcanvas handleBurgerClick={handleBurgerClick} handleClick={handleClick} showAltPage={showAltPage} altPageType={altPageType} isOffcanvasMenuOpen={isOffcanvasMenuOpen} ></Offcanvas>
-        </>
+            <Offcanvas handleBurgerClick={handleBurgerClick} handleClick={handleClick} showAltPage={showAltPage} altPageType={altPageType} isOffcanvasMenuOpen={isOffcanvasMenuOpen} ></Offcanvas>
+          </>
 
-      }
-    </div>
+        }
+      </div>
     </div>
   );
 };
