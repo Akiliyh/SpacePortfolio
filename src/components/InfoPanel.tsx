@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import logo from '../assets/GBRDrop.png';
 import { FaReact, FaLanguage } from "react-icons/fa";
 import { TbBrandCpp } from "react-icons/tb";
-import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner } from "react-icons/si";
+import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "./index"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -28,6 +28,8 @@ const iconMap: Record<string, React.ReactElement> = {
     Javascript: <SiJavascript size={30} />,
     Language: <FaLanguage size={30} />,
     AffinityDesigner: <SiAffinitydesigner size={30} />,
+    Wordpress: <SiWordpress size={30} />,
+    Blender: <SiBlender size={30} />,
 };
 
 gsap.registerPlugin(ScrollToPlugin);
