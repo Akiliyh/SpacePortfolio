@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "Zendrops.",
-        "paragraph": "zendrops. is a personal project started in the summer of 2022. It is a zen game (hence its name) which the aim is to click/touch to draw colorful circles like water drops in a relaxing background music. A little beta was first brought to life in HTML/Javascript. In the year after I reworked this little concept bringing it to the mobile world using React Native and expo, extra features were added, like drops customization, changing music etc. Download the mobile app now to relax! (Android only).",
+        "paragraph": "zendrops. is a personal project started in the summer of 2022. It is a zen game (hence its name) with the aim to draw colorful circles like water drops in a relaxing background music by clicking/touching the screen. A little beta was first brought to life in HTML/Javascript. The year after I reworked this little concept bringing it to the mobile world using React Native and expo, extra features were added, like drops customization, changing music etc. Download the mobile app now to relax! (Android only).",
         "year": "2022-2024",
         "link": "zendrops.netlify.app/",
         "image": "/zendrops/zendrops.webp",
@@ -58,7 +58,7 @@
     {
         "id": 5,
         "title": "Rythm Keys",
-        "paragraph": "Rythm Keys is a minimalist web game (realised the typo years after). This project was created only by curiosity in one month during spring of 2022. Inspired by rhythm games, Rythm Keys’ concept is quite straight-forward, you only need to type at the right time the key matching the one that is falling on the screen. The difficulty increases each time you type a correct key! Will you manage to beat the 147 letters record without cheating? Every file has been created from scratch by myself.",
+        "paragraph": "Rythm Keys is a minimalist web game (realised the typo years later). This project was created only by curiosity in one month during spring of 2022. Inspired by rhythm games, Rythm Keys’ concept is quite straight-forward. As soon as a letter comes into the bottom part you have to type the corresponding key. The difficulty increases each time you type a correct key! Will you manage to beat the 160 letters record without cheating? Every file has been created from scratch by myself.",
         "year": "2022",
         "link": "rythmkeys.netlify.app",
         "image": "/rythm-keys/rk-thumbnail.webp",
@@ -72,7 +72,7 @@
     {
         "id": 6,
         "title": "SPART-AC",
-        "paragraph": "During my second-year internship, I collaborated with a Ph.D. student on a React application for his thesis. I was responsible for the creation of the app through the front-end development to the scenario creation and graphic design. The application used the SPART technology created by the laboratory which is a new Augmented Reality technology that allows to enhance plane surfaces via sound and the creation of applications for teaching purposes. This project received recognition with the 2nd prize in the Innovative Device category at the 2023 MMI Festival.",
+        "paragraph": "During my second-year internship of my B.Sc in Laval, I collaborated with a Ph.D. student on a React application for his thesis. I was responsible for the creation of the app from the front-end development to the scenario creation and graphic design. The application used the SPART technology created by the laboratory which is a new Augmented Reality technology. It allows the user to enhance plane surfaces via sound and the creation of applications for teaching purposes. This project received recognition with the 2nd prize in the Innovative Device category at the 2023 MMI Festival.",
         "year": "2023",
         "link": "https://spart-lium.univ-lemans.fr/spart-ac/",
         "image": "/spartac/spartac.webp",
@@ -86,7 +86,7 @@
     {
         "id": 7,
         "title": "Know Your Atlas",
-        "paragraph": "Know Your Atlas is a geography game in the style of Geoguessr developed by myself since September 2022. The goal is to guess the location where you are randomly put into as fast as possible from zoomed maps according to the chosen difficulty. The project uses the MapBox Gl JS API to generate three dimensional maps. Contrary to Geoguessr it uses satellite imagery and is completely free! It has been awarded the prize of the best website of the Laval MMI department of 2024.",
+        "paragraph": "Know Your Atlas is a geography game in the style of Geoguessr developed by myself since September 2022. The goal is to guess the location where you are randomly put into as fast as possible according to the chosen difficulty. The project uses the MapBox Gl JS API to generate three dimensional maps. Contrary to Geoguessr it uses satellite imagery and is completely free! It has been awarded the prize of the best website of the Laval MMI department of 2024.",
         "year": "2022-2024",
         "link": "knowyouratlas.netlify.app",
         "image": "/knowyouratlas/knowyouratlas.webp",
@@ -101,7 +101,7 @@
     {
         "id": 8,
         "title": "Karaokeys",
-        "paragraph": "Karaokeys is a web site during my first year of IMAC engineering school, it uses many APIs to retrieve the video of the music and the synchronized lyrics to sing along with it. Only 3 songs are available for now.",
+        "paragraph": "Karaokeys is a web site created during my first year of IMAC engineering school. It uses many APIs to retrieve the video of the music and the synchronized lyrics to sing along with it. Only 3 songs are available for now.",
         "year": "2024",
         "link": "github.com/Akiliyh/Karaokeys",
         "image": "/karaokeys/karaokeys-thumbnail.webp",
@@ -116,7 +116,7 @@
     {
         "id": 9,
         "title": "Tennisdle",
-        "paragraph": "Tennisdle is a little webgame about guessing the correct tennis player based on their attributes (ranking, nationality, age, handedness, etc.). Try to guess the mystery tennis player of the day! Each day, a new player is randomly selected from the top 100 rankings. With every incorrect guess, you will receive clues such as the player's nationality, ranking, or playing style to help you find the correct answer!",
+        "paragraph": "Tennisdle is a webgame about guessing the correct tennis player based on their attributes (ranking, nationality, age, handedness, etc.). Try to guess the mystery tennis player of the day! Each day, a new player is randomly selected from the top 100 rankings. With every incorrect guess, you will receive clues such as the player's nationality, ranking, or playing style to help you find the correct answer!",
         "year": "2025",
         "link": "tennisdle.netlify.app",
         "image": "/tennisdle/tennisdle-thumbnail.webp",
@@ -146,7 +146,7 @@
     {
         "id": 11,
         "title": "Phantom",
-        "paragraph": "Phantom is a little video game built during my first year of Imac engineering course in 2025 in collaboration with Paul Marchiset and Nina Goislot. It was created with OpenGL and C++. The player controls a little character that needs to pick all the items while managing to escape the ghosts and the sorcerer. ",
+        "paragraph": "Phantom is a video game built during my first year of Imac engineering course in 2025 in collaboration with Paul Marchiset and Nina Goislot. It was created with OpenGL and C++. The player controls a little character that needs to pick all the items while managing to escape the ghosts and the sorcerer.",
         "year": "2025",
         "link": "github.com/NinaGoislot/Phantom",
         "image": "/phantom/phantom-thumbnail.webp",
@@ -161,7 +161,7 @@
     {
         "id": 12,
         "title": "Miloni",
-        "paragraph": "In our engineering course, we were tasked with developing a business scenario focused on revitalizing the beautiful region of Corsica, France. As a fictitious regional development agency, our mission was to enhance local tourism by attracting visitors to lesser-known areas, promoting a more balanced and sustainable flow of tourism across the island. Our goal was to highlight Corsica’s cultural heritage and amplify the voices of local residents, ensuring that tourism growth benefits the community as a whole. To achieve this, we designed a campaign centered around local tales and traditions, transforming them into engaging activities and thematic trails. Through this initiative, we aimed to make Corsica’s stories accessible to a wider audience while offering visitors authentic, meaningful experiences that go beyond the well-trodden tourist paths.",
+        "paragraph": "In this business scenario during our engineering course we were supposed to revitalize the beautiful region of Corsica, France. How to do it? Why? Our goal as a fictitious regional agency was to revitalize and enhance the tourism of Corsica by bringing new people to new places. This, in the aim to spread tourism more homogeneously and to hear the local residents. With this campaign we wanted to vulgarize the local tails of the region while making tourists explore nature and do activities.",
         "year": "2025",
         "link": "",
         "image": "/miloni/miloni-thumbnail.webp",
@@ -171,5 +171,20 @@
         "images" : ["/miloni/miloni-thumbnail.webp", "/miloni/miloni-thumbnail.webp"],
         "technos" : ["Figma"],
         "url" : "/projects/miloni"
+    }
+    ,
+    {
+        "id": 13,
+        "title": "Virtusio",
+        "paragraph": "Virtusio is a brand new innovative way of experiencing museums through VR and more precisely with Google cardboards. As our final student project, we intended, with my group, to capture 360 videos of Laval’s castle with captive commentary. All the interactive elements of the app have been brought to life using Unity, together with gamified components. The spectator can click on points of interest to know more about the place and change scenes to navigate inside the castle.",
+        "year": "2023-2024",
+        "link": "https://drive.google.com/file/d/1q2Cyj5VtBt0atIq3xpBgXPHlqahhBHhQ/view",
+        "image": "/virtusio/virtusio-preview.webp",
+        "videoPreview": "/virtusio/virtusio-preview.webm",
+        "video": "/virtusio/virtusio-preview.webm",
+        "type": "VR Application",
+        "images" : ["/virtusio/virtusio-preview.webp", "/virtusio/virtusio-preview.webp"],
+        "technos" : ["Unity", "Wordpress", "Cardboard", "Blender"],
+        "url" : "/projects/virtusio"
     }
 ]
