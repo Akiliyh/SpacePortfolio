@@ -176,8 +176,9 @@ function App() {
 
   useGSAP(() => {
     if (isInfoOver) {
+      console.log('oui');
 
-
+      gsap.killTweensOf(appContentRef.current);
       const tl = gsap.timeline();
       if (showAltPage) {
         tl.to(appContentRef.current, {
@@ -200,7 +201,7 @@ function App() {
     }
 
 
-  }, [showAltPage, isInfoOver])
+  }, {dependencies : [showAltPage, isInfoOver]} )
 
 
   return (
