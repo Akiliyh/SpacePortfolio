@@ -41,7 +41,7 @@ function App() {
 
     if (path && path != "contact" && path != "about" && !path.startsWith("projects")) {
       window.location.replace("/");
-    } else if (path && !path.startsWith("projects")) {
+    } else if (path && (path == "contact" || path == "about")) {
       setAltPageType(path);
       setShowAltPage(true);
       window.history.replaceState({ altPageType: path }, "", `/${path}`);
