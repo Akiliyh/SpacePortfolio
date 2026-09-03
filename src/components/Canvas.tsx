@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction, PropsWithChildren } from "react";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
@@ -8,7 +8,11 @@ import { Project, Flag } from "./index"
 import projects from "../projects.json";
 import { useMediaQuery } from 'react-responsive';
 
-gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies 
+gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies
+
+const randomIntFromInterval = (min: number, max: number): number => { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
 type ProjectContent = { title: string; paragraph: string; year: string; image: string; video: string; link: string; type: string; images: Array<string>, technos: Array<string>, url: string };
 
@@ -48,10 +52,6 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     // const projects: { x: number; y: number }[] = [];
 
     const { contextSafe } = useGSAP({ scope: containerRef });
-
-    const randomIntFromInterval = ((min: number, max: number): number => { // min and max included 
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    })
 
     // for (let i = 0; i < PROJECTSAMOUNT; i++) {
 
@@ -223,6 +223,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     }, [projectList]);
 
     const envBoxCoordRef = useRef(envBoxCoord);
+    const showFlagRef = useRef(false);
 
     useEffect(() => {
         envBoxCoordRef.current = envBoxCoord;
@@ -230,8 +231,8 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
         console.log(envBoxCoordRef);
 
-        let curPosX = envBoxCoordRef.current.x;
-        let curPosY = envBoxCoordRef.current.y;
+        const curPosX = envBoxCoordRef.current.x;
+        const curPosY = envBoxCoordRef.current.y;
 
         if (!isCoordVisited(curPosX, curPosY)) {
             populateProjects(curPosX, curPosY);
@@ -260,11 +261,11 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
     useGSAP(() => {
 
         const handleMove = function (this: any) {
-            // if element goes too far then we display the flag icon
-            if (Math.abs(this.x) > (window.innerWidth) || Math.abs(this.y) > (window.innerHeight)) {
-                setShowFlag(true);
-            } else {
-                setShowFlag(false);
+            // if element goes too far then we display the flag icon (only setState on an actual change)
+            const shouldShowFlag = Math.abs(this.x) > (window.innerWidth) || Math.abs(this.y) > (window.innerHeight);
+            if (shouldShowFlag !== showFlagRef.current) {
+                showFlagRef.current = shouldShowFlag;
+                setShowFlag(shouldShowFlag);
             }
             // console.log(this.x, this.y, window.innerHeight, window.innerWidth);
             console.log(this.x + window.innerHeight / 2, this.y + window.innerWidth / 2, window.innerHeight, window.innerWidth);
@@ -312,7 +313,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
     }, { scope: containerRef, dependencies: [renderedProjects] })
 
-    const handleProjectClick = contextSafe((index: number) => {
+    const handleProjectClick = useMemo(() => contextSafe((index: number) => {
         // we want here to select the correct project regardless of the index
         const projectIndex = index % projects.length;
         const clickedProject = projects[projectIndex];
@@ -339,7 +340,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
         setProjectSelectedIndex(projectIndex);
 
-    });
+    }), [contextSafe, projectContent, showInfoDiv, isMobile, PROJECTWIDTH, PROJECTHEIGHT]);
 
     useEffect(() => {
         setProjectContent(projects[projectSelectedIndex]);
@@ -351,9 +352,9 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
             <div ref={backgroundRef} className="backgroundCanvas">
                 {renderedProjects.map((el, i) => (
-                    <Project key={i} project={el.project} coord={el.coord}
+                    <Project key={el.coord.x + ":" + el.coord.y} project={el.project} coord={el.coord}
                         showAltPage={showAltPage}
-                        index={i} handleClick={() => handleProjectClick(i)}
+                        index={i} handleClick={handleProjectClick}
                         projectWidth={PROJECTWIDTH} projectHeight={PROJECTHEIGHT}
                         randomIntFromInterval={randomIntFromInterval}
                     />

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from "gsap/SplitText";
@@ -10,7 +10,7 @@ gsap.registerPlugin(useGSAP, SplitText);
 type ProjectProps = {
   coord: { x: number; y: number };
   index: number;
-  handleClick: (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => void;
+  handleClick: (index: number) => void;
   projectWidth: number;
   projectHeight: number;
   project: { title: string, year: string, image: string, video: string, videoPreview: string, images: Array<string> };
@@ -83,9 +83,9 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     handleMouseMove(e);
   };
 
-  const handleTouchEnd = (e: any) => {
+  const handleTouchEnd = () => {
     if (!isDragging) {
-      handleClick(e);
+      handleClick(index);
     }
     setIsDragging(false);
   };
@@ -260,14 +260,14 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       onMouseMove={handleMouseMove}
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
-      onClick={handleClick}
+      onClick={() => handleClick(index)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onFocus={handleHoverEnter}  
       onBlur={handleHoverLeave}
 
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e); }}}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(index); }}}
       key={index}
       style={{
         position: "absolute",
@@ -317,4 +317,4 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   )
 };
 
-export default Project;
+export default memo(Project);
