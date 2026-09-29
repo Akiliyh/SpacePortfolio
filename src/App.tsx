@@ -100,36 +100,23 @@ function App() {
 
 
   useEffect(() => {
-    if (showInfoDiv)
+    // only push when the URL is different, so back/forward (popstate) doesn't add new entries
+    if (showInfoDiv && window.location.pathname !== projectContent.url)
       window.history.pushState({ projectContent: projectContent }, "", projectContent.url);
-  }, [showInfoDiv]);
+  }, [showInfoDiv, projectContent]);
 
   const toggleAltPage = (e: HTMLDivElement) => {
-    // get altPageType
-    // console.log(e.classList[0]);
     const newType = e.classList[0];
 
-
-    if (altPageType === newType) {
-    setShowAltPage(false);
-    window.history.pushState({}, "", "/");
-  } else {
-    setAltPageType(newType);
-    setShowAltPage(true);
-    window.history.pushState({ altPageType: newType }, "", `/${newType}`);
-  }
-
-    if (showAltPage) {
-      console.log(altPageType);
-      console.log(newType);
-      if (altPageType == newType) {
-        setShowAltPage(false);
-        window.history.pushState({ altPageType: null }, "", "/");
-      }
-
+    if (showAltPage && altPageType === newType) {
+      // same tab clicked again (or "return to projects"): close the alt page
+      setShowAltPage(false);
+      window.history.pushState({}, "", "/");
     } else {
+      // open the tab, or switch from one alt page to the other
+      setAltPageType(newType);
       setShowAltPage(true);
-      window.history.pushState({ altPageType: newType }, "", newType);
+      window.history.pushState({ altPageType: newType }, "", "/" + newType);
     }
   };
 

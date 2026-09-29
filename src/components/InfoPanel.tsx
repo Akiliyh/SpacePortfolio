@@ -72,22 +72,16 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     }, [showInfoDiv]);
 
     useEffect(() => {
-        if (isVideoPlaying) {
-            videoRef.current?.play();
-        } else {
-            videoRef.current?.pause();
-        }
-
-    }, [isVideoPlaying])
+        setIsVideoPlaying(true);
+    }, [projectContent.video])
 
     useEffect(() => {
         if (isVideoPlaying) {
-            videoRef.current?.play();
+            videoRef.current?.play().catch(() => { });
         } else {
             videoRef.current?.pause();
         }
-
-    }, [unmountInfoDiv, isVideoPlaying])
+    }, [isVideoPlaying, projectContent.video])
 
     const handleVideoClick = () => {
         if (isVideoPlaying) {
@@ -149,7 +143,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             {projectContent.images.length != 0 &&
                                 <div className="row image-gallery">
                                     {projectContent.images.map((el, i) => (
-                                        <img className={i.toString()} src={"/img" + el} alt="" loading="lazy" decoding="async" />
+                                        <img key={el + "-" + i} className={i.toString()} src={"/img" + el} alt="" loading="lazy" decoding="async" />
                                     ))}
                                 </div>
                             }
@@ -157,7 +151,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                                 <span>Technologies</span>
                                 <div className="icons">
                                     {projectContent.technos.map((tech) => (
-                                        <>{iconMap[tech]}</>
+                                        <div key={tech}>{iconMap[tech]}</div>
                                     ))}
                                 </div>
                             </div>
