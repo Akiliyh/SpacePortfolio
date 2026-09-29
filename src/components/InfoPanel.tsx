@@ -149,7 +149,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             {projectContent.images.length != 0 &&
                                 <div className="row image-gallery">
                                     {projectContent.images.map((el, i) => (
-                                        <img className={i.toString()} src={"/img" + el} alt="" />
+                                        <img className={i.toString()} src={"/img" + el} alt="" loading="lazy" decoding="async" />
                                     ))}
                                 </div>
                             }

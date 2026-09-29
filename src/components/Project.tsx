@@ -280,7 +280,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       }}
     >
 
-      <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" />
+      <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" decoding="async" />
 
       <div className="filter" ref={filterRef}></div>
       {/* <div className="filter" ref={filterRef} style={{
