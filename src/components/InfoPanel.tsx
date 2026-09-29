@@ -37,7 +37,7 @@ gsap.registerPlugin(ScrollToPlugin);
 type InfoPanelProps = {
     closeProjectClick: (e?: React.SyntheticEvent) => void,
     showInfoDiv: boolean,
-    unmountInfoDiv: Function,
+    unmountInfoDiv: () => void,
     projectContent: { title: string, paragraph: string, year: string, image: string, video: string, link: string, type: string, images: Array<string>, technos: Array<string> };
 };
 
@@ -49,7 +49,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(true);
 
-    const isMobile = useMediaQuery({ query: '(min-width: 767px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
     // we remove the tab possibilities when the div is not active
 
@@ -87,7 +87,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
             videoRef.current?.pause();
         }
 
-    }, [unmountInfoDiv])
+    }, [unmountInfoDiv, isVideoPlaying])
 
     const handleVideoClick = () => {
         if (isVideoPlaying) {
@@ -105,7 +105,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
             gsap.set(backgroundFallbackRef.current, { height: "100vh" });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: .2, y: 0, duration: 1.5, ease: "expo.out" });
         } else {
-            gsap.to(infoDivRef.current, { y: "100vh", paddingTop: 0, paddingBottom: 0, duration: 1.5, ease: "expo.out", onComplete: () => { unmountInfoDiv } });
+            gsap.to(infoDivRef.current, { y: "100vh", paddingTop: 0, paddingBottom: 0, duration: 1.5, ease: "expo.out", onComplete: () => { unmountInfoDiv(); } });
             gsap.to(backgroundFallbackRef.current, { autoAlpha: 0, duration: .5, ease: "expo.out" });
             gsap.set(backgroundFallbackRef.current, { height: 0, autoAlpha: 0, delay: .1 });
         }
@@ -162,7 +162,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                                 </div>
                             </div>
                         </div>
-                        <Button href={projectContent.link} positionSticky={true}>{isMobile ? "View Link" : ""}</Button>
+                        <Button href={projectContent.link} positionSticky={true}>{isMobile ? "" : "View Link"}</Button>
                     </div>
                 </div>
 
