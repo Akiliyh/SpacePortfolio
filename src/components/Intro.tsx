@@ -24,9 +24,9 @@ const Intro = () => {
       reduceWhiteSpace: false
     });
 
-    const childSplit = new SplitText(titleRef.current, { type: "chars", reduceWhiteSpace: false });
+    const childSplit = new SplitText(titleRef.current, { type: "chars", reduceWhiteSpace: false, overwrite: false });
 
-    let initials = childSplit.chars.filter(el =>
+    const initials = childSplit.chars.filter(el =>
       ["G", "B", "R"].includes(el.textContent || "")
     );
 

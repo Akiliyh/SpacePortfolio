@@ -31,7 +31,7 @@ const Title = () => {
             (line as HTMLElement).tabIndex = -1;
         });
 
-        const childSplit = new SplitText(textRef.current, { type: "chars" });
+        const childSplit = new SplitText(textRef.current, { type: "chars", overwrite: false });
 
         const tl = gsap.timeline({ repeat: -1 });
 
