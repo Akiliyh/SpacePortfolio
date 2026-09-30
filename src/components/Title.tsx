@@ -5,9 +5,10 @@ import { SplitText } from "gsap/SplitText"
 
 gsap.registerPlugin(useGSAP, SplitText);
 
+const PHRASES = ["Discover my universe", "Driven by creativity"];
+
 const Title = () => {
 
-    const phrases = ["Discover my universe", "Driven by creativity"];
     const [curPhraseIndex, setCurPhraseIndex] = useState(0);
 
     const textRef = useRef<HTMLHeadingElement>(null);
@@ -33,7 +34,9 @@ const Title = () => {
 
         const childSplit = new SplitText(textRef.current, { type: "chars", overwrite: false });
 
-        const tl = gsap.timeline({ repeat: -1 });
+        const tl = gsap.timeline({
+            onComplete: () => setCurPhraseIndex((prev) => (prev + 1) % PHRASES.length),
+        });
 
         tl.from(childSplit.chars, {
             duration: 1,
@@ -43,15 +46,12 @@ const Title = () => {
             stagger: 0.04,
         })
             .to(childSplit.chars, {
-                delay: 2,
-            })
-            .to(childSplit.chars, {
                 duration: 1,
                 ease: "sine.inOut",
                 yPercent: 100,
                 opacity: 0,
                 stagger: 0.04,
-            });
+            }, "+=2"); // 2s pause before the chars go out
 
         return () => {
             parentSplit.revert();
@@ -59,15 +59,9 @@ const Title = () => {
         };
     }, { dependencies: [curPhraseIndex], scope: textRef });
 
-    useEffect(() => {
-        setTimeout(() => {
-            setCurPhraseIndex((curPhraseIndex + 1) % phrases.length);
-        }, 6000);
-    }, [curPhraseIndex]);
-
     return (
-        <h1 tabIndex={-1} className="title" ref={textRef} style={{ left: position.left, top: position.top }}>
-            {phrases[curPhraseIndex]}
+        <h1 key={curPhraseIndex} tabIndex={-1} className="title" ref={textRef} style={{ left: position.left, top: position.top }}>
+            {PHRASES[curPhraseIndex]}
         </h1>
     )
 };
