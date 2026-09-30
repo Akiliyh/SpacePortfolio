@@ -14,7 +14,7 @@ type ProjectProps = {
   projectWidth: number;
   projectHeight: number;
   project: { title: string, year: string, image: string, video: string, videoPreview: string, images: Array<string> };
-  randomIntFromInterval: Function;
+  randomIntFromInterval: (min: number, max: number) => number;
   showAltPage : boolean,
 };
 
@@ -24,6 +24,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   const filterRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasVideoPreview = /\.(mp4|webm|mov)$/i.test(project.videoPreview);
   const imageRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const hoverCircleRef = useRef<HTMLDivElement>(null);
@@ -281,7 +282,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       }}
     >
 
-      <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" decoding="async" />
+      <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" loading="lazy" decoding="async" />
 
       <div className="filter" ref={filterRef}></div>
       {/* <div className="filter" ref={filterRef} style={{
@@ -295,9 +296,11 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
       {!isMobile &&
         <>
-          <video tabIndex={-1} className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
-            <source src={"/video" + project.videoPreview} type="video/mp4" />
-          </video>
+          {hasVideoPreview &&
+            <video tabIndex={-1} className="video" preload="none" ref={videoRef} muted loop disablePictureInPicture>
+              <source src={"/video" + project.videoPreview} type="video/webm" />
+            </video>
+          }
 
 
           <div className="content">
