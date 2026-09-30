@@ -292,26 +292,35 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
     // GSAP observer
 
-    useGSAP(() => {
+    const observerRef = useRef<IntersectionObserver | null>(null);
 
+    useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    gsap.to(entry.target, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut" });
+                    gsap.to(entry.target, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut", overwrite: "auto" });
                 } else {
-                    gsap.to(entry.target, { opacity: 0, scale: 0.6, rotate: randomIntFromInterval(-30, 30), duration: 1, ease: "power2.inOut" });
+                    gsap.to(entry.target, { opacity: 0, scale: 0.6, rotate: randomIntFromInterval(-30, 30), duration: 1, ease: "power2.inOut", overwrite: "auto" });
                 }
             });
         }, { threshold: 0.5 });
 
-        const projectElements = containerRef.current?.querySelectorAll('.project-cards');
-        projectElements?.forEach(el => observer.observe(el));
+        observerRef.current = observer;
 
         return () => {
             observer.disconnect();
+            observerRef.current = null;
         };
+    }, []);
 
-    }, { scope: containerRef, dependencies: [renderedProjects] })
+    // observe only the cards that were not observed yet
+    useEffect(() => {
+        const observer = observerRef.current;
+        if (!observer) return;
+
+        // observe() is a no-op for elements that are already observed
+        containerRef.current?.querySelectorAll('.project-cards').forEach(el => observer.observe(el));
+    }, [renderedProjects]);
 
     const handleProjectClickImpl = contextSafe((index: number) => {
         // we want here to select the correct project regardless of the index
