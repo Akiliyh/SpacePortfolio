@@ -35,6 +35,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   const titleSplitRef = useRef<SplitText>(null);
   const yearSplitRef = useRef<SplitText>(null);
+  const [entryRotation] = useState(() => randomIntFromInterval(-30, 30));
 
   const [isDragging, setIsDragging] = useState(false);
   const [projectClasses, setProjectClasses] = useState('project-title');
@@ -94,6 +95,32 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
 
   const { contextSafe } = useGSAP({ scope: projectRef });
 
+  // The SplitText / quickTo setup is expensive, we set it on hover and not on project mount
+  const isSetupRef = useRef(false);
+  const ensureSetup = () => {
+    if (isSetupRef.current) return;
+    isSetupRef.current = true;
+
+    moveCardX.current = gsap.quickTo(projectRef.current, "x", { duration: 3, ease: "power2.out" });
+    moveCardY.current = gsap.quickTo(projectRef.current, "y", { duration: 3, ease: "power2.out" });
+
+    if (hoverCircleRef.current) {
+      moveCircleX.current = gsap.quickTo(hoverCircleRef.current, "x", { duration: .5, ease: "power2.out" });
+      moveCircleY.current = gsap.quickTo(hoverCircleRef.current, "y", { duration: .5, ease: "power2.out" });
+    }
+
+    if (titleRef.current && yearRef.current) {
+      titleSplitRef.current = new SplitText(titleRef.current, { type: "chars" });
+      yearSplitRef.current = new SplitText(yearRef.current, { type: "chars" });
+
+      gsap.set(titleSplitRef.current.chars, { yPercent: 110 });
+      gsap.set(yearSplitRef.current.chars, { yPercent: 150 });
+
+      // title / year are hidden by CSS until their chars have been pushed out of the mask
+      projectRef.current?.classList.add("is-split");
+    }
+  };
+
   const handleMouseMove = contextSafe((e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const rect = el.getBoundingClientRect();
@@ -118,6 +145,8 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
   const handleHoverEnter = contextSafe((event: React.MouseEvent<HTMLDivElement> | React.FocusEvent<HTMLDivElement>) => {
 
     if ("buttons" in event && event.buttons > 0) return; // if div is dragged (mouse buttons clicked) we don't apply any hover effect
+
+    ensureSetup(); // set splittext on hover
 
     gsap.to(imageRef.current, { zIndex: 0, autoAlpha: 0 });
     gsap.to(filterRef.current, { backdropFilter: "blur(20px)", background: "linear-gradient(to top, rgba(0,0,0,1) 0%,  rgba(0,0,0,0) 60%)", duration: 0, ease: "power2.out" });
@@ -198,52 +227,6 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     });
   })
 
-  useGSAP(() => {
-    gsap.from(projectRef.current, { opacity: 0, scale: 0.6, rotate: randomIntFromInterval(-30, 30), duration: 1, ease: "power2.inOut" });
-    gsap.to(projectRef.current, { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: "power2.inOut" });
-  }, { scope: projectRef }); // <-- scope is for selector text (optional)
-
-  useGSAP(() => {
-
-    titleSplitRef.current = new SplitText(titleRef.current, { type: "chars" });
-    yearSplitRef.current = new SplitText(yearRef.current, { type: "chars" });
-
-    if (hoverCircleRef.current) {
-      gsap.set(hoverCircleRef.current, {
-        autoAlpha: 0,
-      });
-    }
-
-    gsap.set(titleSplitRef.current.chars, {
-      yPercent: 110,
-    });
-
-    gsap.set(yearSplitRef.current.chars, {
-      yPercent: 150,
-    });
-
-    moveCardX.current = gsap.quickTo(projectRef.current, "x", {
-      duration: 3,
-      ease: "power2.out",
-    });
-    moveCardY.current = gsap.quickTo(projectRef.current, "y", {
-      duration: 3,
-      ease: "power2.out",
-    });
-
-    moveCircleX.current = gsap.quickTo(hoverCircleRef.current, "x", {
-      duration: .5,
-      ease: "power2.out",
-    });
-    moveCircleY.current = gsap.quickTo(hoverCircleRef.current, "y", {
-      duration: .5,
-      ease: "power2.out",
-    });
-
-
-
-  }, { scope: projectRef }); // <-- scope is for selector text (optional)
-
   // we add classes base on title length to better style it
   useEffect(() => {
     if (project.title.length > 13) {
@@ -276,6 +259,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
         top: coord.y,
         width: projectWidth,
         height: projectHeight,
+        transform: "scale(0.6) rotate(" + entryRotation + "deg)",
         // Intentional duplicate of the <img> below: on hover the <img> is swapped for a video/other picture, and this keeps the thumbnail visible behind it.
         backgroundImage: "url(/img" + project.image + ")",
         backgroundSize: "cover"
@@ -285,14 +269,6 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
       <img className="preview-image" ref={imageRef} src={"/img" + project.image} alt="" loading="lazy" decoding="async" />
 
       <div className="filter" ref={filterRef}></div>
-      {/* <div className="filter" ref={filterRef} style={{
-    backdropFilter: "blur(800px)",
-    WebkitBackdropFilter: "blur(800px)" // for Safari
-  }}></div>
-  <div className="filter" ref={filterRef} style={{
-    backdropFilter: "blur(800px)",
-    WebkitBackdropFilter: "blur(800px)" // for Safari
-  }}></div> */}
 
       {!isMobile &&
         <>

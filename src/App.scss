@@ -75,6 +75,8 @@ p {
   align-items: end;
   touch-action: auto !important;
 
+  opacity: 0; // by default
+
   .content {
     padding: 10px;
     width: 100%;
@@ -183,6 +185,17 @@ p {
 .project-cards .year {
   padding-bottom: .5rem;
   z-index: 2;
+}
+
+// title / year are split into chars on the first hover (see Project.tsx), they stay hidden until then
+.project-cards .project-title,
+.project-cards .year {
+  visibility: hidden;
+}
+
+.project-cards.is-split .project-title,
+.project-cards.is-split .year {
+  visibility: visible;
 }
 
 .backgroundCanvas .title {
