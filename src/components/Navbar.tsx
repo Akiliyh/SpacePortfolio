@@ -27,38 +27,33 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   const navbarContainerRef = useRef<HTMLDivElement>(null);
   // Map of tab element -> its SplitText instances
   const splitMap = useRef<Map<HTMLDivElement, SplitText[]>>(new Map());
+  const logoSplit = useRef<SplitText | null>(null);
 
   const { contextSafe } = useGSAP({ scope: navbarRef });
 
   const handleHoverLogoEnter = contextSafe(() => {
-    const split = new SplitText(titleRef.current, { type: 'chars' });
+    const split = logoSplit.current;
+    if (!split) return;
 
-    if (split) {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
+    gsap.killTweensOf(split.chars);
+    gsap.timeline()
+      .fromTo(
         split.chars,
         { yPercent: 0 },
         { yPercent: 100, duration: 0.8, stagger: 0.1, ease: "power3.inOut" }
       )
-        .to(
-          split.chars,
-          { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
-        );
-    }
+      .to(
+        split.chars,
+        { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
+      );
   });
 
   const handleHoverLogoLeave = contextSafe(() => {
-    const split = new SplitText(titleRef.current, { type: 'chars' });
+    const split = logoSplit.current;
+    if (!split) return;
 
-    if (split) {
-      const tl = gsap.timeline();
-
-      tl.to(
-          split.chars,
-          { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
-        );
-    }
+    gsap.killTweensOf(split.chars);
+    gsap.to(split.chars, { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" });
   });
 
   const handleHoverEnter = contextSafe((el: HTMLDivElement) => {
@@ -67,6 +62,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     const splits = splitMap.current.get(el);
     if (splits) {
       splits.forEach(split => {
+        gsap.killTweensOf(split.chars);
         gsap.fromTo(
           split.chars,
           { yPercent: 100 },
@@ -82,6 +78,7 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
     const splits = splitMap.current.get(el);
     if (splits) {
       splits.forEach(split => {
+        gsap.killTweensOf(split.chars);
         gsap.to(split.chars, {
           yPercent: 100,
           duration: 0.6,
@@ -141,7 +138,12 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
   useGSAP(() => {
     if (!navbarRef.current) return;
 
+    if (titleRef.current) {
+      logoSplit.current = new SplitText(titleRef.current, { type: 'chars' });
+    }
+
     const tabs = navbarRef.current.querySelectorAll('.sub-tab');
+    splitMap.current.clear();
     tabs.forEach(tab => {
       const spans = tab.querySelectorAll('span');
       const splits: SplitText[] = [];
@@ -154,7 +156,13 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
 
       splitMap.current.set(tab as HTMLDivElement, splits);
     });
-  }, { scope: navbarRef });
+
+    // Splits created in this context are reverted automatically on cleanup
+    return () => {
+      logoSplit.current = null;
+      splitMap.current.clear();
+    };
+  }, { scope: navbarRef, dependencies: [isMobile] });
 
   useEffect(() => {
     setIsOffcanvasMenuOpen(false);
