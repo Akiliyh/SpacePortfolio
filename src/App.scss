@@ -136,8 +136,8 @@ p {
         rgba(0, 0, 0, .0) 50%,
         rgba(0, 0, 0, 0) 70%);
 
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 
     -webkit-mask-image: linear-gradient(to top,
         rgba(0, 0, 0, 1) 0%,

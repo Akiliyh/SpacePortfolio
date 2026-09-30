@@ -159,7 +159,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
     videoRef.current?.pause();
     gsap.to(imageRef.current, { zIndex: 2, autoAlpha: 1 });
 
-    gsap.to(filterRef.current, { backdropFilter: "blur(0px)", duration: 0, background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)", ease: "power2.out" });
+    gsap.to(filterRef.current, { backdropFilter: "none", duration: 0, background: "linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%)", ease: "power2.out" });
 
     const el = event.currentTarget;
     gsap.to(el, { scale: 1, duration: .6, ease: "power2.out" });
@@ -275,6 +275,7 @@ const Project = ({ coord, index, handleClick, projectHeight, projectWidth, proje
         top: coord.y,
         width: projectWidth,
         height: projectHeight,
+        // Intentional duplicate of the <img> below: on hover the <img> is swapped for a video/other picture, and this keeps the thumbnail visible behind it.
         backgroundImage: "url(/img" + project.image + ")",
         backgroundSize: "cover"
       }}
