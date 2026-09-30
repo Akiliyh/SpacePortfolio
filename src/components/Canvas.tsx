@@ -313,7 +313,7 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
     }, { scope: containerRef, dependencies: [renderedProjects] })
 
-    const handleProjectClick = useMemo(() => contextSafe((index: number) => {
+    const handleProjectClickImpl = contextSafe((index: number) => {
         // we want here to select the correct project regardless of the index
         const projectIndex = index % projects.length;
         const clickedProject = projects[projectIndex];
@@ -326,7 +326,9 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
         console.log(curProjectX, curProjectY);
 
         // move canvas based on project position (only on desktop)
-        !isMobile && gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
+        if (!isMobile) {
+            gsap.to(backgroundRef.current, { x: -curProjectX, y: -curProjectY, duration: 1.5, ease: "power2.inOut" });
+        }
 
         if (projectContent.url === clickedProject.url && showInfoDiv) {
             setShowInfoDiv(false);
@@ -340,11 +342,17 @@ const Canvas = ({ children, isInfoDivMountedState, showInfoDivState, projectCont
 
         setProjectSelectedIndex(projectIndex);
 
-    }), [contextSafe, projectContent, showInfoDiv, isMobile, PROJECTWIDTH, PROJECTHEIGHT]);
+    });
+
+    // the real handler is recreated each render (it reads fresh state), but we expose a stable wrapper
+    // so the memoized <Project> cards don't re-render when projectContent / showInfoDiv change
+    const handleProjectClickRef = useRef(handleProjectClickImpl);
+    handleProjectClickRef.current = handleProjectClickImpl;
+    const handleProjectClick = useMemo(() => (index: number) => handleProjectClickRef.current(index), []);
 
     useEffect(() => {
         setProjectContent(projects[projectSelectedIndex]);
-    }, [projectSelectedIndex])
+    }, [projectSelectedIndex, setProjectContent])
 
     return (
         <div className="container" ref={containerRef}>
