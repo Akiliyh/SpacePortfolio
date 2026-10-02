@@ -33,12 +33,18 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage, projects, currentUrl
       'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
     );
 
+    const projectLines = contentEl.querySelectorAll<HTMLElement>('.project-line');
+
     focusable.forEach((el) => {
       if (showAltPage) {
         el.removeAttribute("tabindex");
       } else {
         el.setAttribute("tabindex", "-1");
       }
+    });
+
+    projectLines.forEach((el) => {
+      el.setAttribute("tabindex", showAltPage ? "0" : "-1");
     });
   }, [showAltPage]);
 
