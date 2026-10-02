@@ -2,35 +2,12 @@ import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import logo from '../assets/GBRDrop.png';
-import { FaReact, FaLanguage } from "react-icons/fa";
-import { TbBrandCpp } from "react-icons/tb";
-import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender } from "react-icons/si";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "./index"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useMediaQuery } from 'react-responsive';
 import React from "react";
-
-const iconMap: Record<string, React.ReactElement> = {
-    React: <FaReact size={30} />,
-    Expo: <SiExpo size={30} />,
-    P5: <SiP5Dotjs size={30} />,
-    Unity: <SiUnity size={30} />,
-    Cardboard: <SiGooglecardboard size={30} />,
-    Supabase: <SiSupabase size={30} />,
-    Latex: <SiLatex size={30} />,
-    Figma: <SiFigma size={30} />,
-    Rive: <SiRive size={30} />,
-    Mapbox: <SiMapbox size={30} />,
-    OpenGL: <SiOpengl size={30} />,
-    CPP: <TbBrandCpp size={30} />,
-    NodeDotJs: <SiNodedotjs size={30} />,
-    Javascript: <SiJavascript size={30} />,
-    Language: <FaLanguage size={30} />,
-    AffinityDesigner: <SiAffinitydesigner size={30} />,
-    Wordpress: <SiWordpress size={30} />,
-    Blender: <SiBlender size={30} />,
-};
+import { iconMap } from "../technoIcons";
 
 gsap.registerPlugin(ScrollToPlugin);
 

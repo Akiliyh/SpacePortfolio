@@ -200,7 +200,8 @@
         "type": "3D Animation",
         "images" : ["/lone-little-diver/lone-little-diver-thumbnail.jpg", "/lone-little-diver/lone-little-diver-thumbnail.webp"],
         "technos" : ["Blender"],
-        "url" : "/projects/lone-little-diver"
+        "url" : "/projects/lone-little-diver",
+        "hidden": true
     },
     {
         "id": 15,
@@ -214,7 +215,8 @@
         "type": "3D Animation",
         "images" : ["/candidatn6162/candidatn6162-thumbnail.jpg", "/candidatn6162/candidatn6162-thumbnail.jpg"],
         "technos" : ["Blender"],
-        "url" : "/projects/lone-little-diver"
+        "url" : "/projects/candidatn6162",
+        "hidden": true
     }
     ,
     {
@@ -229,7 +231,8 @@
         "type": "3D Animation",
         "images" : ["/operation-arabica/operation-arabica-thumbnail.webp", "/operation-arabica/operation-arabica-thumbnail.webp"],
         "technos" : ["Unity"],
-        "url" : "/projects/operation-arabica"
+        "url" : "/projects/operation-arabica",
+        "hidden": true
     }
     ,
     {
@@ -244,7 +247,8 @@
         "type": "3D Animation",
         "images" : ["/100souvenirs/100souvenirs-thumbnail.webp", "/100souvenirs/100souvenirs-thumbnail.webp"],
         "technos" : ["Supabase"],
-        "url" : "/projects/100-souvenirs"
+        "url" : "/projects/100-souvenirs",
+        "hidden": true
     }
     ,
     {

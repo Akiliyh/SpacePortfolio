@@ -10,3 +10,4 @@ export { default as Offcanvas } from './Offcanvas';
 export { default as AltPage } from './AltPage';
 export { default as About } from './About';
 export { default as ContactForm } from './ContactForm';
+export { default as ProjectList } from './ProjectList';

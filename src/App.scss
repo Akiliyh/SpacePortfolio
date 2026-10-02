@@ -1028,6 +1028,99 @@ button[disabled] {
   }
 }
 
+// Projects list (alt page)
+
+.alt-page.projects {
+  justify-content: flex-start; // the list can be longer than the screen
+  overflow-y: scroll;
+
+  .content.projects {
+    display: block;
+    margin-top: 80px; // under the navbar
+    padding-bottom: 100px; // above the return button
+    min-height: 0;
+  }
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+
+  .project-line {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    align-items: center;
+    gap: 30px;
+    padding: 15px 0;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s ease color;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--blue);
+    }
+
+    img {
+      width: 160px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .title-year {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .title {
+        margin: 0;
+        font-size: 1.75rem;
+      }
+    }
+
+    .icons {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      color: var(--blue);
+    }
+
+    &:hover,
+    &.active {
+      color: var(--blue);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.1rem var(--blue) !important;
+      outline: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .project-list .project-line {
+    grid-template-columns: 100px 1fr;
+    gap: 15px;
+
+    img {
+      width: 100px;
+    }
+
+    .title-year .title {
+      font-size: 1.25rem;
+    }
+
+    .icons {
+      grid-column: 1 / -1;
+      flex-wrap: wrap;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .alt-page {
 
@@ -1063,6 +1156,10 @@ button[disabled] {
     .content {
       grid-template-columns: 1fr;
       height: 90%;
+
+      &.projects {
+        height: auto;
+      }
 
       .contact.button {
         margin-right: auto;

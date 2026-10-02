@@ -240,6 +240,13 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
                   <span>Contact</span>
                   <span>Contact</span>
                 </div>
+
+                <div tabIndex={0} style={{ display: isMobile ? "none" : "block" }} className="projects sub-tab" onClick={(e) => handleClick(e.currentTarget)} onMouseEnter={(e) => handleHoverEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleHoverLeave(e.currentTarget)} onFocus={(e) => handleHoverEnter(e.currentTarget)} onBlur={(e) => handleHoverLeave(e.currentTarget)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(e.currentTarget); } }}>
+                  <span>Projects</span>
+                  <span>Projects</span>
+                </div>
               </>
               <img src={logo} alt="" />
             </div>

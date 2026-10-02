@@ -16,7 +16,7 @@ function App() {
 
   const initialPath = window.location.pathname.replace("/", "");
 
-  const isKnownAlt = initialPath === "about" || initialPath === "contact";
+  const isKnownAlt = initialPath === "about" || initialPath === "contact" || initialPath === "projects";
 
   const [showAltPage, setShowAltPage] = useState(isKnownAlt);
   const [isInfoOver, setIsInfoOver] = useState(false);
@@ -41,9 +41,9 @@ function App() {
 
     const path = window.location.pathname.replace("/", "");
 
-    if (path && path != "contact" && path != "about" && !path.startsWith("projects")) {
+    if (path && path != "contact" && path != "about" && path != "projects" && !path.startsWith("projects")) {
       window.location.replace("/");
-    } else if (path && (path == "contact" || path == "about")) {
+    } else if (path && (path == "contact" || path == "about" || path == "projects")) {
       setAltPageType(path);
       setShowAltPage(true);
       window.history.replaceState({ altPageType: path }, "", `/${path}`);
@@ -122,6 +122,18 @@ function App() {
     }
   };
 
+  // click on a line of the projects list: we go back to the canvas with the project panel open
+  const openProjectFromList = (url: string) => {
+    const found = projects.find(p => p.url === url);
+    if (!found) return;
+
+    setProjectContent(found);
+    setIsInfoDivMounted(true);
+    setShowInfoDiv(true);
+    setShowAltPage(false);
+    window.history.pushState({ projectContent: found }, "", found.url);
+  };
+
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.from(appContentRef.current, {
@@ -195,7 +207,8 @@ function App() {
     <div ref={appRef}>
       <Intro></Intro>
       <Navbar toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></Navbar>
-      <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}></AltPage>
+      <AltPage toggleAltPage={(e: HTMLDivElement) => toggleAltPage(e)} showAltPage={showAltPage} altPageType={altPageType}
+        projects={projects} currentUrl={projectContent.url} showInfoDiv={showInfoDiv} openProject={openProjectFromList}></AltPage>
       <div className="app-content" ref={appContentRef}>
         <Canvas isInfoDivMountedState={[isInfoDivMounted, setIsInfoDivMounted]} showAltPage={showAltPage} showInfoDivState={[showInfoDiv, setShowInfoDiv]} projectContentState={[projectContent, setProjectContent]} >
           <Title></Title>

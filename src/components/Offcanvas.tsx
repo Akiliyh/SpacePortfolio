@@ -17,6 +17,7 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurger
     const offCanvasRef = useRef<HTMLDivElement>(null);
     const aboutTitleRef = useRef<HTMLDivElement>(null);
     const contactTitleRef = useRef<HTMLDivElement>(null);
+    const projectsTitleRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         gsap.to(offCanvasRef.current, {
@@ -35,6 +36,7 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurger
         
         const aboutSplit = new SplitText(aboutTitleRef.current, { type: "chars" });
         const contactSplit = new SplitText(contactTitleRef.current, { type: "chars" });
+        const projectsSplit = new SplitText(projectsTitleRef.current, { type: "chars" });
 
         gsap.from(aboutSplit.chars, {
             duration: 2,
@@ -45,6 +47,14 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurger
         })
 
         gsap.from(contactSplit.chars, {
+            duration: 2,
+            ease: "expo.out",
+            yPercent: 100,
+            opacity: 0,
+            stagger: 0.04,
+        })
+
+        gsap.from(projectsSplit.chars, {
             duration: 2,
             ease: "expo.out",
             yPercent: 100,
@@ -64,6 +74,9 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurger
                 </div>
                 <div className={((altPageType === "contact") && (showAltPage)) ? "contact sub-tab active" : "contact sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
                 <span ref={contactTitleRef}>CONTACT</span>
+                </div>
+                <div className={((altPageType === "projects") && (showAltPage)) ? "projects sub-tab active" : "projects sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
+                <span ref={projectsTitleRef}>PROJECTS</span>
                 </div>
             <div className="boxes">
                 <div className="red"></div>

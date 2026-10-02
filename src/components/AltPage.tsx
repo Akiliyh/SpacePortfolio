@@ -1,4 +1,4 @@
-import { Button, ContactForm, About } from "./index"
+import { Button, ContactForm, About, ProjectList } from "./index"
 import { useMediaQuery } from 'react-responsive';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -11,9 +11,13 @@ type AltPageProps = {
   showAltPage: boolean,
   altPageType: string,
   toggleAltPage: (e: HTMLDivElement) => void;
+  projects: { title: string, year: string, image: string, technos: Array<string>, url: string }[],
+  currentUrl: string,
+  showInfoDiv: boolean,
+  openProject: (url: string) => void;
 };
 
-const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
+const AltPage = ({ showAltPage, altPageType, toggleAltPage, projects, currentUrl, showInfoDiv, openProject }: AltPageProps) => {
 
   const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
   const altPageRef = useRef<HTMLDivElement>(null);
@@ -86,7 +90,7 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
 
 
   return (
-    <div className="alt-page" ref={altPageRef}>
+    <div className={"alt-page " + altPageType} ref={altPageRef}>
       <div className={"content " + altPageType} ref={contentRef}>
         {
           altPageType === "about" &&
@@ -97,6 +101,11 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage }: AltPageProps) => {
         {
           altPageType === "contact" &&
           <ContactForm isMobile={isMobile}></ContactForm>
+        }
+
+        {
+          altPageType === "projects" &&
+          <ProjectList projects={projects} currentUrl={currentUrl} showInfoDiv={showInfoDiv} openProject={openProject}></ProjectList>
         }
 
 
