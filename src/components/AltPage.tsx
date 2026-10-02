@@ -97,15 +97,15 @@ const AltPage = ({ showAltPage, altPageType, toggleAltPage, projects, currentUrl
           <About isMobile={isMobile} toggleAltPage={toggleAltPage}></About>
         }
 
+        {
+          altPageType === "projects" &&
+          <ProjectList projects={projects} currentUrl={currentUrl} showInfoDiv={showInfoDiv} openProject={openProject}></ProjectList>
+        }
+
 
         {
           altPageType === "contact" &&
           <ContactForm isMobile={isMobile}></ContactForm>
-        }
-
-        {
-          altPageType === "projects" &&
-          <ProjectList projects={projects} currentUrl={currentUrl} showInfoDiv={showInfoDiv} openProject={openProject}></ProjectList>
         }
 
 

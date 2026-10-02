@@ -72,11 +72,11 @@ const Offcanvas = ({ isOffcanvasMenuOpen, showAltPage, altPageType, handleBurger
                 <div className={((altPageType === "about") && (showAltPage)) ? "about sub-tab active" : "about sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
                 <span ref={aboutTitleRef}>ABOUT</span>
                 </div>
-                <div className={((altPageType === "contact") && (showAltPage)) ? "contact sub-tab active" : "contact sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
-                <span ref={contactTitleRef}>CONTACT</span>
-                </div>
                 <div className={((altPageType === "projects") && (showAltPage)) ? "projects sub-tab active" : "projects sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
                 <span ref={projectsTitleRef}>PROJECTS</span>
+                </div>
+                <div className={((altPageType === "contact") && (showAltPage)) ? "contact sub-tab active" : "contact sub-tab"} onClick={(e) => {handleBurgerClick(e.currentTarget); handleClick(e.currentTarget)}}>
+                <span ref={contactTitleRef}>CONTACT</span>
                 </div>
             <div className="boxes">
                 <div className="red"></div>
