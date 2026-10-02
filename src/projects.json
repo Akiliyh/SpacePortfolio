@@ -80,7 +80,7 @@
         "video": "/spartac/spartac-preview.webm",
         "type": "AR web application",
         "images" : ["/spartac/spartac.webp", "/spartac/spartac.webp"],
-        "technos" : ["React", "AffinityDesigner"],
+        "technos" : ["React", "AffinityDesigner", "Resolve"],
         "url" : "/projects/spart-ac"
     },
     {
@@ -214,7 +214,7 @@
         "video": "/candidatn6162/candidatn6162-thumbnail.jpg",
         "type": "3D Animation",
         "images" : ["/candidatn6162/candidatn6162-thumbnail.jpg", "/candidatn6162/candidatn6162-thumbnail.jpg"],
-        "technos" : ["Blender"],
+        "technos" : ["Resolve"],
         "url" : "/projects/candidatn6162",
         "hidden": true
     }
@@ -230,7 +230,7 @@
         "video": "/operation-arabica/operation-arabica-thumbnail.webp",
         "type": "3D Animation",
         "images" : ["/operation-arabica/operation-arabica-thumbnail.webp", "/operation-arabica/operation-arabica-thumbnail.webp"],
-        "technos" : ["Unity"],
+        "technos" : ["Unity", "Resolve"],
         "url" : "/projects/operation-arabica",
         "hidden": true
     }
@@ -246,7 +246,7 @@
         "video": "/100souvenirs/100souvenirs-thumbnail.webp",
         "type": "3D Animation",
         "images" : ["/100souvenirs/100souvenirs-thumbnail.webp", "/100souvenirs/100souvenirs-thumbnail.webp"],
-        "technos" : ["Supabase"],
+        "technos" : ["Resolve"],
         "url" : "/projects/100-souvenirs",
         "hidden": true
     }

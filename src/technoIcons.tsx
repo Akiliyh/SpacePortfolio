@@ -1,6 +1,6 @@
 import { FaReact, FaLanguage } from "react-icons/fa";
 import { TbBrandCpp } from "react-icons/tb";
-import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender } from "react-icons/si";
+import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender, SiDavinciresolve } from "react-icons/si";
 import React from "react";
 
 // shared by the info panel and the projects list
@@ -23,4 +23,5 @@ export const iconMap: Record<string, React.ReactElement> = {
     AffinityDesigner: <SiAffinitydesigner size={30} />,
     Wordpress: <SiWordpress size={30} />,
     Blender: <SiBlender size={30} />,
+    Resolve: <SiDavinciresolve size={30} />,
 };
