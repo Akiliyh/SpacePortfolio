@@ -5,8 +5,10 @@ import { useGSAP } from '@gsap/react';
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { Project, Flag } from "./index"
-import projects from "../projects.json";
+import allProjects from "../projects.json";
 import { useMediaQuery } from 'react-responsive';
+
+const projects = allProjects.filter(p => !(p as { hidden?: boolean }).hidden); // "hidden": true in projects.json skips a project
 
 gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin); // register the hook to avoid React version discrepancies
 

@@ -4,7 +4,9 @@ import { Intro, Navbar, Canvas, Title, AltPage, InfoPanel } from './components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive';
-import projects from "./projects.json";
+import allProjects from "./projects.json";
+
+const projects = allProjects.filter(p => !(p as { hidden?: boolean }).hidden); // "hidden": true in projects.json skips a project
 
 
 function App() {

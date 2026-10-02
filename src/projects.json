@@ -259,6 +259,7 @@
         "type": "3D Animation",
         "images" : ["/candidatn6162/candidatn6162-thumbnail.jpg", "/candidatn6162/candidatn6162-thumbnail.jpg"],
         "technos" : ["Blender"],
-        "url" : "/projects/123Imac"
+        "url" : "/projects/123Imac",
+        "hidden": true
     }
 ]
