@@ -216,4 +216,49 @@
         "technos" : ["Blender"],
         "url" : "/projects/lone-little-diver"
     }
+    ,
+    {
+        "id": 16,
+        "title": "Opération Arabica",
+        "paragraph": "Virtusio is a brand new innovative way of experiencing museums through VR and more precisely with Google cardboards. As our final student project, we intended, with my group, to capture 360 videos of Laval’s castle with captive commentary. All the interactive elements of the app have been brought to life using Unity, together with gamified components. The spectator can click on points of interest to know more about the place and change scenes to navigate inside the castle.",
+        "year": "2026",
+        "link": "https://youtu.be/OukInQBcFfo",
+        "image": "/operation-arabica/operation-arabica-thumbnail.webp",
+        "videoPreview": "/operation-arabica/operation-arabica-thumbnail.webp",
+        "video": "/operation-arabica/operation-arabica-thumbnail.webp",
+        "type": "3D Animation",
+        "images" : ["/operation-arabica/operation-arabica-thumbnail.webp", "/operation-arabica/operation-arabica-thumbnail.webp"],
+        "technos" : ["Unity"],
+        "url" : "/projects/operation-arabica"
+    }
+    ,
+    {
+        "id": 17,
+        "title": "100 souvenirs ",
+        "paragraph": "Virtusio is a brand new innovative way of experiencing museums through VR and more precisely with Google cardboards. As our final student project, we intended, with my group, to capture 360 videos of Laval’s castle with captive commentary. All the interactive elements of the app have been brought to life using Unity, together with gamified components. The spectator can click on points of interest to know more about the place and change scenes to navigate inside the castle.",
+        "year": "2026",
+        "link": "https://youtu.be/riceZfoFTVI",
+        "image": "/100souvenirs/100souvenirs-thumbnail.webp",
+        "videoPreview": "/100souvenirs/100souvenirs-thumbnail.webp",
+        "video": "/100souvenirs/100souvenirs-thumbnail.webp",
+        "type": "3D Animation",
+        "images" : ["/100souvenirs/100souvenirs-thumbnail.webp", "/100souvenirs/100souvenirs-thumbnail.webp"],
+        "technos" : ["Supabase"],
+        "url" : "/projects/100-souvenirs"
+    }
+    ,
+    {
+        "id": 17,
+        "title": "123IMAC",
+        "paragraph": "Virtusio is a brand new innovative way of experiencing museums through VR and more precisely with Google cardboards. As our final student project, we intended, with my group, to capture 360 videos of Laval’s castle with captive commentary. All the interactive elements of the app have been brought to life using Unity, together with gamified components. The spectator can click on points of interest to know more about the place and change scenes to navigate inside the castle.",
+        "year": "2025",
+        "link": "https://youtu.be/riceZfoFTVI",
+        "image": "/candidatn6162/candidatn6162-thumbnail.jpg",
+        "videoPreview": "/candidatn6162/candidatn6162-thumbnail.jpg",
+        "video": "/candidatn6162/candidatn6162-thumbnail.jpg",
+        "type": "3D Animation",
+        "images" : ["/candidatn6162/candidatn6162-thumbnail.jpg", "/candidatn6162/candidatn6162-thumbnail.jpg"],
+        "technos" : ["Blender"],
+        "url" : "/projects/123Imac"
+    }
 ]
