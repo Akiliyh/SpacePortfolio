@@ -23,6 +23,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
     const videoRef = useRef<HTMLVideoElement>(null);
     const backgroundFallbackRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const hasInitRef = useRef(false);
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(true);
 
@@ -70,6 +71,15 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
 
     useGSAP(() => {
 
+        if (!hasInitRef.current) {
+            hasInitRef.current = true;
+            if (!showInfoDiv) {
+                gsap.set(infoDivRef.current, { y: "100vh", paddingTop: 0, paddingBottom: 0 });
+                gsap.set(backgroundFallbackRef.current, { height: 0, autoAlpha: 0 });
+                return;
+            }
+        }
+
         if (showInfoDiv) {
             gsap.to(infoDivRef.current, { y: "100vh", duration: .5, scrollTo: 0, ease: "expo.out" });
             gsap.to(infoDivRef.current, { y: 0, paddingTop: 0, paddingBottom: 10, duration: 1.5, ease: "expo.out" });
@@ -100,7 +110,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                 </div>
 
                 <div className="content">
-                    {!projectContent.video.endsWith("webp") ?
+                    {projectContent.video === "" ? null : !projectContent.video.endsWith("webp") ?
                         <video onClick={handleVideoClick} ref={videoRef} key={projectContent.video} className="video" autoPlay muted loop disablePictureInPicture>
                             <source src={"/video" + projectContent.video} type="video/mp4" />
                         </video>
@@ -117,7 +127,7 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                             <div className="row">
                                 <p>{projectContent.paragraph}</p>
                             </div>
-                            {projectContent.images.length != 0 &&
+                            {projectContent.images.filter(Boolean).length != 0 &&
                                 <div className="row image-gallery">
                                     {projectContent.images.map((el, i) => (
                                         <img key={el + "-" + i} className={i.toString()} src={"/img" + el} alt="" loading="lazy" decoding="async" />

@@ -214,9 +214,7 @@ function App() {
           <Title></Title>
         </Canvas>
       </div>
-      {isInfoDivMounted &&
-        <InfoPanel projectContent={projectContent} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
-      }
+      <InfoPanel projectContent={projectContent} showInfoDiv={showInfoDiv} closeProjectClick={closeProjectClick} unmountInfoDiv={unmountInfoDiv}></InfoPanel>
     </div>
   )
 }
