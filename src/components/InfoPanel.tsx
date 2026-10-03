@@ -143,7 +143,10 @@ const InfoPanel = ({ closeProjectClick, showInfoDiv, unmountInfoDiv, projectCont
                                 </div>
                             </div>
                         </div>
-                        <Button href={projectContent.link} positionSticky={true}>{isMobile ? "" : "View Link"}</Button>
+                        {
+                            (projectContent.link  !== "") &&
+                                <Button href={projectContent.link} positionSticky={true}>{isMobile ? "" : "View Link"}</Button>
+                        }
                     </div>
                 </div>
 
