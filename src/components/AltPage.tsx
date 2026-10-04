@@ -11,7 +11,7 @@ type AltPageProps = {
   showAltPage: boolean,
   altPageType: string,
   toggleAltPage: (e: HTMLDivElement) => void;
-  projects: { title: string, year: string, image: string, technos: Array<string>, url: string }[],
+  projects: { title: string, year: string, type: string, image: string, technos: Array<string>, url: string }[],
   currentUrl: string,
   showInfoDiv: boolean,
   openProject: (url: string) => void;
