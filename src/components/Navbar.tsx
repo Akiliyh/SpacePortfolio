@@ -249,7 +249,9 @@ const Navbar = ({ toggleAltPage, showAltPage, altPageType }: NavbarProps) => {
                 </div>
 
               </>
+              <a href="mailto:guillaumeboucher.contact@gmail.com" title="Curious?">
               <img src={logo} alt="" />
+              </a>
             </div>
           </div>
         </nav>

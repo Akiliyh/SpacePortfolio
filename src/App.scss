@@ -321,6 +321,12 @@ p {
   }
 }
 
+.navbar .tabs>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navbar img {
   width: 1.25rem;
   transition: .5s ease;
