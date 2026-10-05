@@ -9,7 +9,7 @@
         "videoPreview": "/dorianstudio/dorianstudio-thumbnail.webp",
         "video": "/dorianstudio/dorianstudio-cover.webp",
         "type": "Website",
-        "images" : ["/dorianstudio/dorianstudio.webp", "/dorianstudio/dorianstudio-cover.webp"],
+        "images" : ["/dorianstudio/dorianstudio.webp", "/dorianstudio/dorian1.webp", "/dorianstudio/dorian2.webp", "/dorianstudio/dorianstudio-cover.webp"],
         "technos" : ["React", "Supabase", "Figma"],
         "url" : "/projects/dorian-studio"
     },
@@ -23,7 +23,7 @@
         "videoPreview": "/knowyouratlas/knowyouratlas-preview.webm",
         "video": "/knowyouratlas/knowyouratlas-preview.webm",
         "type": "Web game",
-        "images" : ["/knowyouratlas/knowyouratlas.webp", "/knowyouratlas/knowyouratlas.webp"],
+        "images" : ["/knowyouratlas/knowyouratlas.webp", "/knowyouratlas/kya1.webp", "/knowyouratlas/kya6.webp", "/knowyouratlas/kya4.webp", "/knowyouratlas/kya6.webp", "/knowyouratlas/kya2.webp"],
         "technos" : ["Javascript", "Rive", "Mapbox"],
         "url" : "/projects/knowyouratlas"
     },
@@ -66,7 +66,7 @@
         "videoPreview": "/spartac/spartac-preview.webm",
         "video": "/spartac/spartac-preview.webm",
         "type": "AR web application",
-        "images" : ["/spartac/spartac.webp", "/spartac/spartac-thumbnail.webp", "/spartac/spart1.webp", "/spartac/spart2.webp", "/spartac/spart3.webp", "/spartac/spart4.webp", "/spartac/spart5.webp"],
+        "images" : ["/spartac/spartac.webp", "/spartac/spartac-thumbnail.webp", "/spartac/spart1.webp", "/spartac/spart2.webp", "/spartac/spart5.webp"],
         "technos" : ["React", "AffinityDesigner", "Resolve"],
         "url" : "/projects/spart-ac"
     },
@@ -80,7 +80,7 @@
         "videoPreview": "/virtusio/virtusio-preview.webm",
         "video": "/virtusio/virtusio-preview.webm",
         "type": "VR Application",
-        "images" : ["/virtusio/virtusio-preview.webp", "/virtusio/virtusio-preview.webp"],
+        "images" : ["/virtusio/virtusio1.webp", "/virtusio/virtusio2.webp", "/virtusio/virtusio3.webp", "/virtusio/virtusio4.webp", "/virtusio/virtusio-preview.webp", "/virtusio/virtusio5.webp"],
         "technos" : ["Unity", "Wordpress", "Cardboard", "Blender"],
         "url" : "/projects/virtusio"
     },
@@ -152,7 +152,7 @@
         "videoPreview": "/tlanguage/tlanguage-thumbnail.webp",
         "video": "/tlanguage/tlanguage-thumbnail.webp",
         "type": "Language",
-        "images" : ["/tlanguage/tlanguage-thumbnail.webp", "/tlanguage/tlanguage-thumbnail.webp"],
+        "images" : ["/tlanguage/tlanguage2.webp", "/tlanguage/tlanguage-thumbnail.webp", "/tlanguage/tlanguage1.webp"],
         "technos" : ["Language"],
         "url" : "/projects/t-language"
     },
