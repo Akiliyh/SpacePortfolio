@@ -1,6 +1,6 @@
 import { FaReact, FaLanguage } from "react-icons/fa";
-import { TbBrandCpp } from "react-icons/tb";
-import { SiExpo, SiP5Dotjs, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender, SiDavinciresolve } from "react-icons/si";
+import { TbBrandCpp, TbBrandCSharp } from "react-icons/tb";
+import { SiExpo, SiP5Dotjs, SiAseprite, SiUnity, SiGooglecardboard, SiSupabase, SiLatex, SiFigma, SiRive, SiMapbox, SiOpengl, SiNodedotjs, SiJavascript, SiAffinitydesigner, SiWordpress, SiBlender, SiDavinciresolve } from "react-icons/si";
 import React from "react";
 
 // shared by the info panel and the projects list
@@ -17,6 +17,8 @@ export const iconMap: Record<string, React.ReactElement> = {
     Mapbox: <SiMapbox size={30} />,
     OpenGL: <SiOpengl size={30} />,
     CPP: <TbBrandCpp size={30} />,
+    CSharp: <TbBrandCSharp size={30} />,
+    Aseprite: <SiAseprite size={30} />,
     NodeDotJs: <SiNodedotjs size={30} />,
     Javascript: <SiJavascript size={30} />,
     Language: <FaLanguage size={30} />,
